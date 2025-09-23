@@ -196,11 +196,11 @@ fn psychedelic_tunnel(pos: vec2<f32>) -> vec3<f32> {
     let spiral = sin(twisted_angle * 8.0 + z * 10.0);
 
     let pattern = (stripes + spiral) * 0.5;
-    let tunnel_brightness = smoothstep(-0.3, 0.3, pattern);
+    let tunnel_brightness_base = smoothstep(-0.3, 0.3, pattern);
 
     // Beat-driven pulsing
     let beat_pulse = 1.0 + uniforms.beat_strength * 0.5;
-    tunnel_brightness *= beat_pulse;
+    let tunnel_brightness = tunnel_brightness_base * beat_pulse;
 
     // Color shift through the tunnel
     let hue = z * 0.1 + uniforms.time * 0.2 + uniforms.mid * 0.3;
@@ -242,7 +242,7 @@ fn particle_swarm(pos: vec2<f32>) -> vec3<f32> {
         if (distance_to_particle < pulse_size) {
             let particle_brightness = 1.0 - (distance_to_particle / pulse_size);
             let particle_hue = seed + uniforms.time * 0.3 + uniforms.spectral_centroid * 0.2;
-            color += hsv_to_rgb(particle_hue, 0.8, particle_brightness * 0.3);
+            color = color + hsv_to_rgb(particle_hue, 0.8, particle_brightness * 0.3);
         }
     }
 
@@ -260,10 +260,10 @@ fn fractal_madness(pos: vec2<f32>) -> vec3<f32> {
 
     // Multi-octave fractal noise
     for (var i = 0; i < 5; i++) {
-        intensity += smooth_noise(p + vec2<f32>(time_offset)) * amplitude;
-        p *= 2.0;
-        amplitude *= 0.5;
-        p += vec2<f32>(uniforms.bass * 0.5, uniforms.treble * 0.3);
+        intensity = intensity + smooth_noise(p + vec2<f32>(time_offset)) * amplitude;
+        p = p * 2.0;
+        amplitude = amplitude * 0.5;
+        p = p + vec2<f32>(uniforms.bass * 0.5, uniforms.treble * 0.3);
     }
 
     // Fractal distortion based on pitch confidence
@@ -297,15 +297,15 @@ fn fs_main(in: VertexOutput) -> @location(0) vec4<f32> {
     var final_color = vec3<f32>(0.0);
 
     // Blend effects using dynamic weights from the psychedelic manager
-    final_color += plasma * uniforms.plasma_weight;
-    final_color += kaleidoscope * uniforms.kaleidoscope_weight;
-    final_color += tunnel * uniforms.tunnel_weight;
-    final_color += particles * uniforms.particle_weight;
-    final_color += fractal * uniforms.fractal_weight;
+    final_color = final_color + plasma * uniforms.plasma_weight;
+    final_color = final_color + kaleidoscope * uniforms.kaleidoscope_weight;
+    final_color = final_color + tunnel * uniforms.tunnel_weight;
+    final_color = final_color + particles * uniforms.particle_weight;
+    final_color = final_color + fractal * uniforms.fractal_weight;
 
     // Beat-driven global intensity boost
     let beat_boost = 1.0 + uniforms.beat_strength * 0.4;
-    final_color *= beat_boost;
+    final_color = final_color * beat_boost;
 
     // Ensure we don't exceed maximum brightness while preserving psychedelic chaos
     final_color = clamp(final_color, vec3<f32>(0.0), vec3<f32>(2.0));
