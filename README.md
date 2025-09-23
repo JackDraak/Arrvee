@@ -36,10 +36,10 @@ cd Arrvee
 cargo run --bin audio-test
 
 # Run with your own audio file
-cargo run --bin audio-test path/to/your/music.wav
+cargo run --bin audio-test -- path/to/your/music.wav
 
 # Run with developer overlay showing real-time analysis
-cargo run --bin audio-test --debug sample.wav
+cargo run --bin audio-test -- --debug sample.wav
 ```
 
 The visualizer will:
