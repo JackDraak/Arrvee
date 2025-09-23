@@ -11,6 +11,7 @@ use winit::{
 mod graphics;
 mod ui;
 mod audio;
+mod effects;
 
 use graphics::GraphicsEngine;
 use ui::UserInterface;
@@ -68,6 +69,14 @@ fn main() -> Result<()> {
                         beat_detected: true,
                         beat_strength: 0.8,
                         volume: 0.5,
+                        spectral_centroid: 0.6,
+                        spectral_rolloff: 0.7,
+                        zero_crossing_rate: 0.3,
+                        spectral_flux: 0.4,
+                        onset_strength: 0.5,
+                        pitch_confidence: 0.8,
+                        estimated_bpm: 128.0,
+                        dynamic_range: 0.6,
                     };
 
                     if let Err(e) = graphics_engine.render(&fake_audio, &window_clone) {

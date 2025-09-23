@@ -4,6 +4,7 @@ use winit::window::Window;
 use glam::{Mat4, Vec3};
 
 use crate::audio::AudioFrame;
+use crate::effects::PsychedelicManager;
 use super::{ShaderManager, TextureManager, Vertex, VertexBuffer};
 
 pub struct GraphicsEngine<'a> {
@@ -23,6 +24,7 @@ pub struct GraphicsEngine<'a> {
     pub vertex_buffer: VertexBuffer,
 
     pub time: f32,
+    pub psychedelic_manager: PsychedelicManager,
 }
 
 #[repr(C)]
@@ -30,12 +32,38 @@ pub struct GraphicsEngine<'a> {
 pub struct Uniforms {
     pub view_proj: [[f32; 4]; 4],
     pub time: f32,
+
+    // Frequency bands (5-band analysis)
+    pub sub_bass: f32,
     pub bass: f32,
     pub mid: f32,
     pub treble: f32,
+    pub presence: f32,
+
+    // Beat and rhythm
     pub beat_strength: f32,
+    pub estimated_bpm: f32,
     pub volume: f32,
-    pub _padding: [f32; 2],
+
+    // Spectral characteristics
+    pub spectral_centroid: f32,    // Brightness
+    pub spectral_rolloff: f32,     // High frequency content
+    pub pitch_confidence: f32,     // Harmonic vs percussive
+
+    // Temporal dynamics
+    pub zero_crossing_rate: f32,   // Texture/noisiness
+    pub spectral_flux: f32,        // Rate of change
+    pub onset_strength: f32,       // Note attacks
+    pub dynamic_range: f32,        // Volume variation
+
+    // Effect weights for dynamic blending
+    pub plasma_weight: f32,
+    pub kaleidoscope_weight: f32,
+    pub tunnel_weight: f32,
+    pub particle_weight: f32,
+    pub fractal_weight: f32,
+
+    pub _padding: [f32; 3],
 }
 
 impl Uniforms {
@@ -43,12 +71,27 @@ impl Uniforms {
         Self {
             view_proj: Mat4::IDENTITY.to_cols_array_2d(),
             time: 0.0,
+            sub_bass: 0.0,
             bass: 0.0,
             mid: 0.0,
             treble: 0.0,
+            presence: 0.0,
             beat_strength: 0.0,
+            estimated_bpm: 120.0,
             volume: 0.0,
-            _padding: [0.0; 2],
+            spectral_centroid: 0.0,
+            spectral_rolloff: 0.0,
+            pitch_confidence: 0.0,
+            zero_crossing_rate: 0.0,
+            spectral_flux: 0.0,
+            onset_strength: 0.0,
+            dynamic_range: 0.0,
+            plasma_weight: 0.3,
+            kaleidoscope_weight: 0.0,
+            tunnel_weight: 0.0,
+            particle_weight: 0.0,
+            fractal_weight: 0.0,
+            _padding: [0.0; 3],
         }
     }
 
@@ -145,18 +188,26 @@ impl<'a> GraphicsEngine<'a> {
         let mut shader_manager = ShaderManager::new();
         let texture_manager = TextureManager::new();
 
+        // Load both simple and psychedelic shaders
         let simple_shader = include_str!("../../shaders/simple.wgsl");
         shader_manager.load_shader(&device, "simple", simple_shader)?;
+
+        let psychedelic_shader = include_str!("../../shaders/psychedelic_effects.wgsl");
+        shader_manager.load_shader(&device, "psychedelic", psychedelic_shader)?;
+
+        // Create pipeline with psychedelic shader
         shader_manager.create_pipeline(
             &device,
             "visualizer",
-            "simple",
+            "psychedelic",
             surface_format,
             &uniform_bind_group_layout,
         )?;
 
         let vertices = Self::create_fullscreen_quad();
         let vertex_buffer = VertexBuffer::new(&device, &vertices);
+
+        let psychedelic_manager = PsychedelicManager::new();
 
         Ok(Self {
             surface,
@@ -171,6 +222,7 @@ impl<'a> GraphicsEngine<'a> {
             uniform_bind_group_layout,
             vertex_buffer,
             time: 0.0,
+            psychedelic_manager,
         })
     }
 
@@ -219,7 +271,12 @@ impl<'a> GraphicsEngine<'a> {
     }
 
     pub fn render(&mut self, audio_frame: &AudioFrame, window: &Window) -> Result<()> {
-        self.time += 1.0 / 60.0;
+        let delta_time = 1.0 / 60.0;
+        self.time += delta_time;
+
+        // Update psychedelic effect manager
+        self.psychedelic_manager.update(delta_time, audio_frame);
+        let effect_weights = self.psychedelic_manager.get_effect_weights();
 
         let uniforms = Uniforms {
             view_proj: Mat4::orthographic_rh(
@@ -231,12 +288,27 @@ impl<'a> GraphicsEngine<'a> {
                 1.0,
             ).to_cols_array_2d(),
             time: self.time,
+            sub_bass: audio_frame.frequency_bands.sub_bass,
             bass: audio_frame.frequency_bands.bass,
             mid: audio_frame.frequency_bands.mid,
             treble: audio_frame.frequency_bands.treble,
+            presence: audio_frame.frequency_bands.presence,
             beat_strength: audio_frame.beat_strength,
+            estimated_bpm: audio_frame.estimated_bpm,
             volume: audio_frame.volume,
-            _padding: [0.0; 2],
+            spectral_centroid: audio_frame.spectral_centroid,
+            spectral_rolloff: audio_frame.spectral_rolloff,
+            pitch_confidence: audio_frame.pitch_confidence,
+            zero_crossing_rate: audio_frame.zero_crossing_rate,
+            spectral_flux: audio_frame.spectral_flux,
+            onset_strength: audio_frame.onset_strength,
+            dynamic_range: audio_frame.dynamic_range,
+            plasma_weight: *effect_weights.get("llama_plasma").unwrap_or(&0.0),
+            kaleidoscope_weight: *effect_weights.get("geometric_kaleidoscope").unwrap_or(&0.0),
+            tunnel_weight: *effect_weights.get("psychedelic_tunnel").unwrap_or(&0.0),
+            particle_weight: *effect_weights.get("particle_swarm").unwrap_or(&0.0),
+            fractal_weight: *effect_weights.get("fractal_madness").unwrap_or(&0.0),
+            _padding: [0.0; 3],
         };
 
         self.queue.write_buffer(&self.uniform_buffer, 0, bytemuck::cast_slice(&[uniforms]));
@@ -283,5 +355,15 @@ impl<'a> GraphicsEngine<'a> {
         output.present();
 
         Ok(())
+    }
+
+    /// Get mutable access to the psychedelic effect manager for configuration
+    pub fn psychedelic_manager_mut(&mut self) -> &mut PsychedelicManager {
+        &mut self.psychedelic_manager
+    }
+
+    /// Get read-only access to the psychedelic effect manager
+    pub fn psychedelic_manager(&self) -> &PsychedelicManager {
+        &self.psychedelic_manager
     }
 }

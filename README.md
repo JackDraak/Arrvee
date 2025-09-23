@@ -4,19 +4,26 @@ A cross-platform music visualizer application inspired by classic WinAmp visuali
 
 ## Features
 
-- **Audio File Processing**: Direct analysis of audio files (WAV, MP3, OGG support)
-- **Advanced Musical Analysis**: 8+ real-time audio features for rich visualization control
+- **🎵 Audio File Processing**: Direct analysis of audio files (WAV, MP3, OGG support)
+- **🧠 Advanced Musical Analysis**: 15+ real-time audio features for rich visualization control
   - **Spectral Features**: Brightness, rolloff, pitch confidence, zero-crossing rate
   - **Rhythm Analysis**: Beat detection, BPM estimation, onset strength
   - **Dynamic Analysis**: Volume tracking, dynamic range, spectral flux
-- **Real-time FFT Analysis**: Fast Fourier Transform for frequency spectrum analysis
-- **Beat Detection**: Intelligent rhythm detection with adaptive thresholds
-- **Frequency Band Analysis**: 5-band separation (sub-bass, bass, mid, treble, presence)
-- **GPU-Accelerated Graphics**: Hardware-accelerated rendering with wgpu
-- **Audio-Reactive Shaders**: WGSL shaders that respond to music in real-time
-- **Developer Tools**: Real-time analysis overlay and volume controls
-- **Cross-platform**: Works on Linux, Windows, and macOS
-- **Modular Architecture**: Extensible design for adding new visual effects
+- **🌈 Psychedelic Visual Effects**: Jeff Minter-inspired effect collection
+  - **Llama Plasma Fields**: Multi-layered plasma driven by frequency bands
+  - **Geometric Kaleidoscope**: BPM-controlled kaleidoscopic patterns
+  - **Psychedelic Tunnel**: Classic Minter-style tunnels with spectral control
+  - **Particle Swarm**: Chaos-driven particles responding to onset detection
+  - **Fractal Madness**: Multi-octave noise patterns modulated by dynamics
+- **🎛️ Intelligent Effect Management**: Automatic effect blending based on musical characteristics
+- **⚡ Real-time FFT Analysis**: Fast Fourier Transform for frequency spectrum analysis
+- **🥁 Beat Detection**: Intelligent rhythm detection with adaptive thresholds
+- **📊 Frequency Band Analysis**: 5-band separation (sub-bass, bass, mid, treble, presence)
+- **🚀 GPU-Accelerated Graphics**: Hardware-accelerated rendering with wgpu
+- **🎨 Audio-Reactive Shaders**: WGSL shaders that respond to music in real-time
+- **🔧 Developer Tools**: Real-time analysis overlay and volume controls
+- **🌍 Cross-platform**: Works on Linux, Windows, and macOS
+- **🧩 Modular Architecture**: Extensible design for adding new visual effects
 
 ## Quick Start
 
@@ -43,10 +50,11 @@ cargo run --bin audio-test -- --debug sample.wav
 ```
 
 The visualizer will:
-- Load and play your audio file through speakers
-- Analyze the audio data in real-time for frequency content and beats
-- Display dynamic, music-reactive graphics that pulse and change color
-- Show visual responses synchronized to bass, mid, and treble frequencies
+- 🎵 Load and play your audio file through speakers
+- 🧠 Analyze the audio data in real-time for 15+ musical characteristics
+- 🌈 Display psychedelic, music-reactive graphics with 5 distinct effect types
+- 🎛️ Automatically blend effects based on musical content (bass-heavy → plasma, harmonic → kaleidoscope, etc.)
+- 🎨 Create trippy visuals that pulse, morph, and transform with the music
 
 ### Controls
 
@@ -64,6 +72,7 @@ The visualizer will:
 - Beat detection with strength and BPM estimation
 - Advanced spectral features (brightness, pitch confidence, onset detection)
 - Dynamic audio characteristics (volume, dynamic range, spectral flux)
+- Effect blending weights and current dominant effect display
 
 ## Current Status
 
@@ -86,13 +95,16 @@ The visualizer will:
 
 **Main Visualizer:**
 ```bash
-# Audio file visualizer with GPU graphics
+# Audio file visualizer with psychedelic effects
 cargo run --bin audio-test
+
+# With debug overlay showing all analysis data
+cargo run --bin audio-test -- --debug
 ```
 
 **Development/Testing:**
 ```bash
-# Graphics pipeline test with UI framework
+# Graphics pipeline test with fake audio data (great for testing effects)
 cargo run --bin graphics-test
 ```
 
@@ -116,15 +128,18 @@ The project is structured with the following modules:
 - **Controls**: Playback controls, volume, preset selection
 
 ### Effects System (`src/effects/`)
+- **Psychedelic Manager**: Intelligent effect blending and selection system
 - **Presets**: Predefined visualizer configurations
-- **Manager**: Dynamic effect switching and combination
+- **Effect Collection**: 5 distinct Minter-inspired psychedelic effects
 
 ### Shaders (`shaders/`)
-- **visualizer.wgsl**: Main visualization shader with:
-  - Plasma effects that respond to audio frequency bands
-  - Spectrum bar visualization
-  - Radial wave patterns
-  - Beat-synchronized visual pulses
+- **psychedelic_effects.wgsl**: Complete psychedelic effect collection featuring:
+  - **Llama Plasma Fields**: Multi-layered plasma with frequency band control
+  - **Geometric Kaleidoscope**: BPM-synchronized kaleidoscopic patterns
+  - **Psychedelic Tunnel**: Classic Minter-style tunnel effects with spectral control
+  - **Particle Swarm**: Chaos-driven particles responding to onset detection
+  - **Fractal Madness**: Multi-octave fractal noise modulated by musical dynamics
+- **simple.wgsl**: Basic shader for testing and reference
 
 ## Technical Features
 

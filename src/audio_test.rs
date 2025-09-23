@@ -11,6 +11,7 @@ use winit::{
 
 mod graphics;
 mod audio;
+mod effects;
 
 use graphics::GraphicsEngine;
 use audio::{AudioPlayback, AudioFrame};
