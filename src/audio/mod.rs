@@ -15,6 +15,16 @@ pub struct AudioFrame {
     pub beat_detected: bool,
     pub beat_strength: f32,
     pub volume: f32,
+
+    // Advanced analysis features
+    pub spectral_centroid: f32,    // "Brightness" - where most energy is concentrated
+    pub spectral_rolloff: f32,     // High frequency content
+    pub zero_crossing_rate: f32,   // Noisiness vs tonality
+    pub spectral_flux: f32,        // Rate of change in spectrum
+    pub onset_strength: f32,       // Note attack detection
+    pub pitch_confidence: f32,     // How tonal vs noisy
+    pub estimated_bpm: f32,        // Current tempo estimate
+    pub dynamic_range: f32,        // Loudness variation
 }
 
 #[derive(Debug, Clone)]
@@ -36,6 +46,14 @@ impl Default for AudioFrame {
             beat_detected: false,
             beat_strength: 0.0,
             volume: 0.0,
+            spectral_centroid: 0.0,
+            spectral_rolloff: 0.0,
+            zero_crossing_rate: 0.0,
+            spectral_flux: 0.0,
+            onset_strength: 0.0,
+            pitch_confidence: 0.0,
+            estimated_bpm: 120.0,
+            dynamic_range: 0.0,
         }
     }
 }

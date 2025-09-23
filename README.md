@@ -5,11 +5,16 @@ A cross-platform music visualizer application inspired by classic WinAmp visuali
 ## Features
 
 - **Audio File Processing**: Direct analysis of audio files (WAV, MP3, OGG support)
+- **Advanced Musical Analysis**: 8+ real-time audio features for rich visualization control
+  - **Spectral Features**: Brightness, rolloff, pitch confidence, zero-crossing rate
+  - **Rhythm Analysis**: Beat detection, BPM estimation, onset strength
+  - **Dynamic Analysis**: Volume tracking, dynamic range, spectral flux
 - **Real-time FFT Analysis**: Fast Fourier Transform for frequency spectrum analysis
-- **Beat Detection**: Intelligent rhythm detection for visual synchronization
+- **Beat Detection**: Intelligent rhythm detection with adaptive thresholds
 - **Frequency Band Analysis**: 5-band separation (sub-bass, bass, mid, treble, presence)
 - **GPU-Accelerated Graphics**: Hardware-accelerated rendering with wgpu
 - **Audio-Reactive Shaders**: WGSL shaders that respond to music in real-time
+- **Developer Tools**: Real-time analysis overlay and volume controls
 - **Cross-platform**: Works on Linux, Windows, and macOS
 - **Modular Architecture**: Extensible design for adding new visual effects
 
@@ -27,11 +32,14 @@ A cross-platform music visualizer application inspired by classic WinAmp visuali
 # Clone and navigate to the project
 cd Arrvee
 
-# Run with your audio file
+# Run with default sample file
 cargo run --bin audio-test
 
-# Or test with the included sample
-cargo run --bin audio-test sample.wav
+# Run with your own audio file
+cargo run --bin audio-test path/to/your/music.wav
+
+# Run with developer overlay showing real-time analysis
+cargo run --bin audio-test --debug sample.wav
 ```
 
 The visualizer will:
@@ -42,9 +50,20 @@ The visualizer will:
 
 ### Controls
 
+**Playback:**
 - **Space**: Pause/resume audio playback
 - **Escape**: Exit the visualizer
-- Music will automatically play when the visualizer starts
+
+**Developer Mode** (when using `--debug`):**
+- **D**: Toggle debug overlay on/off
+- **+/=**: Increase volume
+- **-**: Decrease volume
+
+**Debug Overlay Features:**
+- Real-time frequency band analysis (sub-bass, bass, mid, treble, presence)
+- Beat detection with strength and BPM estimation
+- Advanced spectral features (brightness, pitch confidence, onset detection)
+- Dynamic audio characteristics (volume, dynamic range, spectral flux)
 
 ## Current Status
 

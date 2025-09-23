@@ -4,7 +4,7 @@ use std::fs::File;
 use std::io::BufReader;
 use std::path::Path;
 use log::info;
-use crate::audio::{AudioFrame, FrequencyBands, AudioAnalyzer};
+use crate::audio::{AudioFrame, AudioAnalyzer};
 
 pub struct AudioPlayback {
     #[allow(dead_code)]
@@ -124,20 +124,6 @@ impl AudioPlayback {
         }
 
         // Return empty frame if no data
-        AudioFrame {
-            sample_rate: self.sample_rate as f32,
-            spectrum: vec![0.0; 512],
-            time_domain: vec![0.0; 1024],
-            frequency_bands: FrequencyBands {
-                sub_bass: 0.0,
-                bass: 0.0,
-                mid: 0.0,
-                treble: 0.0,
-                presence: 0.0,
-            },
-            beat_detected: false,
-            beat_strength: 0.0,
-            volume: 0.0,
-        }
+        AudioFrame::default()
     }
 }
