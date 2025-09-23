@@ -36,21 +36,10 @@ serde_json = "1.0"
 [dev-dependencies]
 criterion = "0.5"
 
-[[bin]]
-name = "simple"
-path = "src/simple_main.rs"
-
-[[bin]]
-name = "basic"
-path = "src/basic_main.rs"
 
 [[bin]]
 name = "graphics-test"
 path = "src/graphics_test_main.rs"
-
-[[bin]]
-name = "minimal"
-path = "src/minimal_test.rs"
 
 [[bin]]
 name = "audio-test"

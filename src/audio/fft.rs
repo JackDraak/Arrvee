@@ -1,11 +1,12 @@
 use rustfft::{FftPlanner, num_complex::Complex};
-use super::{AudioFrame, FrequencyBands};
+use super::{AudioFrame, FrequencyBands, BeatDetector};
 
 pub struct AudioAnalyzer {
     sample_rate: f32,
     fft_size: usize,
     fft: std::sync::Arc<dyn rustfft::Fft<f32>>,
     window: Vec<f32>,
+    beat_detector: BeatDetector,
 }
 
 impl AudioAnalyzer {
@@ -20,6 +21,7 @@ impl AudioAnalyzer {
             fft_size,
             fft,
             window,
+            beat_detector: BeatDetector::new(sample_rate),
         }
     }
 
@@ -32,19 +34,25 @@ impl AudioAnalyzer {
             .collect()
     }
 
-    pub fn analyze(&self, audio_data: &[f32]) -> AudioFrame {
+    pub fn analyze(&mut self, audio_data: &[f32]) -> AudioFrame {
         let windowed_data = self.apply_window(audio_data);
         let spectrum = self.compute_fft(&windowed_data);
         let frequency_bands = self.extract_frequency_bands(&spectrum);
+
+        // Calculate volume (RMS)
+        let volume = (audio_data.iter().map(|x| x * x).sum::<f32>() / audio_data.len() as f32).sqrt();
+
+        // Run beat detection
+        let (beat_detected, beat_strength) = self.beat_detector.detect_beat(&frequency_bands);
 
         AudioFrame {
             sample_rate: self.sample_rate,
             spectrum: spectrum.clone(),
             time_domain: audio_data[..self.fft_size.min(audio_data.len())].to_vec(),
             frequency_bands,
-            beat_detected: false,
-            beat_strength: 0.0,
-            volume: 0.0,
+            beat_detected,
+            beat_strength,
+            volume,
         }
     }
 

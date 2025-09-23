@@ -13,7 +13,7 @@ mod graphics;
 mod ui;
 mod effects;
 
-use audio::AudioProcessor;
+use audio::AudioPlayback;
 use graphics::GraphicsEngine;
 use ui::UserInterface;
 
@@ -28,8 +28,12 @@ fn main() -> Result<()> {
         .build(&event_loop)?);
 
     let mut graphics_engine = pollster::block_on(GraphicsEngine::new(&window))?;
-    let mut audio_processor = AudioProcessor::new()?;
+    let mut audio_playback = AudioPlayback::new()?;
     let mut ui = UserInterface::new(&window, &graphics_engine);
+
+    // Load sample audio file
+    audio_playback.load_file("sample.wav")?;
+    audio_playback.play();
 
     info!("Visualizer initialized successfully");
 
@@ -55,7 +59,7 @@ fn main() -> Result<()> {
                     graphics_engine.resize(physical_size);
                 }
                 WindowEvent::RedrawRequested => {
-                    let audio_data = audio_processor.get_latest_frame();
+                    let audio_data = audio_playback.get_current_audio_frame();
                     if let Err(e) = graphics_engine.render(&audio_data, &window_clone) {
                         log::error!("Render error: {}", e);
                     }

@@ -4,9 +4,12 @@ A cross-platform music visualizer application inspired by classic WinAmp visuali
 
 ## Features
 
-- **Real-time Audio Processing**: Live microphone input with FFT-based spectral analysis
+- **Audio File Processing**: Direct analysis of audio files (WAV, MP3, OGG support)
+- **Real-time FFT Analysis**: Fast Fourier Transform for frequency spectrum analysis
 - **Beat Detection**: Intelligent rhythm detection for visual synchronization
-- **Frequency Band Analysis**: Bass, mid, and treble frequency separation
+- **Frequency Band Analysis**: 5-band separation (sub-bass, bass, mid, treble, presence)
+- **GPU-Accelerated Graphics**: Hardware-accelerated rendering with wgpu
+- **Audio-Reactive Shaders**: WGSL shaders that respond to music in real-time
 - **Cross-platform**: Works on Linux, Windows, and macOS
 - **Modular Architecture**: Extensible design for adding new visual effects
 
@@ -15,66 +18,63 @@ A cross-platform music visualizer application inspired by classic WinAmp visuali
 ### Prerequisites
 
 - Rust (latest stable version)
-- Audio input device (microphone)
+- Audio file (WAV, MP3, or OGG format)
 
-### Running the Visualizers
+### Running the Visualizer
 
-**Basic Enhanced Visualizer (Recommended):**
+**Audio File Visualizer (Recommended):**
 ```bash
 # Clone and navigate to the project
 cd Arrvee
 
-# Run the enhanced ASCII-based visualizer
-cargo run --bin basic
+# Run with your audio file
+cargo run --bin audio-test
+
+# Or test with the included sample
+cargo run --bin audio-test sample.wav
 ```
 
-**Simple Frequency Spectrum:**
-```bash
-# Run the simple frequency spectrum display
-cargo run --bin simple
-```
-
-The visualizers will display real-time audio analysis in your terminal, showing:
-- **Basic**: Enhanced display with frequency bands, beat detection, volume meters, and sample spectrum
-- **Simple**: Individual frequency bins with ASCII bar visualization and basic stats
-- Real-time response to audio input from your microphone
+The visualizer will:
+- Load and play your audio file through speakers
+- Analyze the audio data in real-time for frequency content and beats
+- Display dynamic, music-reactive graphics that pulse and change color
+- Show visual responses synchronized to bass, mid, and treble frequencies
 
 ### Controls
 
-- **Ctrl+C**: Exit the visualizer
-- Make some noise or play music near your microphone to see the visualization respond!
+- **Space**: Pause/resume audio playback
+- **Escape**: Exit the visualizer
+- Music will automatically play when the visualizer starts
 
 ## Current Status
 
 ✅ **Working Components:**
-- **Real-time Audio Processing**: Live microphone input with FFT analysis ✓
+- **Audio File Processing**: Direct WAV/MP3/OGG file analysis and playback ✓
+- **Real-time FFT Analysis**: Fast frequency spectrum analysis during playback ✓
 - **Beat Detection**: Smart rhythm detection with adaptive thresholds ✓
 - **Frequency Analysis**: 5-band frequency separation (sub-bass, bass, mid, treble, presence) ✓
-- **Terminal Visualizers**: Two working ASCII-based demos ✓
-- **Cross-platform Audio**: Works on Linux, Windows, macOS ✓
-- **Modular Architecture**: Clean separation of audio, graphics, UI, and effects ✓
 - **GPU Graphics Pipeline**: wgpu-based rendering with WGSL shaders ✓
-- **Shader System**: Audio-reactive fragment shaders with real-time parameters ✓
+- **Audio-Reactive Shaders**: Fragment shaders that respond to music in real-time ✓
+- **Cross-platform**: Works on Linux, Windows, macOS ✓
+- **Modular Architecture**: Clean separation of audio, graphics, UI, and effects ✓
 
 🚧 **In Development:**
 - **UI Integration**: egui interface for controls and presets (egui-wgpu compatibility)
-- **File Playback**: MP3/WAV/OGG audio file support
+- **Additional File Formats**: Enhanced MP3/OGG support beyond basic WAV
+- **Advanced Shader Effects**: More complex visual patterns and presets
 
-### Available Demos
+### Available Binaries
 
-**Audio-only Visualizers:**
+**Main Visualizer:**
 ```bash
-# Enhanced ASCII visualizer with beat detection
-cargo run --bin basic
-
-# Simple frequency spectrum display
-cargo run --bin simple
+# Audio file visualizer with GPU graphics
+cargo run --bin audio-test
 ```
 
-**Graphics Pipeline Tests:**
+**Development/Testing:**
 ```bash
-# GPU-accelerated shader rendering (no UI)
-cargo run --bin minimal
+# Graphics pipeline test with UI framework
+cargo run --bin graphics-test
 ```
 
 ## Architecture
@@ -82,10 +82,9 @@ cargo run --bin minimal
 The project is structured with the following modules:
 
 ### Audio Processing (`src/audio/`)
-- **Processor**: Real-time audio capture and processing pipeline
+- **Playback**: Audio file loading, playback, and real-time analysis
 - **FFT**: Fast Fourier Transform implementation for frequency analysis
 - **Beat Detector**: Rhythm and beat detection algorithms
-- **Playback**: Audio file loading and playback system (for future use)
 
 ### Graphics Engine (`src/graphics/`)
 - **Engine**: Core graphics rendering with wgpu (GPU-accelerated)
@@ -135,18 +134,19 @@ The project is structured with the following modules:
 ## Development Status
 
 ✅ **Working Components:**
-- Real-time audio capture and FFT analysis
+- Audio file processing and playback
+- Real-time FFT analysis during playback
 - Beat detection algorithm
-- Simple ASCII-based visualizer
-- Cross-platform audio input
+- GPU-accelerated graphics rendering
+- Audio-reactive shader system
+- Cross-platform compatibility
 - Frequency band analysis
 - Modular architecture foundation
 
 🚧 **In Progress:**
-- Full graphics pipeline integration
-- UI compatibility fixes for latest dependency versions
-- Advanced shader effects
-- File-based audio playback integration
+- UI integration with graphics pipeline
+- Advanced shader effects and presets
+- Additional audio format support
 
 ## Building from Source
 
@@ -161,8 +161,8 @@ cd Arrvee
 # Build the project
 cargo build
 
-# Run the simple visualizer
-cargo run --bin simple
+# Run the main visualizer
+cargo run --bin audio-test
 
 # Run tests
 cargo test

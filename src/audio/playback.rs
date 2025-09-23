@@ -105,7 +105,7 @@ impl AudioPlayback {
     }
 
     pub fn get_current_audio_frame(&mut self) -> AudioFrame {
-        if let Some(analyzer) = &self.analyzer {
+        if let Some(analyzer) = &mut self.analyzer {
             if !self.audio_buffer.is_empty() {
                 // Calculate current position based on playback time
                 // For now, we'll advance the buffer position each frame

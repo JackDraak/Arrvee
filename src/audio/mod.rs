@@ -1,9 +1,7 @@
-pub mod processor;
 pub mod fft;
 pub mod beat_detector;
 pub mod playback;
 
-pub use processor::AudioProcessor;
 pub use fft::AudioAnalyzer;
 pub use beat_detector::BeatDetector;
 pub use playback::AudioPlayback;
