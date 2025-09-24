@@ -68,6 +68,7 @@ pub struct Uniforms {
     pub particle_weight: f32,
     pub fractal_weight: f32,
     pub spectralizer_weight: f32,
+    pub parametric_weight: f32,
 
     // 3D projection controls
     pub projection_mode: f32,  // 0=sphere, 1=cylinder, 2=torus, 3=flat, -1=auto
@@ -105,6 +106,7 @@ impl Uniforms {
             particle_weight: 0.0,
             fractal_weight: 0.0,
             spectralizer_weight: 0.0,
+            parametric_weight: 0.0,
             projection_mode: -1.0, // Auto mode by default
             palette_index: 0.0,     // Start with first palette
             smoothing_factor: 0.3,  // More responsive default smoothing
@@ -334,6 +336,7 @@ impl<'a> GraphicsEngine<'a> {
             particle_weight: *effect_weights.get("particle_swarm").unwrap_or(&0.0),
             fractal_weight: *effect_weights.get("fractal_madness").unwrap_or(&0.0),
             spectralizer_weight: *effect_weights.get("spectralizer_bars").unwrap_or(&0.0),
+            parametric_weight: *effect_weights.get("parametric_waves").unwrap_or(&0.0),
             projection_mode: self.projection_mode,
             palette_index: self.palette_index,
             smoothing_factor: self.smoothing_factor,

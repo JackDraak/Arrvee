@@ -106,6 +106,7 @@ impl DebugOverlay {
                     "particle_swarm" => "Particle Swarm",
                     "fractal_madness" => "Fractal Madness",
                     "spectralizer_bars" => "Spectralizer",
+                    "parametric_waves" => "Parametric Waves",
                     _ => effect
                 };
                 println!("║   {:<15}: {:>6.3} ■{:<15}                    ║",
@@ -124,7 +125,7 @@ impl DebugOverlay {
         println!("║                                                               ║");
         println!("║ 🎮 CONTROLS                                                   ║");
         println!("║   P: Palette | [/]: Smoothing | Q/W/E/R/T: Projection       ║");
-        println!("║   1-6: Effects | 0: Auto | D: Toggle Debug | Space: Pause   ║");
+        println!("║   1-7: Effects | 0: Auto | D: Toggle Debug | Space: Pause   ║");
         println!("╚═══════════════════════════════════════════════════════════════╝");
     }
 
@@ -261,6 +262,10 @@ fn main() -> Result<()> {
                             PhysicalKey::Code(KeyCode::Digit6) => {
                                 graphics_engine.psychedelic_manager_mut().set_manual_effect(Some("spectralizer_bars".to_string()));
                                 info!("🌈 Effect switched to: Spectralizer Bars");
+                            }
+                            PhysicalKey::Code(KeyCode::Digit7) => {
+                                graphics_engine.psychedelic_manager_mut().set_manual_effect(Some("parametric_waves".to_string()));
+                                info!("🌈 Effect switched to: Parametric Waves (Audio-Reactive Mathematical Patterns)");
                             }
                             PhysicalKey::Code(KeyCode::Digit0) => {
                                 graphics_engine.psychedelic_manager_mut().set_manual_effect(None);

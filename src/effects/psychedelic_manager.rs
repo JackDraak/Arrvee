@@ -72,7 +72,8 @@ impl PsychedelicManager {
             "psychedelic_tunnel",
             "particle_swarm",
             "fractal_madness",
-            "spectralizer_bars"
+            "spectralizer_bars",
+            "parametric_waves"
         ];
 
         for effect in effects {
@@ -158,6 +159,14 @@ impl PsychedelicManager {
         if spectral_activity > 0.4 && audio_frame.volume > 0.1 {
             let spectralizer_weight = spectral_activity * 0.3 * self.config.responsiveness;
             *self.target_weights.get_mut("spectralizer_bars").unwrap() = spectralizer_weight;
+        }
+
+        // Parametric waves for mathematically complex, parametric music
+        // Activates for high pitch confidence with dynamic spectral content
+        if audio_frame.pitch_confidence > 0.3 && audio_frame.spectral_flux > 0.15 {
+            let mathematical_complexity = audio_frame.pitch_confidence * audio_frame.spectral_flux;
+            let parametric_weight = mathematical_complexity * 1.2 * self.config.responsiveness;
+            *self.target_weights.get_mut("parametric_waves").unwrap() = parametric_weight;
         }
 
         // Beat-driven effect boosting

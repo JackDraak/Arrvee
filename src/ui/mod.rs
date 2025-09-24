@@ -39,7 +39,7 @@ impl UserInterface {
             state: egui_state,
             renderer,
             show_controls: true,
-            volume: 0.5,
+            volume: 0.1,
             selected_preset: 0,
         }
     }

@@ -35,6 +35,7 @@ struct Uniforms {
     particle_weight: f32,
     fractal_weight: f32,
     spectralizer_weight: f32,
+    parametric_weight: f32,
 
     // 3D projection controls
     projection_mode: f32,  // 0=sphere, 1=cylinder, 2=torus, 3=flat, -1=auto
@@ -809,6 +810,91 @@ fn spectralizer_bars(pos: vec2<f32>) -> vec3<f32> {
     return clamp(final_color, vec3<f32>(0.0), vec3<f32>(1.5));
 }
 
+// Effect 7: Parametric Waves - Mathematical audio-reactive patterns
+fn parametric_waves(pos: vec2<f32>) -> vec3<f32> {
+    // Ultra-smooth audio parameters to prevent jarring changes
+    let smooth_bass = ultra_smooth_audio(uniforms.bass + uniforms.sub_bass, 3.0);
+    let smooth_treble = ultra_smooth_audio(uniforms.treble + uniforms.presence, 3.0);
+    let smooth_spectral_flux = ultra_smooth_audio(uniforms.spectral_flux, 4.0);
+    let smooth_onset = ultra_smooth_audio(uniforms.onset_strength, 2.0);
+
+    // Pattern frequency driven by spectral centroid and onset strength
+    let base_frequency = 2.0 + uniforms.spectral_centroid * 0.0001;
+    let onset_boost = smooth_onset * 5.0;
+    let frequency = base_frequency + onset_boost;
+
+    // Animation speed synchronized to BPM with beat emphasis
+    let bpm_factor = uniforms.estimated_bpm / 120.0;
+    let beat_smooth = ultra_smooth_audio(uniforms.beat_strength, 1.5);
+    let speed = 0.5 + bpm_factor * 1.0 + beat_smooth * 1.5; // More controlled speed
+
+    // Overall intensity from volume and dynamic range
+    let volume_smooth = ultra_smooth_audio(uniforms.volume, 2.0);
+    let intensity = 0.3 + volume_smooth * 0.4 + uniforms.dynamic_range * 0.3; // Less intense
+
+    // Generate mathematical patterns
+    let angle = atan2(pos.y, pos.x);
+    let radius = length(pos);
+
+    // Multiple wave patterns responding to different audio features
+    let wave1 = sin(radius * frequency - uniforms.time * speed);
+    let wave2 = cos(angle * (4.0 + smooth_bass * 4.0) + uniforms.time * speed * 0.7); // Reduced bass response
+    let wave3 = sin(length(pos * (2.0 + smooth_treble * 2.0)) * 3.0 - uniforms.time * speed * 1.3); // Reduced treble response
+
+    // Beat-driven pulse wave (smoother)
+    let beat_pulse = sin(uniforms.time * speed * 2.0) * beat_smooth * 0.5; // Reduced amplitude
+    let wave4 = cos(radius * 6.0 + beat_pulse * 5.0); // Reduced beat influence
+
+    // Spectral flux creates texture variation (much smoother)
+    let texture_noise = sin(pos.x * 15.0 + smooth_spectral_flux * 25.0) *
+                       cos(pos.y * 12.0 + smooth_spectral_flux * 20.0) * 0.05; // Much subtler
+
+    // Combine patterns with controlled intensity
+    let pattern = (wave1 + wave2 + wave3 + wave4 + texture_noise) * intensity * 0.6; // Reduced overall amplitude
+
+    // Color generation using current palette (smoother transitions)
+    let color_t1 = smooth_transition((pattern + 1.0) * 0.5, 2.0);
+    let color_t2 = smooth_transition((sin(pattern * 1.2) + 1.0) * 0.5, 2.0); // Reduced frequency
+    let color_t3 = smooth_transition((cos(pattern * 1.8) + 1.0) * 0.5, 2.0); // Reduced frequency
+
+    let color1 = get_current_palette_color(color_t1);
+    let color2 = get_current_palette_color(color_t2 + 0.33);
+    let color3 = get_current_palette_color(color_t3 + 0.67);
+
+    // Mix colors based on pattern values (gentler mixing)
+    var final_color = color1 * (0.4 + 0.3 * cos(pattern)); // Reduced variation
+    final_color = final_color + color2 * (0.2 + 0.2 * sin(pattern * 1.2)); // Reduced variation
+    final_color = final_color + color3 * (0.1 + 0.1 * cos(pattern * 1.5)); // Reduced variation
+    final_color = final_color / 2.2; // Normalize after mixing
+
+    // Subtle beat-driven chromatic effects
+    final_color.r = final_color.r + sin(uniforms.time * 0.3 + beat_smooth * 2.0) * 0.05; // Much subtler
+    final_color.b = final_color.b + cos(uniforms.time * 0.2 + beat_smooth * 1.5) * 0.05; // Much subtler
+
+    // Gentle onset-driven color shifts
+    let onset_shift = smooth_onset * sin(pattern * 2.0) * 0.1; // Much subtler
+    final_color.g = final_color.g + onset_shift;
+
+    // Zero crossing rate affects saturation gently
+    let saturation_factor = 1.0 + uniforms.zero_crossing_rate * 0.2; // Much subtler
+    final_color = final_color * saturation_factor;
+
+    // Radial gradient with smooth bass response
+    let gradient_power = 0.6 + smooth_bass * 0.3; // Gentler gradient
+    let gradient = 1.0 - pow(radius * 0.8, gradient_power); // Reduced radius impact
+    final_color = final_color * gradient;
+
+    // Dynamic range affects overall brightness smoothly
+    let brightness_factor = 0.7 + uniforms.dynamic_range * 0.3; // More controlled brightness
+    final_color = final_color * brightness_factor;
+
+    // Apply dynamic range and saturation boost
+    final_color = apply_dynamic_range(final_color, 1.2, 1.1); // Gentle enhancement
+
+    // Ensure color values stay in valid range
+    return clamp(final_color, vec3<f32>(0.0), vec3<f32>(1.0));
+}
+
 // ============================================================================
 // EFFECT BLENDING AND MAIN SHADER
 // ============================================================================
@@ -855,6 +941,7 @@ fn fs_main(in: VertexOutput) -> @location(0) vec4<f32> {
     let particles = particle_swarm(pos) * (1.0 + depth_factor * 0.5);
     let fractal = fractal_madness(pos) * (1.0 + depth_factor * 0.25);
     let spectralizer = spectralizer_bars(pos) * (1.0 + depth_factor * 0.1);
+    let parametric = parametric_waves(pos) * (1.0 + depth_factor * 0.3);
 
     // Dynamic effect blending using manager-calculated weights
     var final_color = vec3<f32>(0.0);
@@ -866,6 +953,7 @@ fn fs_main(in: VertexOutput) -> @location(0) vec4<f32> {
     final_color = final_color + particles * uniforms.particle_weight;
     final_color = final_color + fractal * uniforms.fractal_weight;
     final_color = final_color + spectralizer * uniforms.spectralizer_weight;
+    final_color = final_color + parametric * uniforms.parametric_weight;
 
     // Smooth global processing for stability
     let global_contrast = calculate_dynamic_contrast();
