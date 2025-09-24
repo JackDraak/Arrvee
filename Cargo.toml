@@ -20,6 +20,7 @@ hound = "3.4"
 
 # Async and threading
 tokio = { version = "1.0", features = ["full"] }
+async-trait = "0.1"
 crossbeam-channel = "0.5"
 futures-intrusive = "0.5"
 

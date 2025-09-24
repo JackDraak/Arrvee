@@ -4,13 +4,21 @@ pub mod playback;
 pub mod gpu_analyzer;
 pub mod prescan;
 pub mod arv_format;
+pub mod analysis_interface;
+pub mod feature_normalizer;
+pub mod cpu_analyzer;
+pub mod gpu_analyzer_wrapper;
 
-pub use fft::AudioAnalyzer;
+pub use fft::AudioAnalyzer as CpuAudioAnalyzerOld;
 pub use beat_detector::BeatDetector;
 pub use playback::AudioPlayback;
 pub use gpu_analyzer::{GpuAudioAnalyzer, GpuAudioFeatures};
 pub use prescan::{PrescanProcessor, PrescanData, SynchronizedPlayback};
 pub use arv_format::ArvFormat;
+pub use analysis_interface::{AudioAnalyzer, RawAudioFeatures, NormalizedAudioFeatures};
+pub use feature_normalizer::{FeatureNormalizer, NormalizationParameters};
+pub use cpu_analyzer::CpuAudioAnalyzer;
+pub use gpu_analyzer_wrapper::GpuAudioAnalyzer as NewGpuAudioAnalyzer;
 
 #[derive(Debug, Clone)]
 pub struct AudioFrame {

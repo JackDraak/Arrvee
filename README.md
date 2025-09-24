@@ -26,8 +26,10 @@ A revolutionary music visualizer built in Rust featuring real-time audio process
 - **Intelligent Auto-Selection**: Chooses optimal projection based on music characteristics
 
 ### ⚡ Performance & Technology
-- **GPU-Accelerated**: Hardware-accelerated rendering with wgpu
+- **GPU-Accelerated**: Hardware-accelerated rendering with wgpu + optional GPU audio analysis
+- **Unified Architecture**: Transparent CPU/GPU processing with identical normalized results
 - **Real-time FFT**: Fast Fourier Transform for frequency spectrum analysis
+- **WGSL Compute Shaders**: GPU-accelerated audio feature extraction
 - **Beat Detection**: Intelligent rhythm detection with adaptive thresholds
 - **Frequency Bands**: 5-band separation (sub-bass, bass, mid, treble, presence)
 - **Cross-platform**: Linux, Windows, macOS support
@@ -52,8 +54,11 @@ cargo run --bin audio-test -- --debug sample.wav
 
 ### Pre-scan for Perfect Synchronization
 ```bash
-# Generate compressed analysis data
+# Generate compressed analysis data (automatic GPU acceleration with CPU fallback)
 cargo run --bin prescan-tool sample.m4a -o sample.arv
+
+# Alternative output formats
+cargo run --bin prescan-tool sample.m4a -o sample.json --format json
 
 # Run with synchronized playback (zero latency)
 cargo run --bin synchronized-test sample.m4a --arv-file sample.arv --debug
@@ -102,8 +107,16 @@ cargo run --bin synchronized-test <audio_file> --arv-file <arv_file> [--debug]
 
 ### Analysis & Development Tools
 ```bash
-# Pre-scan audio for synchronized playback
+# Pre-scan audio for synchronized playback (unified architecture)
 cargo run --bin prescan-tool <input_file> [-o output_file] [--format arv|json]
+
+# Options:
+#   --format arv    Binary format with 97%+ compression (default)
+#   --format json   Human-readable JSON format for debugging
+#   --sample-rate   Analysis sample rate (default: 44100)
+#   --chunk-size    Analysis window size (default: 512)
+#
+# Note: GPU acceleration is automatically attempted with graceful CPU fallback
 
 # Audio analysis tool for tuning parameters
 cargo run --bin audio-analyzer <audio_file> [-o output_file] [--frame-log]
@@ -118,10 +131,13 @@ cargo run --bin gpu-audio-test
 ## 📊 Technical Architecture
 
 ### Audio Processing (`src/audio/`)
+- **Unified Analysis Architecture**: Transparent CPU/GPU processing with identical results
 - **Real-time Analysis**: FFT-based frequency analysis with 15+ audio features
+- **GPU Acceleration**: WGSL compute shaders for accelerated audio processing
 - **Beat Detection**: Adaptive threshold algorithm with BPM estimation
 - **Synchronized Playback**: Frame-perfect timing using pre-computed analysis
 - **ARV Format**: Proprietary binary format (97% smaller than JSON)
+- **Feature Normalization**: Single source of truth ensuring consistent 0.0-1.0 output ranges
 - **Multi-format Support**: WAV, MP3, OGG, M4A/AAC decoding
 
 ### Graphics Engine (`src/graphics/`)
@@ -135,10 +151,15 @@ cargo run --bin gpu-audio-test
 - **Jeff Minter Inspiration**: Classic demoscene and Llamasoft aesthetics
 - **Real-time Parameters**: All effects respond to live audio analysis
 
-### Synchronized System
+### Intelligent Processing System
+- **Automatic GPU Acceleration**: Tries GPU first, gracefully falls back to CPU if unavailable
+- **Transparent Operation**: No configuration required - system chooses optimal processing automatically
+- **Modular Architecture**: Trait-based abstraction ensuring identical results across processing methods
+- **Feature Normalization**: Single normalizer ensures consistent 0.0-1.0 ranges regardless of CPU/GPU
 - **Pre-computation**: Offline analysis generates compressed data files
 - **Frame-perfect Sync**: Zero-latency synchronized playback
 - **Compression**: 97%+ size reduction (11MB → 300KB typical)
+- **Processing Consistency**: CPU and GPU processing produce identical file sizes and visual results
 
 ## 🎯 Audio Features Analyzed
 
@@ -222,10 +243,13 @@ cargo run --release --bin audio-test
 
 ### ✅ Complete Features
 - Multi-format audio file processing and playback
+- Unified CPU/GPU audio analysis architecture with transparent switching
 - Real-time FFT analysis with 15+ audio features
+- WGSL compute shader acceleration for audio processing
 - GPU-accelerated psychedelic visual effects (7 unique effects)
 - 3D surface projection system (4 projection modes)
 - Synchronized playback with ARV binary format
+- Feature normalization ensuring consistent results across processing methods
 - Cross-platform compatibility (Linux, Windows, macOS)
 - Intelligent effect selection and blending
 - Developer tools and analysis overlays

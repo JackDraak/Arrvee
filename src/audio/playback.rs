@@ -4,7 +4,7 @@ use std::fs::File;
 use std::io::BufReader;
 use std::path::Path;
 use log::info;
-use crate::audio::{AudioFrame, AudioAnalyzer};
+use crate::audio::{AudioFrame, fft::AudioAnalyzer};
 
 pub struct AudioPlayback {
     #[allow(dead_code)]

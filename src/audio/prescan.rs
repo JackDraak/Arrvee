@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 use std::path::Path;
 use std::collections::HashMap;
 use log::info;
-use super::{AudioAnalyzer, AudioFrame, FrequencyBands};
+use super::{fft::AudioAnalyzer, AudioFrame, FrequencyBands};
 
 /// Pre-processed audio data for real-time synchronization
 #[derive(Debug, Clone, Serialize, Deserialize)]

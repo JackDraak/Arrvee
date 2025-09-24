@@ -178,9 +178,7 @@ fn main() {
     // Update time data for next frame
     time_data[3] = new_last_beat_time; // Update last beat time
 
-    // Debug: Write energy and threshold to additional features if available
-    if (arrayLength(&features) > 14) {
-        features[14] = clamp(current_energy, 0.0, 10.0);
-        features[15] = clamp(adaptive_threshold, 0.0, 10.0);
-    }
+    // Debug: Write energy and threshold to additional features (indices 14, 15 are available)
+    features[14] = clamp(current_energy, 0.0, 10.0);
+    features[15] = clamp(adaptive_threshold, 0.0, 10.0);
 }

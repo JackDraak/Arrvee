@@ -62,12 +62,12 @@ fn extract_frequency_bands() {
         }
     }
 
-    // Normalize by count and scale for visualization
-    features[0] = clamp(sub_bass / max(sub_bass_count, 1.0) * 10.0, 0.0, 1.0); // sub_bass
-    features[1] = clamp(bass / max(bass_count, 1.0) * 5.0, 0.0, 1.0); // bass
-    features[2] = clamp(mid / max(mid_count, 1.0) * 2.0, 0.0, 1.0); // mid
-    features[3] = clamp(treble / max(treble_count, 1.0) * 3.0, 0.0, 1.0); // treble
-    features[4] = clamp(presence / max(presence_count, 1.0) * 8.0, 0.0, 1.0); // presence
+    // Normalize by count and scale for visualization (raw values)
+    features[0] = sub_bass / max(sub_bass_count, 1.0); // sub_bass
+    features[1] = bass / max(bass_count, 1.0); // bass
+    features[2] = mid / max(mid_count, 1.0); // mid
+    features[3] = treble / max(treble_count, 1.0); // treble
+    features[4] = presence / max(presence_count, 1.0); // presence
 }
 
 // Calculate spectral centroid (brightness)
@@ -85,7 +85,7 @@ fn calculate_spectral_centroid() {
     }
 
     if (magnitude_sum > 0.0) {
-        features[5] = weighted_sum / magnitude_sum; // spectral_centroid
+        features[5] = weighted_sum / magnitude_sum; // spectral_centroid (raw Hz)
     } else {
         features[5] = 0.0;
     }
@@ -111,7 +111,7 @@ fn calculate_spectral_rolloff() {
         cumulative_energy = cumulative_energy + mag * mag;
 
         if (cumulative_energy >= threshold) {
-            features[6] = bin_to_frequency(i, fft_size); // spectral_rolloff
+            features[6] = bin_to_frequency(i, fft_size); // spectral_rolloff (raw Hz)
             return;
         }
     }
@@ -140,7 +140,7 @@ fn calculate_spectral_flux() {
         variance = variance + diff * diff;
     }
 
-    features[7] = clamp(sqrt(variance / count) * 100.0, 0.0, 1.0); // spectral_flux
+    features[7] = sqrt(variance / count); // spectral_flux (raw variance)
 }
 
 // Calculate zero crossing rate approximation
@@ -162,7 +162,7 @@ fn calculate_zero_crossing_rate() {
     }
 
     if (total_energy > 0.0) {
-        features[8] = clamp(high_freq_energy / total_energy, 0.0, 1.0); // zero_crossing_rate
+        features[8] = high_freq_energy / total_energy; // zero_crossing_rate (raw ratio)
     } else {
         features[8] = 0.0;
     }
@@ -179,7 +179,7 @@ fn calculate_onset_strength() {
         onset_energy = onset_energy + mag * mag;
     }
 
-    features[9] = clamp(onset_energy * 0.01, 0.0, 1.0); // onset_strength
+    features[9] = onset_energy; // onset_strength (raw energy)
 }
 
 // Calculate volume (RMS)
@@ -192,7 +192,7 @@ fn calculate_volume() {
         energy = energy + mag * mag;
     }
 
-    features[12] = clamp(sqrt(energy / f32(fft_size)) * 10.0, 0.0, 1.0); // volume
+    features[12] = sqrt(energy / f32(fft_size)); // volume (raw RMS)
 }
 
 // Calculate dynamic range
