@@ -2,11 +2,15 @@ pub mod fft;
 pub mod beat_detector;
 pub mod playback;
 pub mod gpu_analyzer;
+pub mod prescan;
+pub mod arv_format;
 
 pub use fft::AudioAnalyzer;
 pub use beat_detector::BeatDetector;
 pub use playback::AudioPlayback;
 pub use gpu_analyzer::{GpuAudioAnalyzer, GpuAudioFeatures};
+pub use prescan::{PrescanProcessor, PrescanData, SynchronizedPlayback};
+pub use arv_format::ArvFormat;
 
 #[derive(Debug, Clone)]
 pub struct AudioFrame {
@@ -29,7 +33,7 @@ pub struct AudioFrame {
     pub dynamic_range: f32,        // Loudness variation
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
 pub struct FrequencyBands {
     pub bass: f32,
     pub mid: f32,

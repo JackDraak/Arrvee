@@ -233,4 +233,14 @@ impl AudioPlayback {
     pub fn get_full_audio_buffer(&self) -> &Vec<f32> {
         &self.audio_buffer
     }
+
+    /// Get mutable reference to analyzer for sensitivity control
+    pub fn analyzer_mut(&mut self) -> Option<&mut AudioAnalyzer> {
+        self.analyzer.as_mut()
+    }
+
+    /// Get reference to analyzer for reading sensitivity
+    pub fn analyzer(&self) -> Option<&AudioAnalyzer> {
+        self.analyzer.as_ref()
+    }
 }

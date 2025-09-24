@@ -15,6 +15,9 @@ pub struct AudioAnalyzer {
 
     // Normalization factors based on full song analysis
     normalization_factors: NormalizationFactors,
+
+    // Dynamic sensitivity control (0.5 = less sensitive, 1.5 = more sensitive)
+    sensitivity_factor: f32,
 }
 
 #[derive(Clone)]
@@ -118,7 +121,24 @@ impl AudioAnalyzer {
             volume_history: Vec::with_capacity(100),
             tempo_detector: TempoDetector::new(),
             normalization_factors: NormalizationFactors::default(),
+            sensitivity_factor: 1.0, // Default sensitivity
         }
+    }
+
+    /// Set sensitivity factor (0.5 = less sensitive, 1.5 = more sensitive)
+    pub fn set_sensitivity(&mut self, sensitivity: f32) {
+        self.sensitivity_factor = sensitivity.clamp(0.5, 1.5);
+    }
+
+    /// Get current sensitivity factor
+    pub fn get_sensitivity(&self) -> f32 {
+        self.sensitivity_factor
+    }
+
+    /// Adjust sensitivity by delta (e.g., +0.1 or -0.1)
+    pub fn adjust_sensitivity(&mut self, delta: f32) -> f32 {
+        self.sensitivity_factor = (self.sensitivity_factor + delta).clamp(0.5, 1.5);
+        self.sensitivity_factor
     }
 
     fn hann_window(size: usize) -> Vec<f32> {
@@ -162,13 +182,13 @@ impl AudioAnalyzer {
         // Store current spectrum for next frame's spectral flux calculation
         self.previous_spectrum = spectrum.clone();
 
-        // Apply normalization factors to improve dynamic range
+        // Apply normalization factors with sensitivity adjustment
         let normalized_bands = FrequencyBands {
-            bass: (frequency_bands.bass / self.normalization_factors.bass_max).clamp(0.0, 1.0),
-            mid: (frequency_bands.mid / self.normalization_factors.mid_max).clamp(0.0, 1.0),
-            treble: (frequency_bands.treble / self.normalization_factors.treble_max).clamp(0.0, 1.0),
-            presence: (frequency_bands.presence / self.normalization_factors.presence_max).clamp(0.0, 1.0),
-            sub_bass: (frequency_bands.sub_bass / self.normalization_factors.sub_bass_max).clamp(0.0, 1.0),
+            bass: ((frequency_bands.bass / self.normalization_factors.bass_max) * self.sensitivity_factor).clamp(0.0, 1.0),
+            mid: ((frequency_bands.mid / self.normalization_factors.mid_max) * self.sensitivity_factor).clamp(0.0, 1.0),
+            treble: ((frequency_bands.treble / self.normalization_factors.treble_max) * self.sensitivity_factor).clamp(0.0, 1.0),
+            presence: ((frequency_bands.presence / self.normalization_factors.presence_max) * self.sensitivity_factor).clamp(0.0, 1.0),
+            sub_bass: ((frequency_bands.sub_bass / self.normalization_factors.sub_bass_max) * self.sensitivity_factor).clamp(0.0, 1.0),
         };
 
         AudioFrame {
@@ -179,14 +199,14 @@ impl AudioAnalyzer {
             beat_detected,
             beat_strength,
             volume,
-            spectral_centroid: (spectral_centroid / self.normalization_factors.spectral_centroid_max).clamp(0.0, 1.0),
-            spectral_rolloff: (spectral_rolloff / self.normalization_factors.spectral_rolloff_max).clamp(0.0, 1.0),
-            zero_crossing_rate: (zero_crossing_rate / self.normalization_factors.zero_crossing_max).clamp(0.0, 1.0),
-            spectral_flux: (spectral_flux / self.normalization_factors.spectral_flux_max).clamp(0.0, 1.0),
-            onset_strength: (onset_strength / self.normalization_factors.onset_strength_max).clamp(0.0, 1.0),
-            pitch_confidence: (pitch_confidence / self.normalization_factors.pitch_confidence_max).clamp(0.0, 1.0),
+            spectral_centroid: ((spectral_centroid / self.normalization_factors.spectral_centroid_max) * self.sensitivity_factor).clamp(0.0, 1.0),
+            spectral_rolloff: ((spectral_rolloff / self.normalization_factors.spectral_rolloff_max) * self.sensitivity_factor).clamp(0.0, 1.0),
+            zero_crossing_rate: ((zero_crossing_rate / self.normalization_factors.zero_crossing_max) * self.sensitivity_factor).clamp(0.0, 1.0),
+            spectral_flux: ((spectral_flux / self.normalization_factors.spectral_flux_max) * self.sensitivity_factor).clamp(0.0, 1.0),
+            onset_strength: ((onset_strength / self.normalization_factors.onset_strength_max) * self.sensitivity_factor).clamp(0.0, 1.0),
+            pitch_confidence: ((pitch_confidence / self.normalization_factors.pitch_confidence_max) * self.sensitivity_factor).clamp(0.0, 1.0),
             estimated_bpm: self.tempo_detector.estimated_bpm,
-            dynamic_range: (dynamic_range / self.normalization_factors.dynamic_range_max).clamp(0.0, 1.0),
+            dynamic_range: ((dynamic_range / self.normalization_factors.dynamic_range_max) * self.sensitivity_factor).clamp(0.0, 1.0),
         }
     }
 

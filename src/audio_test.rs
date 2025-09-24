@@ -33,7 +33,7 @@ impl DebugOverlay {
         }
     }
 
-    fn render_debug_info(&mut self, audio_frame: &AudioFrame, graphics_engine: &graphics::GraphicsEngine) {
+    fn render_debug_info(&mut self, audio_frame: &AudioFrame, graphics_engine: &graphics::GraphicsEngine, audio_playback: &AudioPlayback) {
         if !self.show_overlay {
             return;
         }
@@ -91,8 +91,11 @@ impl DebugOverlay {
         } else {
             projection_modes.get(graphics_engine.projection_mode as usize).map_or("Unknown", |v| v)
         };
+        let sensitivity = audio_playback.analyzer().map_or(1.0, |a| a.get_sensitivity());
         println!("║   Projection: {:<10} | Dynamic Range: {:>6.3}             ║",
                  proj_mode, audio_frame.dynamic_range);
+        println!("║   Sensitivity: {:>5.2}x | Analysis Quality: Enhanced       ║",
+                 sensitivity);
 
         println!("║                                                               ║");
         println!("║ 🌈 ACTIVE EFFECTS                                             ║");
@@ -126,6 +129,7 @@ impl DebugOverlay {
         println!("║ 🎮 CONTROLS                                                   ║");
         println!("║   P: Palette | [/]: Smoothing | Q/W/E/R/T: Projection       ║");
         println!("║   1-7: Effects | 0: Auto | D: Toggle Debug | Space: Pause   ║");
+        println!("║   +/-: Volume | ;/': Sensitivity | Tab: Cycle Modes        ║");
         println!("╚═══════════════════════════════════════════════════════════════╝");
     }
 
@@ -317,6 +321,19 @@ fn main() -> Result<()> {
                                 graphics_engine.smoothing_factor = (graphics_engine.smoothing_factor + 0.1).min(2.0);
                                 info!("🎛️ Smoothing: {:.1}", graphics_engine.smoothing_factor);
                             }
+                            // Sensitivity controls using Semicolon/Quote for easier access
+                            PhysicalKey::Code(KeyCode::Semicolon) => {
+                                if let Some(analyzer) = audio_playback.analyzer_mut() {
+                                    let new_sensitivity = analyzer.adjust_sensitivity(0.1);
+                                    info!("🎚️ Sensitivity increased to {:.2}x", new_sensitivity);
+                                }
+                            }
+                            PhysicalKey::Code(KeyCode::Quote) => {
+                                if let Some(analyzer) = audio_playback.analyzer_mut() {
+                                    let new_sensitivity = analyzer.adjust_sensitivity(-0.1);
+                                    info!("🎚️ Sensitivity decreased to {:.2}x", new_sensitivity);
+                                }
+                            }
                             _ => {}
                         }
                     }
@@ -338,7 +355,7 @@ fn main() -> Result<()> {
                         FRAME_COUNT += 1;
                         if FRAME_COUNT % 30 == 0 { // Show debug every 30 frames (~2Hz at 60fps)
                             if let Some(debug) = &mut debug_overlay {
-                                debug.render_debug_info(&audio_data, &graphics_engine);
+                                debug.render_debug_info(&audio_data, &graphics_engine, &audio_playback);
                             }
                         }
                     }

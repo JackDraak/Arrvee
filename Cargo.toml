@@ -55,3 +55,11 @@ path = "src/gpu_audio_test.rs"
 [[bin]]
 name = "audio-analyzer"
 path = "src/audio_analyzer.rs"
+
+[[bin]]
+name = "prescan-tool"
+path = "src/prescan_tool.rs"
+
+[[bin]]
+name = "synchronized-test"
+path = "src/synchronized_test.rs"
