@@ -1,0 +1,4395 @@
+{
+  "file_info": {
+    "filename": "sample.m4a",
+    "duration_seconds": 219.38213,
+    "sample_rate": 44100.0,
+    "total_samples": 9674752,
+    "total_frames": 18896
+  },
+  "analysis_config": {
+    "chunk_size": 512,
+    "frame_rate": 86.13281,
+    "include_frame_data": false
+  },
+  "frequency_band_stats": {
+    "mid": {
+      "min": 0.0,
+      "max": 0.085300334,
+      "mean": 0.02314559,
+      "median": 0.022385785,
+      "std_dev": 0.012590172,
+      "samples": 18896,
+      "histogram": [
+        [
+          0.0,
+          1363
+        ],
+        [
+          0.004265017,
+          821
+        ],
+        [
+          0.008530034,
+          1398
+        ],
+        [
+          0.012795051,
+          2578
+        ],
+        [
+          0.017060068,
+          2693
+        ],
+        [
+          0.021325085,
+          2474
+        ],
+        [
+          0.025590101,
+          2252
+        ],
+        [
+          0.029855117,
+          1948
+        ],
+        [
+          0.034120135,
+          1384
+        ],
+        [
+          0.038385153,
+          831
+        ],
+        [
+          0.04265017,
+          439
+        ],
+        [
+          0.046915185,
+          252
+        ],
+        [
+          0.051180203,
+          172
+        ],
+        [
+          0.05544522,
+          127
+        ],
+        [
+          0.059710234,
+          76
+        ],
+        [
+          0.06397525,
+          48
+        ],
+        [
+          0.06824027,
+          22
+        ],
+        [
+          0.07250529,
+          9
+        ],
+        [
+          0.076770306,
+          8
+        ],
+        [
+          0.08103532,
+          1
+        ]
+      ]
+    },
+    "treble": {
+      "min": 0.0,
+      "max": 0.028677402,
+      "mean": 0.0064966404,
+      "median": 0.0065247454,
+      "std_dev": 0.0034617742,
+      "samples": 18896,
+      "histogram": [
+        [
+          0.0,
+          1652
+        ],
+        [
+          0.00143387,
+          1205
+        ],
+        [
+          0.00286774,
+          1857
+        ],
+        [
+          0.0043016104,
+          2890
+        ],
+        [
+          0.00573548,
+          3416
+        ],
+        [
+          0.00716935,
+          3164
+        ],
+        [
+          0.008603221,
+          2262
+        ],
+        [
+          0.010037091,
+          1280
+        ],
+        [
+          0.01147096,
+          523
+        ],
+        [
+          0.01290483,
+          249
+        ],
+        [
+          0.0143387,
+          157
+        ],
+        [
+          0.01577257,
+          103
+        ],
+        [
+          0.017206442,
+          62
+        ],
+        [
+          0.018640311,
+          47
+        ],
+        [
+          0.020074181,
+          16
+        ],
+        [
+          0.021508051,
+          6
+        ],
+        [
+          0.02294192,
+          3
+        ],
+        [
+          0.02437579,
+          3
+        ],
+        [
+          0.02580966,
+          0
+        ],
+        [
+          0.02724353,
+          0
+        ]
+      ]
+    },
+    "presence": {
+      "min": 0.0,
+      "max": 0.007945857,
+      "mean": 0.0008532337,
+      "median": 0.0007312663,
+      "std_dev": 0.00067955465,
+      "samples": 18896,
+      "histogram": [
+        [
+          0.0,
+          3988
+        ],
+        [
+          0.00039729284,
+          6479
+        ],
+        [
+          0.0007945857,
+          4570
+        ],
+        [
+          0.0011918785,
+          1827
+        ],
+        [
+          0.0015891714,
+          995
+        ],
+        [
+          0.0019864643,
+          459
+        ],
+        [
+          0.002383757,
+          213
+        ],
+        [
+          0.0027810498,
+          127
+        ],
+        [
+          0.0031783427,
+          74
+        ],
+        [
+          0.0035756356,
+          59
+        ],
+        [
+          0.0039729285,
+          23
+        ],
+        [
+          0.0043702214,
+          27
+        ],
+        [
+          0.004767514,
+          20
+        ],
+        [
+          0.0051648067,
+          15
+        ],
+        [
+          0.0055620996,
+          10
+        ],
+        [
+          0.0059593925,
+          2
+        ],
+        [
+          0.0063566854,
+          2
+        ],
+        [
+          0.0067539783,
+          3
+        ],
+        [
+          0.007151271,
+          2
+        ],
+        [
+          0.007548564,
+          0
+        ]
+      ]
+    },
+    "bass": {
+      "min": 0.0,
+      "max": 0.4888515,
+      "mean": 0.07922521,
+      "median": 0.06611873,
+      "std_dev": 0.067206934,
+      "samples": 18896,
+      "histogram": [
+        [
+          0.0,
+          3283
+        ],
+        [
+          0.024442574,
+          3353
+        ],
+        [
+          0.048885148,
+          3899
+        ],
+        [
+          0.07332772,
+          3095
+        ],
+        [
+          0.097770296,
+          2052
+        ],
+        [
+          0.12221287,
+          1134
+        ],
+        [
+          0.14665544,
+          664
+        ],
+        [
+          0.17109802,
+          389
+        ],
+        [
+          0.19554059,
+          212
+        ],
+        [
+          0.21998316,
+          159
+        ],
+        [
+          0.24442574,
+          135
+        ],
+        [
+          0.26886833,
+          109
+        ],
+        [
+          0.29331088,
+          121
+        ],
+        [
+          0.31775346,
+          76
+        ],
+        [
+          0.34219605,
+          69
+        ],
+        [
+          0.3666386,
+          61
+        ],
+        [
+          0.39108118,
+          37
+        ],
+        [
+          0.41552377,
+          31
+        ],
+        [
+          0.43996632,
+          12
+        ],
+        [
+          0.4644089,
+          4
+        ]
+      ]
+    },
+    "sub_bass": {
+      "min": 0.0,
+      "max": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "std_dev": 0.0,
+      "samples": 18896,
+      "histogram": []
+    }
+  },
+  "spectral_feature_stats": {
+    "spectral_rolloff": {
+      "min": 0.0,
+      "max": 18949.219,
+      "mean": 6425.0386,
+      "median": 6029.297,
+      "std_dev": 2512.0737,
+      "samples": 18896,
+      "histogram": [
+        [
+          0.0,
+          253
+        ],
+        [
+          947.46094,
+          28
+        ],
+        [
+          1894.9219,
+          589
+        ],
+        [
+          2842.3828,
+          1043
+        ],
+        [
+          3789.8438,
+          2323
+        ],
+        [
+          4737.3047,
+          3522
+        ],
+        [
+          5684.7656,
+          3728
+        ],
+        [
+          6632.2266,
+          2374
+        ],
+        [
+          7579.6875,
+          1613
+        ],
+        [
+          8527.148,
+          1078
+        ],
+        [
+          9474.609,
+          731
+        ],
+        [
+          10422.07,
+          624
+        ],
+        [
+          11369.531,
+          481
+        ],
+        [
+          12316.992,
+          318
+        ],
+        [
+          13264.453,
+          99
+        ],
+        [
+          14211.914,
+          55
+        ],
+        [
+          15159.375,
+          23
+        ],
+        [
+          16106.836,
+          3
+        ],
+        [
+          17054.297,
+          3
+        ],
+        [
+          18001.758,
+          7
+        ]
+      ]
+    },
+    "spectral_centroid": {
+      "min": 0.0,
+      "max": 15354.41,
+      "mean": 3073.9087,
+      "median": 2922.6921,
+      "std_dev": 1127.7753,
+      "samples": 18896,
+      "histogram": [
+        [
+          0.0,
+          258
+        ],
+        [
+          767.7205,
+          619
+        ],
+        [
+          1535.441,
+          2788
+        ],
+        [
+          2303.1616,
+          7305
+        ],
+        [
+          3070.882,
+          4532
+        ],
+        [
+          3838.6025,
+          1678
+        ],
+        [
+          4606.323,
+          906
+        ],
+        [
+          5374.0435,
+          463
+        ],
+        [
+          6141.764,
+          208
+        ],
+        [
+          6909.485,
+          87
+        ],
+        [
+          7677.205,
+          31
+        ],
+        [
+          8444.926,
+          9
+        ],
+        [
+          9212.646,
+          4
+        ],
+        [
+          9980.367,
+          4
+        ],
+        [
+          10748.087,
+          3
+        ],
+        [
+          11515.808,
+          0
+        ],
+        [
+          12283.528,
+          0
+        ],
+        [
+          13051.249,
+          0
+        ],
+        [
+          13818.97,
+          0
+        ],
+        [
+          14586.689,
+          0
+        ]
+      ]
+    },
+    "pitch_confidence": {
+      "min": 0.0,
+      "max": 0.9978442,
+      "mean": 0.8453935,
+      "median": 0.8905141,
+      "std_dev": 0.14749391,
+      "samples": 18896,
+      "histogram": [
+        [
+          0.0,
+          253
+        ],
+        [
+          0.04989221,
+          2
+        ],
+        [
+          0.09978442,
+          1
+        ],
+        [
+          0.14967662,
+          13
+        ],
+        [
+          0.19956884,
+          16
+        ],
+        [
+          0.24946105,
+          19
+        ],
+        [
+          0.29935324,
+          25
+        ],
+        [
+          0.34924546,
+          40
+        ],
+        [
+          0.39913768,
+          84
+        ],
+        [
+          0.4490299,
+          100
+        ],
+        [
+          0.4989221,
+          145
+        ],
+        [
+          0.5488143,
+          243
+        ],
+        [
+          0.5987065,
+          444
+        ],
+        [
+          0.64859873,
+          561
+        ],
+        [
+          0.6984909,
+          812
+        ],
+        [
+          0.74838316,
+          1266
+        ],
+        [
+          0.79827535,
+          2000
+        ],
+        [
+          0.84816754,
+          4386
+        ],
+        [
+          0.8980598,
+          6477
+        ],
+        [
+          0.947952,
+          2008
+        ]
+      ]
+    }
+  },
+  "temporal_feature_stats": {
+    "zero_crossing_rate": {
+      "min": 0.0,
+      "max": 0.407045,
+      "mean": 0.07570527,
+      "median": 0.06849315,
+      "std_dev": 0.043387894,
+      "samples": 18896,
+      "histogram": [
+        [
+          0.0,
+          892
+        ],
+        [
+          0.02035225,
+          2127
+        ],
+        [
+          0.0407045,
+          4370
+        ],
+        [
+          0.061056748,
+          4900
+        ],
+        [
+          0.081409,
+          3083
+        ],
+        [
+          0.10176125,
+          1635
+        ],
+        [
+          0.122113496,
+          662
+        ],
+        [
+          0.14246576,
+          430
+        ],
+        [
+          0.162818,
+          244
+        ],
+        [
+          0.18317024,
+          187
+        ],
+        [
+          0.2035225,
+          138
+        ],
+        [
+          0.22387475,
+          69
+        ],
+        [
+          0.24422699,
+          40
+        ],
+        [
+          0.26457924,
+          28
+        ],
+        [
+          0.2849315,
+          28
+        ],
+        [
+          0.30528376,
+          27
+        ],
+        [
+          0.325636,
+          14
+        ],
+        [
+          0.34598824,
+          11
+        ],
+        [
+          0.3663405,
+          7
+        ],
+        [
+          0.38669276,
+          3
+        ]
+      ]
+    },
+    "dynamic_range": {
+      "min": 0.0,
+      "max": 0.64323777,
+      "mean": 0.4314751,
+      "median": 0.473324,
+      "std_dev": 0.14074287,
+      "samples": 18896,
+      "histogram": [
+        [
+          0.0,
+          622
+        ],
+        [
+          0.032161888,
+          347
+        ],
+        [
+          0.064323775,
+          170
+        ],
+        [
+          0.09648566,
+          203
+        ],
+        [
+          0.12864755,
+          364
+        ],
+        [
+          0.16080944,
+          219
+        ],
+        [
+          0.19297132,
+          266
+        ],
+        [
+          0.22513321,
+          305
+        ],
+        [
+          0.2572951,
+          214
+        ],
+        [
+          0.289457,
+          57
+        ],
+        [
+          0.32161888,
+          163
+        ],
+        [
+          0.35378078,
+          591
+        ],
+        [
+          0.38594264,
+          1132
+        ],
+        [
+          0.41810453,
+          2830
+        ],
+        [
+          0.45026642,
+          3082
+        ],
+        [
+          0.4824283,
+          3871
+        ],
+        [
+          0.5145902,
+          2502
+        ],
+        [
+          0.5467521,
+          1213
+        ],
+        [
+          0.578914,
+          459
+        ],
+        [
+          0.6110759,
+          253
+        ]
+      ]
+    },
+    "spectral_flux": {
+      "min": 0.0,
+      "max": 0.011554685,
+      "mean": 0.0028689047,
+      "median": 0.0027662627,
+      "std_dev": 0.0015419282,
+      "samples": 18896,
+      "histogram": [
+        [
+          0.0,
+          1463
+        ],
+        [
+          0.00057773426,
+          618
+        ],
+        [
+          0.0011554685,
+          1481
+        ],
+        [
+          0.0017332027,
+          2891
+        ],
+        [
+          0.002310937,
+          3807
+        ],
+        [
+          0.0028886714,
+          3284
+        ],
+        [
+          0.0034664054,
+          2153
+        ],
+        [
+          0.0040441398,
+          1183
+        ],
+        [
+          0.004621874,
+          702
+        ],
+        [
+          0.0051996084,
+          436
+        ],
+        [
+          0.0057773427,
+          314
+        ],
+        [
+          0.006355077,
+          200
+        ],
+        [
+          0.006932811,
+          138
+        ],
+        [
+          0.007510545,
+          79
+        ],
+        [
+          0.0080882795,
+          76
+        ],
+        [
+          0.008666014,
+          38
+        ],
+        [
+          0.009243748,
+          19
+        ],
+        [
+          0.009821482,
+          9
+        ],
+        [
+          0.010399217,
+          3
+        ],
+        [
+          0.010976951,
+          1
+        ]
+      ]
+    },
+    "onset_strength": {
+      "min": 0.0,
+      "max": 0.10383406,
+      "mean": 0.005972134,
+      "median": 0.0,
+      "std_dev": 0.011510733,
+      "samples": 18896,
+      "histogram": [
+        [
+          0.0,
+          13162
+        ],
+        [
+          0.0051917033,
+          1934
+        ],
+        [
+          0.010383407,
+          1344
+        ],
+        [
+          0.01557511,
+          852
+        ],
+        [
+          0.020766813,
+          516
+        ],
+        [
+          0.025958516,
+          291
+        ],
+        [
+          0.03115022,
+          189
+        ],
+        [
+          0.036341924,
+          148
+        ],
+        [
+          0.041533627,
+          100
+        ],
+        [
+          0.04672533,
+          87
+        ],
+        [
+          0.05191703,
+          70
+        ],
+        [
+          0.057108738,
+          62
+        ],
+        [
+          0.06230044,
+          47
+        ],
+        [
+          0.06749214,
+          34
+        ],
+        [
+          0.07268385,
+          31
+        ],
+        [
+          0.07787555,
+          13
+        ],
+        [
+          0.08306725,
+          7
+        ],
+        [
+          0.08825896,
+          6
+        ],
+        [
+          0.09345066,
+          2
+        ],
+        [
+          0.098642364,
+          1
+        ]
+      ]
+    }
+  },
+  "beat_stats": {
+    "total_beats": 669,
+    "average_bpm": 124.69948,
+    "bpm_variance": 153.60477,
+    "beat_consistency": 0.9402111,
+    "strongest_beat": 5.0,
+    "weakest_beat": 1.2899371
+  },
+  "effect_activation_summary": {},
+  "effect_transitions": [],
+  "beat_events": [
+    {
+      "timestamp": 0.44117913,
+      "strength": 5.0,
+      "estimated_bpm": 120.0
+    },
+    {
+      "timestamp": 0.7082086,
+      "strength": 1.704548,
+      "estimated_bpm": 156.52187
+    },
+    {
+      "timestamp": 4.5743313,
+      "strength": 5.0,
+      "estimated_bpm": 156.52187
+    },
+    {
+      "timestamp": 4.9458504,
+      "strength": 3.9425173,
+      "estimated_bpm": 130.90811
+    },
+    {
+      "timestamp": 5.25932,
+      "strength": 3.3112988,
+      "estimated_bpm": 131.70609
+    },
+    {
+      "timestamp": 5.572789,
+      "strength": 2.2303424,
+      "estimated_bpm": 132.1088
+    },
+    {
+      "timestamp": 5.8978686,
+      "strength": 2.655978,
+      "estimated_bpm": 131.38625
+    },
+    {
+      "timestamp": 6.222948,
+      "strength": 3.9863348,
+      "estimated_bpm": 130.90892
+    },
+    {
+      "timestamp": 6.536417,
+      "strength": 4.456885,
+      "estimated_bpm": 131.25014
+    },
+    {
+      "timestamp": 6.8498864,
+      "strength": 4.7665257,
+      "estimated_bpm": 131.50722
+    },
+    {
+      "timestamp": 7.174966,
+      "strength": 3.2381978,
+      "estimated_bpm": 128.572
+    },
+    {
+      "timestamp": 7.4536057,
+      "strength": 2.0775046,
+      "estimated_bpm": 133.33444
+    },
+    {
+      "timestamp": 7.8019047,
+      "strength": 2.9184685,
+      "estimated_bpm": 131.50842
+    },
+    {
+      "timestamp": 8.115375,
+      "strength": 2.3652885,
+      "estimated_bpm": 131.50885
+    },
+    {
+      "timestamp": 8.452064,
+      "strength": 4.736182,
+      "estimated_bpm": 130.91109
+    },
+    {
+      "timestamp": 8.753922,
+      "strength": 2.2764459,
+      "estimated_bpm": 132.1121
+    },
+    {
+      "timestamp": 9.032562,
+      "strength": 1.7664351,
+      "estimated_bpm": 133.95554
+    },
+    {
+      "timestamp": 9.241542,
+      "strength": 2.8045957,
+      "estimated_bpm": 133.95554
+    },
+    {
+      "timestamp": 9.555012,
+      "strength": 3.2685184,
+      "estimated_bpm": 133.95554
+    },
+    {
+      "timestamp": 10.57669,
+      "strength": 5.0,
+      "estimated_bpm": 104.728874
+    },
+    {
+      "timestamp": 13.467574,
+      "strength": 5.0,
+      "estimated_bpm": 104.728874
+    },
+    {
+      "timestamp": 13.839093,
+      "strength": 2.873539,
+      "estimated_bpm": 101.76834
+    },
+    {
+      "timestamp": 14.152562,
+      "strength": 2.03764,
+      "estimated_bpm": 102.85871
+    },
+    {
+      "timestamp": 14.477642,
+      "strength": 4.2413282,
+      "estimated_bpm": 102.49267
+    },
+    {
+      "timestamp": 14.802721,
+      "strength": 3.7855082,
+      "estimated_bpm": 102.85871
+    },
+    {
+      "timestamp": 15.116191,
+      "strength": 3.5743494,
+      "estimated_bpm": 102.49267
+    },
+    {
+      "timestamp": 15.44127,
+      "strength": 3.5826702,
+      "estimated_bpm": 101.05418
+    },
+    {
+      "timestamp": 15.754739,
+      "strength": 2.3107517,
+      "estimated_bpm": 101.05418
+    },
+    {
+      "timestamp": 16.079819,
+      "strength": 3.837523,
+      "estimated_bpm": 128.00195
+    },
+    {
+      "timestamp": 16.404898,
+      "strength": 3.5470614,
+      "estimated_bpm": 130.31873
+    },
+    {
+      "timestamp": 16.718367,
+      "strength": 3.6479073,
+      "estimated_bpm": 130.31873
+    },
+    {
+      "timestamp": 17.031837,
+      "strength": 2.0280566,
+      "estimated_bpm": 130.91109
+    },
+    {
+      "timestamp": 17.368526,
+      "strength": 4.815981,
+      "estimated_bpm": 130.31873
+    },
+    {
+      "timestamp": 17.681995,
+      "strength": 4.2877574,
+      "estimated_bpm": 130.31873
+    },
+    {
+      "timestamp": 17.983854,
+      "strength": 2.5578897,
+      "estimated_bpm": 131.50885
+    },
+    {
+      "timestamp": 18.146395,
+      "strength": 3.383454,
+      "estimated_bpm": 131.50885
+    },
+    {
+      "timestamp": 18.459864,
+      "strength": 2.273396,
+      "estimated_bpm": 131.50885
+    },
+    {
+      "timestamp": 19.260952,
+      "strength": 5.0,
+      "estimated_bpm": 110.77092
+    },
+    {
+      "timestamp": 19.504763,
+      "strength": 4.2116327,
+      "estimated_bpm": 113.83573
+    },
+    {
+      "timestamp": 23.219955,
+      "strength": 5.0,
+      "estimated_bpm": 113.83573
+    },
+    {
+      "timestamp": 23.568254,
+      "strength": 4.4201083,
+      "estimated_bpm": 112.50172
+    },
+    {
+      "timestamp": 23.893333,
+      "strength": 3.1430657,
+      "estimated_bpm": 112.063965
+    },
+    {
+      "timestamp": 24.206802,
+      "strength": 3.3505373,
+      "estimated_bpm": 112.9429
+    },
+    {
+      "timestamp": 24.531881,
+      "strength": 2.968712,
+      "estimated_bpm": 112.50172
+    },
+    {
+      "timestamp": 24.856962,
+      "strength": 3.9487054,
+      "estimated_bpm": 111.62961
+    },
+    {
+      "timestamp": 25.170431,
+      "strength": 3.9325533,
+      "estimated_bpm": 111.62961
+    },
+    {
+      "timestamp": 25.50712,
+      "strength": 4.503459,
+      "estimated_bpm": 132.1121
+    },
+    {
+      "timestamp": 25.808979,
+      "strength": 1.8871613,
+      "estimated_bpm": 129.14995
+    },
+    {
+      "timestamp": 26.09923,
+      "strength": 1.7796488,
+      "estimated_bpm": 132.1121
+    },
+    {
+      "timestamp": 26.435919,
+      "strength": 1.8971957,
+      "estimated_bpm": 131.50885
+    },
+    {
+      "timestamp": 26.772608,
+      "strength": 4.993347,
+      "estimated_bpm": 130.31873
+    },
+    {
+      "timestamp": 29.036552,
+      "strength": 5.0,
+      "estimated_bpm": 130.31873
+    },
+    {
+      "timestamp": 29.489342,
+      "strength": 1.7884316,
+      "estimated_bpm": 124.139824
+    },
+    {
+      "timestamp": 29.84925,
+      "strength": 4.250861,
+      "estimated_bpm": 122.55506
+    },
+    {
+      "timestamp": 30.30204,
+      "strength": 1.748476,
+      "estimated_bpm": 116.60097
+    },
+    {
+      "timestamp": 30.49941,
+      "strength": 2.1365504,
+      "estimated_bpm": 116.60097
+    },
+    {
+      "timestamp": 30.81288,
+      "strength": 2.980296,
+      "estimated_bpm": 117.55281
+    },
+    {
+      "timestamp": 31.126348,
+      "strength": 2.9608848,
+      "estimated_bpm": 117.07496
+    },
+    {
+      "timestamp": 31.40499,
+      "strength": 1.8427873,
+      "estimated_bpm": 117.55281
+    },
+    {
+      "timestamp": 31.567528,
+      "strength": 1.760355,
+      "estimated_bpm": 117.55281
+    },
+    {
+      "timestamp": 31.764898,
+      "strength": 2.0097098,
+      "estimated_bpm": 117.55281
+    },
+    {
+      "timestamp": 32.07837,
+      "strength": 4.395002,
+      "estimated_bpm": 118.520325
+    },
+    {
+      "timestamp": 32.380226,
+      "strength": 1.7812172,
+      "estimated_bpm": 120.00183
+    },
+    {
+      "timestamp": 32.786575,
+      "strength": 2.0158687,
+      "estimated_bpm": 122.03576
+    },
+    {
+      "timestamp": 33.041996,
+      "strength": 2.3075118,
+      "estimated_bpm": 126.87418
+    },
+    {
+      "timestamp": 33.355465,
+      "strength": 3.3074136,
+      "estimated_bpm": 133.95554
+    },
+    {
+      "timestamp": 33.657326,
+      "strength": 4.0051103,
+      "estimated_bpm": 134.5815
+    },
+    {
+      "timestamp": 33.935963,
+      "strength": 2.52119,
+      "estimated_bpm": 136.49498
+    },
+    {
+      "timestamp": 34.156555,
+      "strength": 3.3648114,
+      "estimated_bpm": 139.80795
+    },
+    {
+      "timestamp": 34.330704,
+      "strength": 2.1428466,
+      "estimated_bpm": 139.80795
+    },
+    {
+      "timestamp": 34.620953,
+      "strength": 4.2488136,
+      "estimated_bpm": 141.17862
+    },
+    {
+      "timestamp": 34.88798,
+      "strength": 1.9996072,
+      "estimated_bpm": 143.28577
+    },
+    {
+      "timestamp": 35.34077,
+      "strength": 1.8732449,
+      "estimated_bpm": 140.48994
+    },
+    {
+      "timestamp": 35.54975,
+      "strength": 1.9316268,
+      "estimated_bpm": 140.48994
+    },
+    {
+      "timestamp": 35.86322,
+      "strength": 2.625569,
+      "estimated_bpm": 137.14494
+    },
+    {
+      "timestamp": 36.17669,
+      "strength": 4.7139535,
+      "estimated_bpm": 137.14494
+    },
+    {
+      "timestamp": 36.47855,
+      "strength": 2.045013,
+      "estimated_bpm": 137.14494
+    },
+    {
+      "timestamp": 36.67592,
+      "strength": 4.181637,
+      "estimated_bpm": 137.14494
+    },
+    {
+      "timestamp": 36.83846,
+      "strength": 3.0727947,
+      "estimated_bpm": 137.14494
+    },
+    {
+      "timestamp": 37.151928,
+      "strength": 1.7803323,
+      "estimated_bpm": 135.21333
+    },
+    {
+      "timestamp": 37.442177,
+      "strength": 4.1060815,
+      "estimated_bpm": 131.50885
+    },
+    {
+      "timestamp": 37.732426,
+      "strength": 2.1400785,
+      "estimated_bpm": 131.50885
+    },
+    {
+      "timestamp": 37.929794,
+      "strength": 3.560253,
+      "estimated_bpm": 131.50885
+    },
+    {
+      "timestamp": 38.092335,
+      "strength": 2.2840238,
+      "estimated_bpm": 131.50885
+    },
+    {
+      "timestamp": 38.405804,
+      "strength": 3.743505,
+      "estimated_bpm": 129.14995
+    },
+    {
+      "timestamp": 38.696053,
+      "strength": 3.2353606,
+      "estimated_bpm": 137.80115
+    },
+    {
+      "timestamp": 38.997913,
+      "strength": 1.8420601,
+      "estimated_bpm": 138.46365
+    },
+    {
+      "timestamp": 39.14884,
+      "strength": 1.901894,
+      "estimated_bpm": 138.46365
+    },
+    {
+      "timestamp": 39.346214,
+      "strength": 3.0176363,
+      "estimated_bpm": 138.46365
+    },
+    {
+      "timestamp": 39.62485,
+      "strength": 1.5595369,
+      "estimated_bpm": 140.48994
+    },
+    {
+      "timestamp": 39.973152,
+      "strength": 4.731762,
+      "estimated_bpm": 137.80115
+    },
+    {
+      "timestamp": 40.28662,
+      "strength": 4.510166,
+      "estimated_bpm": 137.80115
+    },
+    {
+      "timestamp": 40.60009,
+      "strength": 2.5417287,
+      "estimated_bpm": 136.49498
+    },
+    {
+      "timestamp": 40.90195,
+      "strength": 2.560496,
+      "estimated_bpm": 135.85114
+    },
+    {
+      "timestamp": 41.21542,
+      "strength": 3.2878914,
+      "estimated_bpm": 135.85114
+    },
+    {
+      "timestamp": 41.52889,
+      "strength": 3.5709121,
+      "estimated_bpm": 134.5815
+    },
+    {
+      "timestamp": 41.842358,
+      "strength": 4.9334188,
+      "estimated_bpm": 133.95554
+    },
+    {
+      "timestamp": 42.14422,
+      "strength": 4.3995075,
+      "estimated_bpm": 132.72092
+    },
+    {
+      "timestamp": 42.446075,
+      "strength": 3.4574156,
+      "estimated_bpm": 135.21333
+    },
+    {
+      "timestamp": 42.747936,
+      "strength": 2.0342612,
+      "estimated_bpm": 135.85114
+    },
+    {
+      "timestamp": 43.061405,
+      "strength": 4.488799,
+      "estimated_bpm": 135.85114
+    },
+    {
+      "timestamp": 43.363266,
+      "strength": 3.4844747,
+      "estimated_bpm": 135.85114
+    },
+    {
+      "timestamp": 43.676735,
+      "strength": 3.5239663,
+      "estimated_bpm": 135.85114
+    },
+    {
+      "timestamp": 43.990204,
+      "strength": 2.3849866,
+      "estimated_bpm": 135.85114
+    },
+    {
+      "timestamp": 44.268845,
+      "strength": 3.17701,
+      "estimated_bpm": 137.80115
+    },
+    {
+      "timestamp": 44.59392,
+      "strength": 3.8480766,
+      "estimated_bpm": 136.49483
+    },
+    {
+      "timestamp": 44.895782,
+      "strength": 4.6836567,
+      "estimated_bpm": 136.49098
+    },
+    {
+      "timestamp": 45.20925,
+      "strength": 1.6913822,
+      "estimated_bpm": 135.84322
+    },
+    {
+      "timestamp": 45.37179,
+      "strength": 4.1553097,
+      "estimated_bpm": 135.84322
+    },
+    {
+      "timestamp": 45.534332,
+      "strength": 2.5402899,
+      "estimated_bpm": 135.84322
+    },
+    {
+      "timestamp": 45.8478,
+      "strength": 4.133478,
+      "estimated_bpm": 135.83925
+    },
+    {
+      "timestamp": 46.09161,
+      "strength": 1.998644,
+      "estimated_bpm": 139.11687
+    },
+    {
+      "timestamp": 46.43991,
+      "strength": 1.6111257,
+      "estimated_bpm": 137.12523
+    },
+    {
+      "timestamp": 46.63728,
+      "strength": 3.7132611,
+      "estimated_bpm": 137.12523
+    },
+    {
+      "timestamp": 46.79982,
+      "strength": 2.8339887,
+      "estimated_bpm": 137.12523
+    },
+    {
+      "timestamp": 47.11329,
+      "strength": 3.288846,
+      "estimated_bpm": 137.12119
+    },
+    {
+      "timestamp": 47.426758,
+      "strength": 3.665331,
+      "estimated_bpm": 135.18631
+    },
+    {
+      "timestamp": 47.7054,
+      "strength": 1.9405426,
+      "estimated_bpm": 137.7696
+    },
+    {
+      "timestamp": 47.856327,
+      "strength": 1.8040875,
+      "estimated_bpm": 137.7696
+    },
+    {
+      "timestamp": 48.065308,
+      "strength": 2.6000667,
+      "estimated_bpm": 143.25298
+    },
+    {
+      "timestamp": 48.367165,
+      "strength": 2.2549195,
+      "estimated_bpm": 143.96924
+    },
+    {
+      "timestamp": 48.692245,
+      "strength": 3.8559852,
+      "estimated_bpm": 143.25298
+    },
+    {
+      "timestamp": 49.063763,
+      "strength": 1.9751107,
+      "estimated_bpm": 135.82004
+    },
+    {
+      "timestamp": 49.319183,
+      "strength": 3.6673195,
+      "estimated_bpm": 141.14632
+    },
+    {
+      "timestamp": 49.621044,
+      "strength": 3.6765924,
+      "estimated_bpm": 141.84161
+    },
+    {
+      "timestamp": 49.771973,
+      "strength": 3.4030194,
+      "estimated_bpm": 141.84161
+    },
+    {
+      "timestamp": 50.143494,
+      "strength": 1.8634355,
+      "estimated_bpm": 138.43196
+    },
+    {
+      "timestamp": 50.39891,
+      "strength": 5.0,
+      "estimated_bpm": 139.77597
+    },
+    {
+      "timestamp": 50.70077,
+      "strength": 1.7548819,
+      "estimated_bpm": 134.55069
+    },
+    {
+      "timestamp": 51.04907,
+      "strength": 4.8888235,
+      "estimated_bpm": 132.08188
+    },
+    {
+      "timestamp": 51.38576,
+      "strength": 2.0842986,
+      "estimated_bpm": 131.47876
+    },
+    {
+      "timestamp": 51.68762,
+      "strength": 3.7851698,
+      "estimated_bpm": 135.18239
+    },
+    {
+      "timestamp": 52.024307,
+      "strength": 2.0957909,
+      "estimated_bpm": 130.88113
+    },
+    {
+      "timestamp": 52.337776,
+      "strength": 3.9465013,
+      "estimated_bpm": 130.28891
+    },
+    {
+      "timestamp": 52.616417,
+      "strength": 1.7535026,
+      "estimated_bpm": 135.18239
+    },
+    {
+      "timestamp": 52.987938,
+      "strength": 4.1551704,
+      "estimated_bpm": 129.12039
+    },
+    {
+      "timestamp": 53.301407,
+      "strength": 1.7295892,
+      "estimated_bpm": 128.54398
+    },
+    {
+      "timestamp": 53.638096,
+      "strength": 4.5162745,
+      "estimated_bpm": 129.12039
+    },
+    {
+      "timestamp": 53.951565,
+      "strength": 1.6283765,
+      "estimated_bpm": 130.28891
+    },
+    {
+      "timestamp": 54.125713,
+      "strength": 2.0939531,
+      "estimated_bpm": 130.28891
+    },
+    {
+      "timestamp": 54.299866,
+      "strength": 3.1841574,
+      "estimated_bpm": 130.28891
+    },
+    {
+      "timestamp": 54.671383,
+      "strength": 2.675124,
+      "estimated_bpm": 126.845146
+    },
+    {
+      "timestamp": 54.96163,
+      "strength": 1.9239748,
+      "estimated_bpm": 129.12039
+    },
+    {
+      "timestamp": 55.34476,
+      "strength": 2.4006855,
+      "estimated_bpm": 125.737335
+    },
+    {
+      "timestamp": 55.6234,
+      "strength": 4.036933,
+      "estimated_bpm": 125.737335
+    },
+    {
+      "timestamp": 55.96009,
+      "strength": 2.3899665,
+      "estimated_bpm": 127.40641
+    },
+    {
+      "timestamp": 56.12263,
+      "strength": 1.798748,
+      "estimated_bpm": 127.40641
+    },
+    {
+      "timestamp": 56.28517,
+      "strength": 2.2284942,
+      "estimated_bpm": 127.40641
+    },
+    {
+      "timestamp": 56.64508,
+      "strength": 1.711034,
+      "estimated_bpm": 125.19065
+    },
+    {
+      "timestamp": 56.946938,
+      "strength": 4.1108885,
+      "estimated_bpm": 126.845146
+    },
+    {
+      "timestamp": 57.330067,
+      "strength": 2.587368,
+      "estimated_bpm": 123.57875
+    },
+    {
+      "timestamp": 57.5971,
+      "strength": 3.7942226,
+      "estimated_bpm": 128.54398
+    },
+    {
+      "timestamp": 57.95701,
+      "strength": 2.9967833,
+      "estimated_bpm": 125.19065
+    },
+    {
+      "timestamp": 58.258865,
+      "strength": 3.9228382,
+      "estimated_bpm": 129.12039
+    },
+    {
+      "timestamp": 58.549114,
+      "strength": 1.8796868,
+      "estimated_bpm": 128.54398
+    },
+    {
+      "timestamp": 58.734875,
+      "strength": 1.9845345,
+      "estimated_bpm": 128.54398
+    },
+    {
+      "timestamp": 58.920635,
+      "strength": 4.6159086,
+      "estimated_bpm": 128.54398
+    },
+    {
+      "timestamp": 59.268932,
+      "strength": 2.315302,
+      "estimated_bpm": 127.972664
+    },
+    {
+      "timestamp": 59.582405,
+      "strength": 2.1064794,
+      "estimated_bpm": 130.28891
+    },
+    {
+      "timestamp": 59.802994,
+      "strength": 1.8979542,
+      "estimated_bpm": 134.55069
+    },
+    {
+      "timestamp": 60.186123,
+      "strength": 2.208254,
+      "estimated_bpm": 134.55069
+    },
+    {
+      "timestamp": 60.55764,
+      "strength": 2.0631642,
+      "estimated_bpm": 129.12039
+    },
+    {
+      "timestamp": 60.847893,
+      "strength": 5.0,
+      "estimated_bpm": 132.69055
+    },
+    {
+      "timestamp": 61.21941,
+      "strength": 1.9904966,
+      "estimated_bpm": 129.12039
+    },
+    {
+      "timestamp": 61.37034,
+      "strength": 2.0589533,
+      "estimated_bpm": 129.12039
+    },
+    {
+      "timestamp": 61.52127,
+      "strength": 5.0,
+      "estimated_bpm": 129.12039
+    },
+    {
+      "timestamp": 61.869568,
+      "strength": 2.9014482,
+      "estimated_bpm": 126.28881
+    },
+    {
+      "timestamp": 62.17143,
+      "strength": 3.1221814,
+      "estimated_bpm": 128.54398
+    },
+    {
+      "timestamp": 62.531338,
+      "strength": 2.150343,
+      "estimated_bpm": 126.28881
+    },
+    {
+      "timestamp": 62.8332,
+      "strength": 3.5539722,
+      "estimated_bpm": 122.527016
+    },
+    {
+      "timestamp": 63.494965,
+      "strength": 5.0,
+      "estimated_bpm": 111.173164
+    },
+    {
+      "timestamp": 64.15674,
+      "strength": 5.0,
+      "estimated_bpm": 101.386795
+    },
+    {
+      "timestamp": 64.505035,
+      "strength": 3.2969112,
+      "estimated_bpm": 99.6327
+    },
+    {
+      "timestamp": 64.83012,
+      "strength": 3.5895734,
+      "estimated_bpm": 101.03105
+    },
+    {
+      "timestamp": 65.190025,
+      "strength": 2.065579,
+      "estimated_bpm": 100.677795
+    },
+    {
+      "timestamp": 65.49188,
+      "strength": 3.0449014,
+      "estimated_bpm": 100.677795
+    },
+    {
+      "timestamp": 65.81696,
+      "strength": 2.1224136,
+      "estimated_bpm": 101.74505
+    },
+    {
+      "timestamp": 66.15365,
+      "strength": 2.8748937,
+      "estimated_bpm": 100.677795
+    },
+    {
+      "timestamp": 66.47873,
+      "strength": 1.6045383,
+      "estimated_bpm": 112.03832
+    },
+    {
+      "timestamp": 66.81542,
+      "strength": 4.5854673,
+      "estimated_bpm": 125.737335
+    },
+    {
+      "timestamp": 67.11728,
+      "strength": 1.8115349,
+      "estimated_bpm": 127.972664
+    },
+    {
+      "timestamp": 67.47719,
+      "strength": 5.0,
+      "estimated_bpm": 126.28881
+    },
+    {
+      "timestamp": 67.79066,
+      "strength": 1.8700194,
+      "estimated_bpm": 128.54398
+    },
+    {
+      "timestamp": 68.138954,
+      "strength": 4.340519,
+      "estimated_bpm": 126.28881
+    },
+    {
+      "timestamp": 68.45242,
+      "strength": 2.0888293,
+      "estimated_bpm": 126.845146
+    },
+    {
+      "timestamp": 68.80073,
+      "strength": 3.8875444,
+      "estimated_bpm": 126.28881
+    },
+    {
+      "timestamp": 69.16064,
+      "strength": 1.9429188,
+      "estimated_bpm": 124.6487
+    },
+    {
+      "timestamp": 69.462494,
+      "strength": 2.0458512,
+      "estimated_bpm": 126.28881
+    },
+    {
+      "timestamp": 69.98494,
+      "strength": 1.7231159,
+      "estimated_bpm": 116.57429
+    },
+    {
+      "timestamp": 70.193924,
+      "strength": 2.1338882,
+      "estimated_bpm": 123.05064
+    },
+    {
+      "timestamp": 70.36807,
+      "strength": 1.7284716,
+      "estimated_bpm": 123.05064
+    },
+    {
+      "timestamp": 70.53061,
+      "strength": 1.6380104,
+      "estimated_bpm": 123.05064
+    },
+    {
+      "timestamp": 70.93696,
+      "strength": 3.8295498,
+      "estimated_bpm": 118.98285
+    },
+    {
+      "timestamp": 71.20399,
+      "strength": 1.8887815,
+      "estimated_bpm": 122.527016
+    },
+    {
+      "timestamp": 71.42458,
+      "strength": 3.6789775,
+      "estimated_bpm": 126.845146
+    },
+    {
+      "timestamp": 71.58712,
+      "strength": 2.4207916,
+      "estimated_bpm": 126.845146
+    },
+    {
+      "timestamp": 71.9122,
+      "strength": 3.1489308,
+      "estimated_bpm": 127.972664
+    },
+    {
+      "timestamp": 72.23728,
+      "strength": 4.9750214,
+      "estimated_bpm": 129.70203
+    },
+    {
+      "timestamp": 72.57397,
+      "strength": 1.71568,
+      "estimated_bpm": 127.972664
+    },
+    {
+      "timestamp": 72.7249,
+      "strength": 4.271856,
+      "estimated_bpm": 127.972664
+    },
+    {
+      "timestamp": 72.887436,
+      "strength": 3.4451394,
+      "estimated_bpm": 127.972664
+    },
+    {
+      "timestamp": 73.200905,
+      "strength": 2.8219714,
+      "estimated_bpm": 139.10072
+    },
+    {
+      "timestamp": 73.525986,
+      "strength": 2.8553157,
+      "estimated_bpm": 132.69055
+    },
+    {
+      "timestamp": 73.89751,
+      "strength": 2.074747,
+      "estimated_bpm": 134.55069
+    },
+    {
+      "timestamp": 74.15292,
+      "strength": 1.9159102,
+      "estimated_bpm": 135.18239
+    },
+    {
+      "timestamp": 74.50122,
+      "strength": 3.890679,
+      "estimated_bpm": 128.54398
+    },
+    {
+      "timestamp": 74.8263,
+      "strength": 3.7207494,
+      "estimated_bpm": 128.54398
+    },
+    {
+      "timestamp": 75.15138,
+      "strength": 1.8084936,
+      "estimated_bpm": 128.54398
+    },
+    {
+      "timestamp": 75.31393,
+      "strength": 4.3287373,
+      "estimated_bpm": 128.54398
+    },
+    {
+      "timestamp": 75.47646,
+      "strength": 3.366331,
+      "estimated_bpm": 128.54398
+    },
+    {
+      "timestamp": 75.78993,
+      "strength": 2.5950038,
+      "estimated_bpm": 129.70203
+    },
+    {
+      "timestamp": 76.126625,
+      "strength": 1.9709654,
+      "estimated_bpm": 128.54398
+    },
+    {
+      "timestamp": 76.40526,
+      "strength": 2.0326843,
+      "estimated_bpm": 130.88113
+    },
+    {
+      "timestamp": 76.63746,
+      "strength": 2.646968,
+      "estimated_bpm": 138.43196
+    },
+    {
+      "timestamp": 76.8,
+      "strength": 2.3574524,
+      "estimated_bpm": 138.43196
+    },
+    {
+      "timestamp": 77.11347,
+      "strength": 2.0510464,
+      "estimated_bpm": 135.18239
+    },
+    {
+      "timestamp": 77.46177,
+      "strength": 4.4346485,
+      "estimated_bpm": 135.18239
+    },
+    {
+      "timestamp": 77.74041,
+      "strength": 1.6391677,
+      "estimated_bpm": 137.7696
+    },
+    {
+      "timestamp": 77.94939,
+      "strength": 3.4193373,
+      "estimated_bpm": 144.6927
+    },
+    {
+      "timestamp": 78.123535,
+      "strength": 1.971029,
+      "estimated_bpm": 144.6927
+    },
+    {
+      "timestamp": 78.4254,
+      "strength": 2.2833176,
+      "estimated_bpm": 145.42348
+    },
+    {
+      "timestamp": 78.762085,
+      "strength": 5.0,
+      "estimated_bpm": 145.42348
+    },
+    {
+      "timestamp": 79.20326,
+      "strength": 1.7770145,
+      "estimated_bpm": 135.82004
+    },
+    {
+      "timestamp": 79.41225,
+      "strength": 3.4716415,
+      "estimated_bpm": 137.11357
+    },
+    {
+      "timestamp": 79.70249,
+      "strength": 2.0176039,
+      "estimated_bpm": 138.43196
+    },
+    {
+      "timestamp": 80.0508,
+      "strength": 2.5686226,
+      "estimated_bpm": 138.43196
+    },
+    {
+      "timestamp": 80.32943,
+      "strength": 2.241305,
+      "estimated_bpm": 138.43196
+    },
+    {
+      "timestamp": 80.51519,
+      "strength": 2.173102,
+      "estimated_bpm": 138.43196
+    },
+    {
+      "timestamp": 80.70095,
+      "strength": 3.4150796,
+      "estimated_bpm": 138.43196
+    },
+    {
+      "timestamp": 80.9912,
+      "strength": 2.2963905,
+      "estimated_bpm": 133.92488
+    },
+    {
+      "timestamp": 81.15374,
+      "strength": 3.508534,
+      "estimated_bpm": 133.92488
+    },
+    {
+      "timestamp": 81.52526,
+      "strength": 1.8910139,
+      "estimated_bpm": 130.28891
+    },
+    {
+      "timestamp": 81.71102,
+      "strength": 1.7169548,
+      "estimated_bpm": 130.28891
+    },
+    {
+      "timestamp": 82.14059,
+      "strength": 3.2997775,
+      "estimated_bpm": 125.737335
+    },
+    {
+      "timestamp": 82.46567,
+      "strength": 1.9082546,
+      "estimated_bpm": 131.47876
+    },
+    {
+      "timestamp": 82.80236,
+      "strength": 2.2143788,
+      "estimated_bpm": 125.19065
+    },
+    {
+      "timestamp": 83.06939,
+      "strength": 1.7450414,
+      "estimated_bpm": 126.28881
+    },
+    {
+      "timestamp": 83.47574,
+      "strength": 2.4477239,
+      "estimated_bpm": 123.57875
+    },
+    {
+      "timestamp": 83.777596,
+      "strength": 2.034699,
+      "estimated_bpm": 122.527016
+    },
+    {
+      "timestamp": 84.12589,
+      "strength": 1.8427613,
+      "estimated_bpm": 119.97437
+    },
+    {
+      "timestamp": 84.416145,
+      "strength": 1.866673,
+      "estimated_bpm": 123.57875
+    },
+    {
+      "timestamp": 84.74123,
+      "strength": 2.039064,
+      "estimated_bpm": 128.54398
+    },
+    {
+      "timestamp": 85.06631,
+      "strength": 1.7736892,
+      "estimated_bpm": 128.54398
+    },
+    {
+      "timestamp": 85.379776,
+      "strength": 1.5823498,
+      "estimated_bpm": 129.70203
+    },
+    {
+      "timestamp": 85.72807,
+      "strength": 4.245276,
+      "estimated_bpm": 125.737335
+    },
+    {
+      "timestamp": 86.053154,
+      "strength": 2.7076235,
+      "estimated_bpm": 129.70203
+    },
+    {
+      "timestamp": 86.38984,
+      "strength": 5.0,
+      "estimated_bpm": 127.972664
+    },
+    {
+      "timestamp": 86.88907,
+      "strength": 1.7859068,
+      "estimated_bpm": 120.98256
+    },
+    {
+      "timestamp": 87.05161,
+      "strength": 3.9357939,
+      "estimated_bpm": 120.98256
+    },
+    {
+      "timestamp": 87.39991,
+      "strength": 1.9661655,
+      "estimated_bpm": 118.4932
+    },
+    {
+      "timestamp": 87.70177,
+      "strength": 4.0875764,
+      "estimated_bpm": 119.476555
+    },
+    {
+      "timestamp": 88.0849,
+      "strength": 1.7763374,
+      "estimated_bpm": 117.048164
+    },
+    {
+      "timestamp": 88.27066,
+      "strength": 1.963463,
+      "estimated_bpm": 117.048164
+    },
+    {
+      "timestamp": 88.607346,
+      "strength": 1.9152242,
+      "estimated_bpm": 116.10423
+    },
+    {
+      "timestamp": 89.00208,
+      "strength": 5.0,
+      "estimated_bpm": 114.26131
+    },
+    {
+      "timestamp": 89.373604,
+      "strength": 2.3047523,
+      "estimated_bpm": 112.47979
+    },
+    {
+      "timestamp": 89.66386,
+      "strength": 4.7683034,
+      "estimated_bpm": 114.27044
+    },
+    {
+      "timestamp": 89.930885,
+      "strength": 1.7973616,
+      "estimated_bpm": 124.12782
+    },
+    {
+      "timestamp": 90.09342,
+      "strength": 1.812014,
+      "estimated_bpm": 124.12782
+    },
+    {
+      "timestamp": 90.31401,
+      "strength": 2.097374,
+      "estimated_bpm": 130.31212
+    },
+    {
+      "timestamp": 90.662315,
+      "strength": 1.6791356,
+      "estimated_bpm": 128.00287
+    },
+    {
+      "timestamp": 90.96417,
+      "strength": 2.142981,
+      "estimated_bpm": 132.12126
+    },
+    {
+      "timestamp": 91.32408,
+      "strength": 2.4967892,
+      "estimated_bpm": 130.92825
+    },
+    {
+      "timestamp": 91.59111,
+      "strength": 2.6300614,
+      "estimated_bpm": 137.82877
+    },
+    {
+      "timestamp": 91.9278,
+      "strength": 3.8669453,
+      "estimated_bpm": 139.83997
+    },
+    {
+      "timestamp": 92.25288,
+      "strength": 5.0,
+      "estimated_bpm": 137.83269
+    },
+    {
+      "timestamp": 92.6244,
+      "strength": 2.115622,
+      "estimated_bpm": 132.14235
+    },
+    {
+      "timestamp": 92.91465,
+      "strength": 4.896322,
+      "estimated_bpm": 128.60283
+    },
+    {
+      "timestamp": 93.26295,
+      "strength": 2.8940501,
+      "estimated_bpm": 128.60283
+    },
+    {
+      "timestamp": 93.58803,
+      "strength": 5.0,
+      "estimated_bpm": 127.464745
+    },
+    {
+      "timestamp": 93.94794,
+      "strength": 3.1366115,
+      "estimated_bpm": 127.464745
+    },
+    {
+      "timestamp": 94.249794,
+      "strength": 4.019787,
+      "estimated_bpm": 125.79491
+    },
+    {
+      "timestamp": 94.899956,
+      "strength": 5.0,
+      "estimated_bpm": 112.52747
+    },
+    {
+      "timestamp": 95.27148,
+      "strength": 2.1934676,
+      "estimated_bpm": 110.79628
+    },
+    {
+      "timestamp": 95.56172,
+      "strength": 5.0,
+      "estimated_bpm": 113.86179
+    },
+    {
+      "timestamp": 95.91002,
+      "strength": 2.8424225,
+      "estimated_bpm": 111.65517
+    },
+    {
+      "timestamp": 96.2351,
+      "strength": 4.7298393,
+      "estimated_bpm": 112.52747
+    },
+    {
+      "timestamp": 96.88526,
+      "strength": 3.2147655,
+      "estimated_bpm": 101.43321
+    },
+    {
+      "timestamp": 97.18712,
+      "strength": 1.740303,
+      "estimated_bpm": 103.251015
+    },
+    {
+      "timestamp": 97.54703,
+      "strength": 1.9007521,
+      "estimated_bpm": 101.43321
+    },
+    {
+      "timestamp": 97.8605,
+      "strength": 1.7957785,
+      "estimated_bpm": 112.96876
+    },
+    {
+      "timestamp": 98.2088,
+      "strength": 2.3937073,
+      "estimated_bpm": 113.86179
+    },
+    {
+      "timestamp": 98.5571,
+      "strength": 2.033577,
+      "estimated_bpm": 111.65517
+    },
+    {
+      "timestamp": 98.87057,
+      "strength": 2.6793294,
+      "estimated_bpm": 112.96876
+    },
+    {
+      "timestamp": 99.19565,
+      "strength": 2.147156,
+      "estimated_bpm": 112.96876
+    },
+    {
+      "timestamp": 99.53233,
+      "strength": 3.8238556,
+      "estimated_bpm": 126.346634
+    },
+    {
+      "timestamp": 99.88064,
+      "strength": 2.0673509,
+      "estimated_bpm": 124.16824
+    },
+    {
+      "timestamp": 100.089615,
+      "strength": 1.7789736,
+      "estimated_bpm": 124.16824
+    },
+    {
+      "timestamp": 100.71655,
+      "strength": 1.8981388,
+      "estimated_bpm": 112.96876
+    },
+    {
+      "timestamp": 100.867485,
+      "strength": 3.8673625,
+      "estimated_bpm": 112.96876
+    },
+    {
+      "timestamp": 101.1229,
+      "strength": 2.5900016,
+      "estimated_bpm": 115.228134
+    },
+    {
+      "timestamp": 101.29705,
+      "strength": 1.7611938,
+      "estimated_bpm": 115.228134
+    },
+    {
+      "timestamp": 101.506035,
+      "strength": 2.102754,
+      "estimated_bpm": 115.228134
+    },
+    {
+      "timestamp": 101.74984,
+      "strength": 2.1273274,
+      "estimated_bpm": 119.53126
+    },
+    {
+      "timestamp": 102.02848,
+      "strength": 2.304469,
+      "estimated_bpm": 122.58312
+    },
+    {
+      "timestamp": 102.34195,
+      "strength": 1.9571732,
+      "estimated_bpm": 122.58312
+    },
+    {
+      "timestamp": 102.59737,
+      "strength": 1.8681283,
+      "estimated_bpm": 125.79491
+    },
+    {
+      "timestamp": 102.75991,
+      "strength": 2.192967,
+      "estimated_bpm": 125.79491
+    },
+    {
+      "timestamp": 103.003716,
+      "strength": 2.3173065,
+      "estimated_bpm": 130.34857
+    },
+    {
+      "timestamp": 103.3288,
+      "strength": 4.280858,
+      "estimated_bpm": 131.53897
+    },
+    {
+      "timestamp": 103.57261,
+      "strength": 2.8703723,
+      "estimated_bpm": 154.87653
+    },
+    {
+      "timestamp": 103.93252,
+      "strength": 2.0189257,
+      "estimated_bpm": 147.72838
+    },
+    {
+      "timestamp": 104.10667,
+      "strength": 1.9953346,
+      "estimated_bpm": 147.72838
+    },
+    {
+      "timestamp": 104.30404,
+      "strength": 3.1719027,
+      "estimated_bpm": 147.72838
+    },
+    {
+      "timestamp": 104.559456,
+      "strength": 1.8989774,
+      "estimated_bpm": 146.97466
+    },
+    {
+      "timestamp": 104.919365,
+      "strength": 1.7275381,
+      "estimated_bpm": 141.90657
+    },
+    {
+      "timestamp": 105.244446,
+      "strength": 1.9838876,
+      "estimated_bpm": 141.21095
+    },
+    {
+      "timestamp": 105.40698,
+      "strength": 2.5254073,
+      "estimated_bpm": 141.21095
+    },
+    {
+      "timestamp": 105.604355,
+      "strength": 2.8711424,
+      "estimated_bpm": 141.21095
+    },
+    {
+      "timestamp": 105.929436,
+      "strength": 5.0,
+      "estimated_bpm": 137.17635
+    },
+    {
+      "timestamp": 106.21968,
+      "strength": 2.4827762,
+      "estimated_bpm": 134.6123
+    },
+    {
+      "timestamp": 106.50993,
+      "strength": 1.7562749,
+      "estimated_bpm": 136.52623
+    },
+    {
+      "timestamp": 106.67247,
+      "strength": 1.7903905,
+      "estimated_bpm": 136.52623
+    },
+    {
+      "timestamp": 106.90467,
+      "strength": 2.7945712,
+      "estimated_bpm": 137.17635
+    },
+    {
+      "timestamp": 107.21814,
+      "strength": 2.2288911,
+      "estimated_bpm": 139.83997
+    },
+    {
+      "timestamp": 107.54322,
+      "strength": 2.1261337,
+      "estimated_bpm": 135.88223
+    },
+    {
+      "timestamp": 107.81025,
+      "strength": 1.9904472,
+      "estimated_bpm": 141.21095
+    },
+    {
+      "timestamp": 108.00762,
+      "strength": 1.9130161,
+      "estimated_bpm": 141.21095
+    },
+    {
+      "timestamp": 108.19338,
+      "strength": 2.1644497,
+      "estimated_bpm": 141.21095
+    },
+    {
+      "timestamp": 108.49524,
+      "strength": 2.5973816,
+      "estimated_bpm": 142.60907
+    },
+    {
+      "timestamp": 108.84354,
+      "strength": 4.5907125,
+      "estimated_bpm": 141.21095
+    },
+    {
+      "timestamp": 109.28471,
+      "strength": 1.8346752,
+      "estimated_bpm": 132.7513
+    },
+    {
+      "timestamp": 109.5053,
+      "strength": 2.662547,
+      "estimated_bpm": 136.52623
+    },
+    {
+      "timestamp": 109.78394,
+      "strength": 1.7385008,
+      "estimated_bpm": 133.9862
+    },
+    {
+      "timestamp": 110.14385,
+      "strength": 4.788452,
+      "estimated_bpm": 131.53897
+    },
+    {
+      "timestamp": 110.41088,
+      "strength": 2.4629078,
+      "estimated_bpm": 134.6123
+    },
+    {
+      "timestamp": 110.60825,
+      "strength": 2.10211,
+      "estimated_bpm": 134.6123
+    },
+    {
+      "timestamp": 110.794014,
+      "strength": 2.1993463,
+      "estimated_bpm": 134.6123
+    },
+    {
+      "timestamp": 111.09587,
+      "strength": 2.079524,
+      "estimated_bpm": 132.7513
+    },
+    {
+      "timestamp": 111.40934,
+      "strength": 5.0,
+      "estimated_bpm": 132.14235
+    },
+    {
+      "timestamp": 111.757645,
+      "strength": 1.9148638,
+      "estimated_bpm": 132.14235
+    },
+    {
+      "timestamp": 111.90857,
+      "strength": 4.88943,
+      "estimated_bpm": 132.14235
+    },
+    {
+      "timestamp": 112.0595,
+      "strength": 2.931641,
+      "estimated_bpm": 132.14235
+    },
+    {
+      "timestamp": 112.33814,
+      "strength": 1.9999616,
+      "estimated_bpm": 141.21095
+    },
+    {
+      "timestamp": 112.54712,
+      "strength": 1.7046118,
+      "estimated_bpm": 141.21095
+    },
+    {
+      "timestamp": 112.72127,
+      "strength": 5.0,
+      "estimated_bpm": 141.21095
+    },
+    {
+      "timestamp": 113.03474,
+      "strength": 3.828437,
+      "estimated_bpm": 135.88223
+    },
+    {
+      "timestamp": 113.348206,
+      "strength": 4.3197494,
+      "estimated_bpm": 133.9862
+    },
+    {
+      "timestamp": 113.65007,
+      "strength": 2.6694705,
+      "estimated_bpm": 137.17635
+    },
+    {
+      "timestamp": 113.97515,
+      "strength": 4.811739,
+      "estimated_bpm": 133.9862
+    },
+    {
+      "timestamp": 114.28862,
+      "strength": 5.0,
+      "estimated_bpm": 133.36589
+    },
+    {
+      "timestamp": 114.60209,
+      "strength": 4.6267033,
+      "estimated_bpm": 133.36589
+    },
+    {
+      "timestamp": 114.91556,
+      "strength": 4.3701186,
+      "estimated_bpm": 135.2443
+    },
+    {
+      "timestamp": 115.22903,
+      "strength": 3.6603823,
+      "estimated_bpm": 133.36589
+    },
+    {
+      "timestamp": 115.542496,
+      "strength": 3.2794123,
+      "estimated_bpm": 133.36589
+    },
+    {
+      "timestamp": 115.855965,
+      "strength": 3.4269311,
+      "estimated_bpm": 133.36589
+    },
+    {
+      "timestamp": 116.16943,
+      "strength": 3.5540555,
+      "estimated_bpm": 132.7513
+    },
+    {
+      "timestamp": 116.4829,
+      "strength": 2.8676324,
+      "estimated_bpm": 133.36589
+    },
+    {
+      "timestamp": 116.79637,
+      "strength": 2.7153814,
+      "estimated_bpm": 133.36589
+    },
+    {
+      "timestamp": 117.10984,
+      "strength": 3.033455,
+      "estimated_bpm": 133.36589
+    },
+    {
+      "timestamp": 117.43492,
+      "strength": 4.365633,
+      "estimated_bpm": 132.7513
+    },
+    {
+      "timestamp": 117.74839,
+      "strength": 4.3689947,
+      "estimated_bpm": 132.7513
+    },
+    {
+      "timestamp": 118.05025,
+      "strength": 1.8105208,
+      "estimated_bpm": 133.36589
+    },
+    {
+      "timestamp": 118.21279,
+      "strength": 4.2835693,
+      "estimated_bpm": 133.36589
+    },
+    {
+      "timestamp": 118.37533,
+      "strength": 3.1010227,
+      "estimated_bpm": 133.36589
+    },
+    {
+      "timestamp": 118.677185,
+      "strength": 3.3332834,
+      "estimated_bpm": 133.9862
+    },
+    {
+      "timestamp": 118.990654,
+      "strength": 3.982267,
+      "estimated_bpm": 133.9862
+    },
+    {
+      "timestamp": 119.29252,
+      "strength": 1.9856331,
+      "estimated_bpm": 134.6123
+    },
+    {
+      "timestamp": 119.455055,
+      "strength": 1.8349347,
+      "estimated_bpm": 134.6123
+    },
+    {
+      "timestamp": 119.6176,
+      "strength": 2.0407307,
+      "estimated_bpm": 134.6123
+    },
+    {
+      "timestamp": 119.91946,
+      "strength": 1.6894345,
+      "estimated_bpm": 135.2443
+    },
+    {
+      "timestamp": 120.25614,
+      "strength": 3.8444946,
+      "estimated_bpm": 133.9862
+    },
+    {
+      "timestamp": 120.6741,
+      "strength": 2.0429769,
+      "estimated_bpm": 129.17952
+    },
+    {
+      "timestamp": 120.9063,
+      "strength": 2.9738297,
+      "estimated_bpm": 133.36589
+    },
+    {
+      "timestamp": 121.231384,
+      "strength": 4.476034,
+      "estimated_bpm": 132.14235
+    },
+    {
+      "timestamp": 121.4868,
+      "strength": 1.7537022,
+      "estimated_bpm": 134.6123
+    },
+    {
+      "timestamp": 121.8351,
+      "strength": 2.3556108,
+      "estimated_bpm": 132.7513
+    },
+    {
+      "timestamp": 122.04408,
+      "strength": 1.6829131,
+      "estimated_bpm": 132.7513
+    },
+    {
+      "timestamp": 122.20662,
+      "strength": 1.7837056,
+      "estimated_bpm": 132.7513
+    },
+    {
+      "timestamp": 122.45043,
+      "strength": 1.7671771,
+      "estimated_bpm": 135.88223
+    },
+    {
+      "timestamp": 122.601364,
+      "strength": 1.6054709,
+      "estimated_bpm": 135.88223
+    },
+    {
+      "timestamp": 123.72753,
+      "strength": 1.9507916,
+      "estimated_bpm": 101.79163
+    },
+    {
+      "timestamp": 124.06422,
+      "strength": 1.8052988,
+      "estimated_bpm": 101.79163
+    },
+    {
+      "timestamp": 124.29642,
+      "strength": 1.8404541,
+      "estimated_bpm": 107.89151
+    },
+    {
+      "timestamp": 124.609886,
+      "strength": 1.2899371,
+      "estimated_bpm": 105.135155
+    },
+    {
+      "timestamp": 124.784035,
+      "strength": 1.3983257,
+      "estimated_bpm": 105.135155
+    },
+    {
+      "timestamp": 124.94658,
+      "strength": 1.3597364,
+      "estimated_bpm": 105.135155
+    },
+    {
+      "timestamp": 125.45741,
+      "strength": 1.4511294,
+      "estimated_bpm": 99.334595
+    },
+    {
+      "timestamp": 125.794106,
+      "strength": 1.7336389,
+      "estimated_bpm": 96.99338
+    },
+    {
+      "timestamp": 126.00308,
+      "strength": 1.3951586,
+      "estimated_bpm": 96.99338
+    },
+    {
+      "timestamp": 126.54875,
+      "strength": 1.5765843,
+      "estimated_bpm": 91.74214
+    },
+    {
+      "timestamp": 126.7229,
+      "strength": 1.8370869,
+      "estimated_bpm": 91.74214
+    },
+    {
+      "timestamp": 127.31501,
+      "strength": 2.0582156,
+      "estimated_bpm": 83.74137
+    },
+    {
+      "timestamp": 127.70975,
+      "strength": 2.2190838,
+      "estimated_bpm": 102.51613
+    },
+    {
+      "timestamp": 128.0,
+      "strength": 2.4506273,
+      "estimated_bpm": 103.996506
+    },
+    {
+      "timestamp": 128.45279,
+      "strength": 2.4117568,
+      "estimated_bpm": 97.32106
+    },
+    {
+      "timestamp": 128.91719,
+      "strength": 2.031279,
+      "estimated_bpm": 93.22665
+    },
+    {
+      "timestamp": 129.28871,
+      "strength": 1.9511516,
+      "estimated_bpm": 96.99338
+    },
+    {
+      "timestamp": 129.49768,
+      "strength": 3.4369428,
+      "estimated_bpm": 96.99338
+    },
+    {
+      "timestamp": 129.846,
+      "strength": 2.487259,
+      "estimated_bpm": 96.66789
+    },
+    {
+      "timestamp": 130.19429,
+      "strength": 1.9094188,
+      "estimated_bpm": 102.51613
+    },
+    {
+      "timestamp": 130.4497,
+      "strength": 1.6797508,
+      "estimated_bpm": 114.31362
+    },
+    {
+      "timestamp": 130.6819,
+      "strength": 3.3048668,
+      "estimated_bpm": 121.03796
+    },
+    {
+      "timestamp": 130.87927,
+      "strength": 3.4437623,
+      "estimated_bpm": 121.03796
+    },
+    {
+      "timestamp": 131.2508,
+      "strength": 2.930327,
+      "estimated_bpm": 117.57973
+    },
+    {
+      "timestamp": 131.51782,
+      "strength": 1.9982303,
+      "estimated_bpm": 125.79491
+    },
+    {
+      "timestamp": 131.81969,
+      "strength": 1.8699255,
+      "estimated_bpm": 133.9862
+    },
+    {
+      "timestamp": 132.08672,
+      "strength": 1.7729149,
+      "estimated_bpm": 139.83997
+    },
+    {
+      "timestamp": 132.29568,
+      "strength": 4.0334597,
+      "estimated_bpm": 139.83997
+    },
+    {
+      "timestamp": 132.55112,
+      "strength": 1.7452203,
+      "estimated_bpm": 145.49007
+    },
+    {
+      "timestamp": 132.98068,
+      "strength": 1.8776338,
+      "estimated_bpm": 140.52211
+    },
+    {
+      "timestamp": 133.28255,
+      "strength": 1.6593889,
+      "estimated_bpm": 137.83269
+    },
+    {
+      "timestamp": 133.50313,
+      "strength": 1.8351301,
+      "estimated_bpm": 138.49535
+    },
+    {
+      "timestamp": 133.66566,
+      "strength": 2.550033,
+      "estimated_bpm": 138.49535
+    },
+    {
+      "timestamp": 134.00237,
+      "strength": 1.806356,
+      "estimated_bpm": 140.52211
+    },
+    {
+      "timestamp": 134.59447,
+      "strength": 1.8642607,
+      "estimated_bpm": 123.63534
+    },
+    {
+      "timestamp": 134.76862,
+      "strength": 1.6323102,
+      "estimated_bpm": 123.63534
+    },
+    {
+      "timestamp": 135.04726,
+      "strength": 3.2249064,
+      "estimated_bpm": 124.70577
+    },
+    {
+      "timestamp": 135.39555,
+      "strength": 2.4736302,
+      "estimated_bpm": 121.03796
+    },
+    {
+      "timestamp": 135.918,
+      "strength": 1.5954158,
+      "estimated_bpm": 110.37177
+    },
+    {
+      "timestamp": 136.23148,
+      "strength": 1.9186931,
+      "estimated_bpm": 114.76906
+    },
+    {
+      "timestamp": 136.41724,
+      "strength": 3.4731321,
+      "estimated_bpm": 114.76906
+    },
+    {
+      "timestamp": 136.76553,
+      "strength": 3.033307,
+      "estimated_bpm": 112.96876
+    },
+    {
+      "timestamp": 137.24155,
+      "strength": 1.8022597,
+      "estimated_bpm": 103.996506
+    },
+    {
+      "timestamp": 137.62466,
+      "strength": 3.4462614,
+      "estimated_bpm": 102.51613
+    },
+    {
+      "timestamp": 137.79883,
+      "strength": 2.915727,
+      "estimated_bpm": 102.51613
+    },
+    {
+      "timestamp": 138.14713,
+      "strength": 3.3865814,
+      "estimated_bpm": 110.79628
+    },
+    {
+      "timestamp": 138.51865,
+      "strength": 2.246843,
+      "estimated_bpm": 107.48893
+    },
+    {
+      "timestamp": 138.73923,
+      "strength": 2.0148683,
+      "estimated_bpm": 112.08962
+    },
+    {
+      "timestamp": 139.15718,
+      "strength": 1.8797282,
+      "estimated_bpm": 116.157394
+    },
+    {
+      "timestamp": 139.49388,
+      "strength": 3.8524942,
+      "estimated_bpm": 115.228134
+    },
+    {
+      "timestamp": 139.78413,
+      "strength": 2.457829,
+      "estimated_bpm": 117.57973
+    },
+    {
+      "timestamp": 140.29497,
+      "strength": 2.0593693,
+      "estimated_bpm": 116.157394
+    },
+    {
+      "timestamp": 140.51555,
+      "strength": 3.6581817,
+      "estimated_bpm": 123.10698
+    },
+    {
+      "timestamp": 140.81741,
+      "strength": 1.7515469,
+      "estimated_bpm": 125.24797
+    },
+    {
+      "timestamp": 141.16571,
+      "strength": 1.7158701,
+      "estimated_bpm": 126.346634
+    },
+    {
+      "timestamp": 141.65334,
+      "strength": 2.2164383,
+      "estimated_bpm": 114.76906
+    },
+    {
+      "timestamp": 141.88553,
+      "strength": 3.4008565,
+      "estimated_bpm": 122.58312
+    },
+    {
+      "timestamp": 142.199,
+      "strength": 3.0532722,
+      "estimated_bpm": 123.63534
+    },
+    {
+      "timestamp": 142.53569,
+      "strength": 1.8504022,
+      "estimated_bpm": 121.54866
+    },
+    {
+      "timestamp": 143.0117,
+      "strength": 3.8275054,
+      "estimated_bpm": 123.10698
+    },
+    {
+      "timestamp": 143.22069,
+      "strength": 3.7275584,
+      "estimated_bpm": 123.10698
+    },
+    {
+      "timestamp": 143.51093,
+      "strength": 1.9103398,
+      "estimated_bpm": 120.029305
+    },
+    {
+      "timestamp": 143.90567,
+      "strength": 2.366582,
+      "estimated_bpm": 116.157394
+    },
+    {
+      "timestamp": 144.0682,
+      "strength": 2.1615093,
+      "estimated_bpm": 116.157394
+    },
+    {
+      "timestamp": 144.23074,
+      "strength": 1.9413499,
+      "estimated_bpm": 116.157394
+    },
+    {
+      "timestamp": 144.48616,
+      "strength": 2.412948,
+      "estimated_bpm": 120.029305
+    },
+    {
+      "timestamp": 144.89252,
+      "strength": 1.9047937,
+      "estimated_bpm": 123.63534
+    },
+    {
+      "timestamp": 145.2292,
+      "strength": 1.7622895,
+      "estimated_bpm": 119.03732
+    },
+    {
+      "timestamp": 145.67038,
+      "strength": 3.8633685,
+      "estimated_bpm": 113.86179
+    },
+    {
+      "timestamp": 146.18123,
+      "strength": 1.7777423,
+      "estimated_bpm": 107.48893
+    },
+    {
+      "timestamp": 146.52953,
+      "strength": 1.8030787,
+      "estimated_bpm": 112.08962
+    },
+    {
+      "timestamp": 147.0752,
+      "strength": 5.0,
+      "estimated_bpm": 103.251015
+    },
+    {
+      "timestamp": 147.28418,
+      "strength": 2.6546044,
+      "estimated_bpm": 103.251015
+    },
+    {
+      "timestamp": 147.62086,
+      "strength": 3.2900803,
+      "estimated_bpm": 105.135155
+    },
+    {
+      "timestamp": 147.8879,
+      "strength": 1.6991736,
+      "estimated_bpm": 104.752846
+    },
+    {
+      "timestamp": 148.42195,
+      "strength": 4.09811,
+      "estimated_bpm": 100.72389
+    },
+    {
+      "timestamp": 148.65414,
+      "strength": 4.277664,
+      "estimated_bpm": 103.996506
+    },
+    {
+      "timestamp": 148.99084,
+      "strength": 4.731266,
+      "estimated_bpm": 107.48893
+    },
+    {
+      "timestamp": 149.32753,
+      "strength": 2.690721,
+      "estimated_bpm": 113.86179
+    },
+    {
+      "timestamp": 149.47845,
+      "strength": 2.6389008,
+      "estimated_bpm": 113.86179
+    },
+    {
+      "timestamp": 149.67583,
+      "strength": 1.9895105,
+      "estimated_bpm": 113.86179
+    },
+    {
+      "timestamp": 149.91963,
+      "strength": 1.7154789,
+      "estimated_bpm": 118.06161
+    },
+    {
+      "timestamp": 150.3376,
+      "strength": 4.4499235,
+      "estimated_bpm": 123.63534
+    },
+    {
+      "timestamp": 150.76717,
+      "strength": 2.6381083,
+      "estimated_bpm": 119.53126
+    },
+    {
+      "timestamp": 150.95293,
+      "strength": 2.7197409,
+      "estimated_bpm": 119.53126
+    },
+    {
+      "timestamp": 151.17351,
+      "strength": 3.9468274,
+      "estimated_bpm": 121.54866
+    },
+    {
+      "timestamp": 151.35927,
+      "strength": 2.7027318,
+      "estimated_bpm": 121.54866
+    },
+    {
+      "timestamp": 151.6263,
+      "strength": 2.0030231,
+      "estimated_bpm": 134.6123
+    },
+    {
+      "timestamp": 152.48544,
+      "strength": 3.313726,
+      "estimated_bpm": 107.48893
+    },
+    {
+      "timestamp": 152.72925,
+      "strength": 2.258075,
+      "estimated_bpm": 110.79628
+    },
+    {
+      "timestamp": 153.05434,
+      "strength": 2.6468456,
+      "estimated_bpm": 111.22407
+    },
+    {
+      "timestamp": 153.34457,
+      "strength": 2.20401,
+      "estimated_bpm": 109.53245
+    },
+    {
+      "timestamp": 153.85542,
+      "strength": 2.8233247,
+      "estimated_bpm": 106.29901
+    },
+    {
+      "timestamp": 154.08762,
+      "strength": 2.8183904,
+      "estimated_bpm": 113.41351
+    },
+    {
+      "timestamp": 154.4127,
+      "strength": 4.1231866,
+      "estimated_bpm": 109.53245
+    },
+    {
+      "timestamp": 154.84227,
+      "strength": 1.9379776,
+      "estimated_bpm": 103.996506
+    },
+    {
+      "timestamp": 155.15573,
+      "strength": 2.889548,
+      "estimated_bpm": 125.24797
+    },
+    {
+      "timestamp": 155.43437,
+      "strength": 3.4135175,
+      "estimated_bpm": 123.63534
+    },
+    {
+      "timestamp": 156.29352,
+      "strength": 2.009264,
+      "estimated_bpm": 103.251015
+    },
+    {
+      "timestamp": 156.59537,
+      "strength": 5.0,
+      "estimated_bpm": 102.88226
+    },
+    {
+      "timestamp": 156.78113,
+      "strength": 3.3578649,
+      "estimated_bpm": 102.88226
+    },
+    {
+      "timestamp": 157.083,
+      "strength": 1.6883965,
+      "estimated_bpm": 109.95051
+    },
+    {
+      "timestamp": 157.46613,
+      "strength": 1.9090549,
+      "estimated_bpm": 104.752846
+    },
+    {
+      "timestamp": 157.93053,
+      "strength": 5.0,
+      "estimated_bpm": 100.37294
+    },
+    {
+      "timestamp": 158.15111,
+      "strength": 2.7914991,
+      "estimated_bpm": 107.08934
+    },
+    {
+      "timestamp": 158.4878,
+      "strength": 3.1072407,
+      "estimated_bpm": 106.29901
+    },
+    {
+      "timestamp": 158.99864,
+      "strength": 2.1508956,
+      "estimated_bpm": 98.99324
+    },
+    {
+      "timestamp": 159.26567,
+      "strength": 3.515419,
+      "estimated_bpm": 120.029305
+    },
+    {
+      "timestamp": 159.49786,
+      "strength": 3.6820705,
+      "estimated_bpm": 123.10698
+    },
+    {
+      "timestamp": 159.83456,
+      "strength": 3.688902,
+      "estimated_bpm": 121.54866
+    },
+    {
+      "timestamp": 160.08998,
+      "strength": 1.987565,
+      "estimated_bpm": 127.464745
+    },
+    {
+      "timestamp": 160.4615,
+      "strength": 2.0534167,
+      "estimated_bpm": 132.14235
+    },
+    {
+      "timestamp": 160.74014,
+      "strength": 1.932785,
+      "estimated_bpm": 129.17952
+    },
+    {
+      "timestamp": 161.48317,
+      "strength": 2.384444,
+      "estimated_bpm": 111.65517
+    },
+    {
+      "timestamp": 161.63411,
+      "strength": 2.595532,
+      "estimated_bpm": 111.65517
+    },
+    {
+      "timestamp": 162.09851,
+      "strength": 1.6456394,
+      "estimated_bpm": 113.41351
+    },
+    {
+      "timestamp": 162.59773,
+      "strength": 2.1261482,
+      "estimated_bpm": 105.135155
+    },
+    {
+      "timestamp": 162.86476,
+      "strength": 1.6193933,
+      "estimated_bpm": 103.996506
+    },
+    {
+      "timestamp": 163.01569,
+      "strength": 1.649164,
+      "estimated_bpm": 103.996506
+    },
+    {
+      "timestamp": 163.2595,
+      "strength": 2.193616,
+      "estimated_bpm": 107.08934
+    },
+    {
+      "timestamp": 163.54974,
+      "strength": 2.7681537,
+      "estimated_bpm": 105.90821
+    },
+    {
+      "timestamp": 164.1767,
+      "strength": 2.5389798,
+      "estimated_bpm": 97.98311
+    },
+    {
+      "timestamp": 164.36244,
+      "strength": 2.689722,
+      "estimated_bpm": 97.98311
+    },
+    {
+      "timestamp": 164.83846,
+      "strength": 2.4628968,
+      "estimated_bpm": 92.62711
+    },
+    {
+      "timestamp": 165.29124,
+      "strength": 1.5728021,
+      "estimated_bpm": 100.72389
+    },
+    {
+      "timestamp": 165.61633,
+      "strength": 2.0457983,
+      "estimated_bpm": 105.135155
+    },
+    {
+      "timestamp": 165.95302,
+      "strength": 2.1640747,
+      "estimated_bpm": 110.79628
+    },
+    {
+      "timestamp": 166.24327,
+      "strength": 3.765387,
+      "estimated_bpm": 109.95051
+    },
+    {
+      "timestamp": 166.90503,
+      "strength": 1.9035933,
+      "estimated_bpm": 96.66789
+    },
+    {
+      "timestamp": 167.05597,
+      "strength": 3.0264163,
+      "estimated_bpm": 96.66789
+    },
+    {
+      "timestamp": 167.48553,
+      "strength": 1.7068536,
+      "estimated_bpm": 92.92591
+    },
+    {
+      "timestamp": 167.63646,
+      "strength": 5.0,
+      "estimated_bpm": 92.92591
+    },
+    {
+      "timestamp": 168.00798,
+      "strength": 1.6965597,
+      "estimated_bpm": 100.02442
+    },
+    {
+      "timestamp": 168.34467,
+      "strength": 2.4203625,
+      "estimated_bpm": 104.37331
+    },
+    {
+      "timestamp": 168.63492,
+      "strength": 2.0225232,
+      "estimated_bpm": 109.95051
+    },
+    {
+      "timestamp": 168.9716,
+      "strength": 3.7433224,
+      "estimated_bpm": 109.53245
+    },
+    {
+      "timestamp": 169.436,
+      "strength": 1.5487735,
+      "estimated_bpm": 105.135155
+    },
+    {
+      "timestamp": 169.64499,
+      "strength": 2.5431433,
+      "estimated_bpm": 105.135155
+    },
+    {
+      "timestamp": 169.84236,
+      "strength": 2.271028,
+      "estimated_bpm": 105.135155
+    },
+    {
+      "timestamp": 170.17905,
+      "strength": 1.5829997,
+      "estimated_bpm": 103.62242
+    },
+    {
+      "timestamp": 170.32997,
+      "strength": 4.192049,
+      "estimated_bpm": 103.62242
+    },
+    {
+      "timestamp": 170.74794,
+      "strength": 1.9460403,
+      "estimated_bpm": 112.08962
+    },
+    {
+      "timestamp": 171.0614,
+      "strength": 2.0254798,
+      "estimated_bpm": 116.62766
+    },
+    {
+      "timestamp": 171.3981,
+      "strength": 1.6590996,
+      "estimated_bpm": 118.06161
+    },
+    {
+      "timestamp": 171.67673,
+      "strength": 2.5904875,
+      "estimated_bpm": 120.53152
+    },
+    {
+      "timestamp": 171.9902,
+      "strength": 3.5142908,
+      "estimated_bpm": 119.53126
+    },
+    {
+      "timestamp": 172.32689,
+      "strength": 2.1345975,
+      "estimated_bpm": 119.53126
+    },
+    {
+      "timestamp": 172.66359,
+      "strength": 2.9827716,
+      "estimated_bpm": 125.24797
+    },
+    {
+      "timestamp": 172.83774,
+      "strength": 1.7871027,
+      "estimated_bpm": 125.24797
+    },
+    {
+      "timestamp": 173.00027,
+      "strength": 4.717741,
+      "estimated_bpm": 125.24797
+    },
+    {
+      "timestamp": 173.33696,
+      "strength": 1.859375,
+      "estimated_bpm": 125.24797
+    },
+    {
+      "timestamp": 173.66205,
+      "strength": 5.0,
+      "estimated_bpm": 129.76141
+    },
+    {
+      "timestamp": 173.98712,
+      "strength": 2.4434881,
+      "estimated_bpm": 129.17952
+    },
+    {
+      "timestamp": 174.23093,
+      "strength": 1.7613492,
+      "estimated_bpm": 133.9862
+    },
+    {
+      "timestamp": 174.66049,
+      "strength": 2.2491755,
+      "estimated_bpm": 126.346634
+    },
+    {
+      "timestamp": 174.9972,
+      "strength": 3.599587,
+      "estimated_bpm": 125.24797
+    },
+    {
+      "timestamp": 175.32227,
+      "strength": 1.8080131,
+      "estimated_bpm": 125.79491
+    },
+    {
+      "timestamp": 175.67056,
+      "strength": 3.5583436,
+      "estimated_bpm": 125.24797
+    },
+    {
+      "timestamp": 175.99565,
+      "strength": 1.9207035,
+      "estimated_bpm": 125.79491
+    },
+    {
+      "timestamp": 176.34395,
+      "strength": 3.813768,
+      "estimated_bpm": 124.70577
+    },
+    {
+      "timestamp": 176.81996,
+      "strength": 1.8771157,
+      "estimated_bpm": 118.06161
+    },
+    {
+      "timestamp": 177.0057,
+      "strength": 5.0,
+      "estimated_bpm": 118.06161
+    },
+    {
+      "timestamp": 177.31918,
+      "strength": 1.9921331,
+      "estimated_bpm": 115.228134
+    },
+    {
+      "timestamp": 177.65587,
+      "strength": 4.8822403,
+      "estimated_bpm": 119.03732
+    },
+    {
+      "timestamp": 177.94612,
+      "strength": 1.6561213,
+      "estimated_bpm": 121.03796
+    },
+    {
+      "timestamp": 178.10866,
+      "strength": 1.7286162,
+      "estimated_bpm": 121.03796
+    },
+    {
+      "timestamp": 178.31764,
+      "strength": 2.7121964,
+      "estimated_bpm": 121.03796
+    },
+    {
+      "timestamp": 178.65433,
+      "strength": 1.5916269,
+      "estimated_bpm": 120.53106
+    },
+    {
+      "timestamp": 178.81686,
+      "strength": 1.7427022,
+      "estimated_bpm": 120.53106
+    },
+    {
+      "timestamp": 178.99103,
+      "strength": 2.3565922,
+      "estimated_bpm": 120.53106
+    },
+    {
+      "timestamp": 179.36253,
+      "strength": 2.0239785,
+      "estimated_bpm": 119.5308
+    },
+    {
+      "timestamp": 179.6644,
+      "strength": 4.143916,
+      "estimated_bpm": 120.53106
+    },
+    {
+      "timestamp": 180.0127,
+      "strength": 1.7866905,
+      "estimated_bpm": 120.53106
+    },
+    {
+      "timestamp": 180.32617,
+      "strength": 4.2239347,
+      "estimated_bpm": 128.03073
+    },
+    {
+      "timestamp": 180.6977,
+      "strength": 2.896338,
+      "estimated_bpm": 125.24747
+    },
+    {
+      "timestamp": 181.01115,
+      "strength": 2.143629,
+      "estimated_bpm": 126.34613
+    },
+    {
+      "timestamp": 181.33624,
+      "strength": 1.6876621,
+      "estimated_bpm": 124.70528
+    },
+    {
+      "timestamp": 181.5336,
+      "strength": 1.8427163,
+      "estimated_bpm": 124.70528
+    },
+    {
+      "timestamp": 181.77742,
+      "strength": 2.0765803,
+      "estimated_bpm": 129.17952
+    },
+    {
+      "timestamp": 182.06766,
+      "strength": 1.6706924,
+      "estimated_bpm": 133.36589
+    },
+    {
+      "timestamp": 182.48563,
+      "strength": 3.2014995,
+      "estimated_bpm": 127.464745
+    },
+    {
+      "timestamp": 182.9268,
+      "strength": 1.5711355,
+      "estimated_bpm": 123.10698
+    },
+    {
+      "timestamp": 183.13579,
+      "strength": 2.62821,
+      "estimated_bpm": 123.10698
+    },
+    {
+      "timestamp": 183.46086,
+      "strength": 4.385691,
+      "estimated_bpm": 122.58312
+    },
+    {
+      "timestamp": 183.78593,
+      "strength": 4.9483175,
+      "estimated_bpm": 124.70577
+    },
+    {
+      "timestamp": 184.0878,
+      "strength": 3.037415,
+      "estimated_bpm": 125.24797
+    },
+    {
+      "timestamp": 184.28517,
+      "strength": 3.5706642,
+      "estimated_bpm": 125.24797
+    },
+    {
+      "timestamp": 184.4361,
+      "strength": 2.2930708,
+      "estimated_bpm": 125.24797
+    },
+    {
+      "timestamp": 184.72635,
+      "strength": 2.0552373,
+      "estimated_bpm": 126.90323
+    },
+    {
+      "timestamp": 185.08626,
+      "strength": 2.4990482,
+      "estimated_bpm": 121.54866
+    },
+    {
+      "timestamp": 185.37651,
+      "strength": 1.7328296,
+      "estimated_bpm": 121.54866
+    },
+    {
+      "timestamp": 185.53905,
+      "strength": 2.0601244,
+      "estimated_bpm": 121.54866
+    },
+    {
+      "timestamp": 185.74803,
+      "strength": 3.6240587,
+      "estimated_bpm": 121.54866
+    },
+    {
+      "timestamp": 186.0615,
+      "strength": 2.3283534,
+      "estimated_bpm": 126.346634
+    },
+    {
+      "timestamp": 186.38658,
+      "strength": 3.6229973,
+      "estimated_bpm": 132.14235
+    },
+    {
+      "timestamp": 186.80453,
+      "strength": 1.6266791,
+      "estimated_bpm": 127.464745
+    },
+    {
+      "timestamp": 187.04834,
+      "strength": 3.1710486,
+      "estimated_bpm": 131.53897
+    },
+    {
+      "timestamp": 187.36182,
+      "strength": 4.7819796,
+      "estimated_bpm": 130.94106
+    },
+    {
+      "timestamp": 187.64046,
+      "strength": 2.5544634,
+      "estimated_bpm": 131.53897
+    },
+    {
+      "timestamp": 188.15129,
+      "strength": 1.7215633,
+      "estimated_bpm": 124.16824
+    },
+    {
+      "timestamp": 188.34866,
+      "strength": 2.7846427,
+      "estimated_bpm": 124.16824
+    },
+    {
+      "timestamp": 188.66212,
+      "strength": 3.2546427,
+      "estimated_bpm": 123.10698
+    },
+    {
+      "timestamp": 188.94077,
+      "strength": 1.6394964,
+      "estimated_bpm": 124.70577
+    },
+    {
+      "timestamp": 189.45161,
+      "strength": 1.9439175,
+      "estimated_bpm": 116.62766
+    },
+    {
+      "timestamp": 189.95084,
+      "strength": 2.2561593,
+      "estimated_bpm": 113.41351
+    },
+    {
+      "timestamp": 190.28752,
+      "strength": 4.4736567,
+      "estimated_bpm": 109.95051
+    },
+    {
+      "timestamp": 190.58939,
+      "strength": 2.4346752,
+      "estimated_bpm": 110.37177
+    },
+    {
+      "timestamp": 190.77515,
+      "strength": 4.3590255,
+      "estimated_bpm": 110.37177
+    },
+    {
+      "timestamp": 190.93768,
+      "strength": 3.2299557,
+      "estimated_bpm": 110.37177
+    },
+    {
+      "timestamp": 191.21632,
+      "strength": 1.9507533,
+      "estimated_bpm": 110.37177
+    },
+    {
+      "timestamp": 191.58784,
+      "strength": 3.3741932,
+      "estimated_bpm": 115.690895
+    },
+    {
+      "timestamp": 191.97098,
+      "strength": 1.7318428,
+      "estimated_bpm": 112.96876
+    },
+    {
+      "timestamp": 192.238,
+      "strength": 3.054047,
+      "estimated_bpm": 113.41351
+    },
+    {
+      "timestamp": 192.8069,
+      "strength": 1.696072,
+      "estimated_bpm": 111.22407
+    },
+    {
+      "timestamp": 192.95782,
+      "strength": 2.7023034,
+      "estimated_bpm": 111.22407
+    },
+    {
+      "timestamp": 193.19002,
+      "strength": 2.8966775,
+      "estimated_bpm": 122.0637
+    },
+    {
+      "timestamp": 193.5035,
+      "strength": 2.888503,
+      "estimated_bpm": 123.10698
+    },
+    {
+      "timestamp": 193.81696,
+      "strength": 2.475062,
+      "estimated_bpm": 122.58312
+    },
+    {
+      "timestamp": 194.13043,
+      "strength": 3.3446732,
+      "estimated_bpm": 121.03796
+    },
+    {
+      "timestamp": 194.4439,
+      "strength": 2.4890137,
+      "estimated_bpm": 123.63534
+    },
+    {
+      "timestamp": 194.7806,
+      "strength": 2.644085,
+      "estimated_bpm": 125.79491
+    },
+    {
+      "timestamp": 195.08244,
+      "strength": 3.6019971,
+      "estimated_bpm": 124.16824
+    },
+    {
+      "timestamp": 195.39592,
+      "strength": 4.203498,
+      "estimated_bpm": 137.17635
+    },
+    {
+      "timestamp": 195.70938,
+      "strength": 4.400463,
+      "estimated_bpm": 132.7513
+    },
+    {
+      "timestamp": 196.02286,
+      "strength": 4.149067,
+      "estimated_bpm": 132.7513
+    },
+    {
+      "timestamp": 196.33632,
+      "strength": 3.042849,
+      "estimated_bpm": 132.7513
+    },
+    {
+      "timestamp": 196.6498,
+      "strength": 3.0182595,
+      "estimated_bpm": 132.7513
+    },
+    {
+      "timestamp": 196.96327,
+      "strength": 3.6848826,
+      "estimated_bpm": 132.7513
+    },
+    {
+      "timestamp": 197.27673,
+      "strength": 4.525382,
+      "estimated_bpm": 133.9862
+    },
+    {
+      "timestamp": 197.59021,
+      "strength": 4.603657,
+      "estimated_bpm": 133.36589
+    },
+    {
+      "timestamp": 197.89206,
+      "strength": 1.9291933,
+      "estimated_bpm": 133.9862
+    },
+    {
+      "timestamp": 198.32164,
+      "strength": 1.7347834,
+      "estimated_bpm": 128.03127
+    },
+    {
+      "timestamp": 198.54222,
+      "strength": 3.167575,
+      "estimated_bpm": 132.7513
+    },
+    {
+      "timestamp": 198.83247,
+      "strength": 1.8633969,
+      "estimated_bpm": 133.9862
+    },
+    {
+      "timestamp": 199.18077,
+      "strength": 4.8671656,
+      "estimated_bpm": 132.14235
+    },
+    {
+      "timestamp": 199.47102,
+      "strength": 2.457891,
+      "estimated_bpm": 133.36589
+    },
+    {
+      "timestamp": 199.68,
+      "strength": 3.2640018,
+      "estimated_bpm": 133.36589
+    },
+    {
+      "timestamp": 199.84254,
+      "strength": 3.2562933,
+      "estimated_bpm": 133.36589
+    },
+    {
+      "timestamp": 200.13278,
+      "strength": 3.274485,
+      "estimated_bpm": 134.6123
+    },
+    {
+      "timestamp": 200.42303,
+      "strength": 1.7629874,
+      "estimated_bpm": 135.88223
+    },
+    {
+      "timestamp": 200.7249,
+      "strength": 2.0668087,
+      "estimated_bpm": 135.88223
+    },
+    {
+      "timestamp": 200.88744,
+      "strength": 2.058385,
+      "estimated_bpm": 135.88223
+    },
+    {
+      "timestamp": 201.09642,
+      "strength": 3.962204,
+      "estimated_bpm": 135.88223
+    },
+    {
+      "timestamp": 201.38667,
+      "strength": 2.3121088,
+      "estimated_bpm": 144.03517
+    },
+    {
+      "timestamp": 201.75818,
+      "strength": 4.4984326,
+      "estimated_bpm": 135.2443
+    },
+    {
+      "timestamp": 202.03682,
+      "strength": 1.9258131,
+      "estimated_bpm": 135.88223
+    },
+    {
+      "timestamp": 202.18776,
+      "strength": 1.9057972,
+      "estimated_bpm": 135.88223
+    },
+    {
+      "timestamp": 202.65216,
+      "strength": 1.6773801,
+      "estimated_bpm": 129.76141
+    },
+    {
+      "timestamp": 203.03528,
+      "strength": 1.575311,
+      "estimated_bpm": 125.24797
+    },
+    {
+      "timestamp": 203.20943,
+      "strength": 1.6627486,
+      "estimated_bpm": 125.24797
+    },
+    {
+      "timestamp": 203.49968,
+      "strength": 2.054871,
+      "estimated_bpm": 125.24797
+    },
+    {
+      "timestamp": 203.73189,
+      "strength": 1.6528592,
+      "estimated_bpm": 128.03127
+    },
+    {
+      "timestamp": 203.88281,
+      "strength": 1.4411983,
+      "estimated_bpm": 128.03127
+    },
+    {
+      "timestamp": 204.04535,
+      "strength": 1.4551916,
+      "estimated_bpm": 128.03127
+    },
+    {
+      "timestamp": 204.27756,
+      "strength": 1.51137,
+      "estimated_bpm": 131.53897
+    },
+    {
+      "timestamp": 204.67229,
+      "strength": 1.4199753,
+      "estimated_bpm": 126.346634
+    },
+    {
+      "timestamp": 205.0322,
+      "strength": 1.5984647,
+      "estimated_bpm": 126.90323
+    },
+    {
+      "timestamp": 205.34567,
+      "strength": 1.9437169,
+      "estimated_bpm": 125.24797
+    },
+    {
+      "timestamp": 205.83328,
+      "strength": 1.4958972,
+      "estimated_bpm": 124.16824
+    },
+    {
+      "timestamp": 206.0771,
+      "strength": 1.4714098,
+      "estimated_bpm": 130.94106
+    },
+    {
+      "timestamp": 206.3093,
+      "strength": 1.7446156,
+      "estimated_bpm": 133.9862
+    },
+    {
+      "timestamp": 206.68082,
+      "strength": 1.9084713,
+      "estimated_bpm": 126.90323
+    },
+    {
+      "timestamp": 206.91301,
+      "strength": 2.0158846,
+      "estimated_bpm": 126.90323
+    },
+    {
+      "timestamp": 207.2381,
+      "strength": 1.7481338,
+      "estimated_bpm": 130.34857
+    },
+    {
+      "timestamp": 207.57478,
+      "strength": 2.1013827,
+      "estimated_bpm": 131.53897
+    },
+    {
+      "timestamp": 207.81859,
+      "strength": 2.381969,
+      "estimated_bpm": 135.2443
+    },
+    {
+      "timestamp": 208.01596,
+      "strength": 1.4727669,
+      "estimated_bpm": 135.2443
+    },
+    {
+      "timestamp": 208.35265,
+      "strength": 1.7148529,
+      "estimated_bpm": 144.03517
+    },
+    {
+      "timestamp": 208.66612,
+      "strength": 1.6813092,
+      "estimated_bpm": 139.83997
+    },
+    {
+      "timestamp": 209.30467,
+      "strength": 1.7115011,
+      "estimated_bpm": 119.53126
+    },
+    {
+      "timestamp": 209.47882,
+      "strength": 1.6955816,
+      "estimated_bpm": 119.53126
+    },
+    {
+      "timestamp": 209.93161,
+      "strength": 1.5514536,
+      "estimated_bpm": 116.157394
+    },
+    {
+      "timestamp": 210.2683,
+      "strength": 1.9812489,
+      "estimated_bpm": 112.08962
+    },
+    {
+      "timestamp": 210.72108,
+      "strength": 1.6313426,
+      "estimated_bpm": 107.48893
+    },
+    {
+      "timestamp": 211.10422,
+      "strength": 1.7131541,
+      "estimated_bpm": 105.90821
+    },
+    {
+      "timestamp": 211.32481,
+      "strength": 1.6490306,
+      "estimated_bpm": 106.69272
+    },
+    {
+      "timestamp": 211.56862,
+      "strength": 1.5713477,
+      "estimated_bpm": 109.95051
+    },
+    {
+      "timestamp": 211.83565,
+      "strength": 1.8512256,
+      "estimated_bpm": 111.65517
+    },
+    {
+      "timestamp": 212.06784,
+      "strength": 1.5864171,
+      "estimated_bpm": 129.17952
+    },
+    {
+      "timestamp": 212.33487,
+      "strength": 1.7737589,
+      "estimated_bpm": 139.16441
+    },
+    {
+      "timestamp": 212.718,
+      "strength": 1.6898322,
+      "estimated_bpm": 136.52623
+    },
+    {
+      "timestamp": 212.98503,
+      "strength": 1.4836917,
+      "estimated_bpm": 147.72838
+    },
+    {
+      "timestamp": 213.21724,
+      "strength": 1.6582683,
+      "estimated_bpm": 158.2804
+    },
+    {
+      "timestamp": 213.36816,
+      "strength": 1.7887355,
+      "estimated_bpm": 158.2804
+    },
+    {
+      "timestamp": 213.98349,
+      "strength": 1.7498984,
+      "estimated_bpm": 133.36589
+    },
+    {
+      "timestamp": 214.25052,
+      "strength": 1.5971174,
+      "estimated_bpm": 132.14235
+    },
+    {
+      "timestamp": 214.51755,
+      "strength": 1.6095438,
+      "estimated_bpm": 132.14235
+    },
+    {
+      "timestamp": 214.6917,
+      "strength": 1.8976442,
+      "estimated_bpm": 132.14235
+    },
+    {
+      "timestamp": 215.34186,
+      "strength": 1.7555625,
+      "estimated_bpm": 113.41351
+    },
+    {
+      "timestamp": 215.60889,
+      "strength": 1.7612967,
+      "estimated_bpm": 113.41351
+    },
+    {
+      "timestamp": 215.99202,
+      "strength": 1.449323,
+      "estimated_bpm": 113.41351
+    },
+    {
+      "timestamp": 216.25905,
+      "strength": 1.946725,
+      "estimated_bpm": 113.41351
+    },
+    {
+      "timestamp": 216.56091,
+      "strength": 1.4588856,
+      "estimated_bpm": 110.79628
+    },
+    {
+      "timestamp": 216.87437,
+      "strength": 1.6890918,
+      "estimated_bpm": 123.10698
+    },
+    {
+      "timestamp": 217.17624,
+      "strength": 1.8878617,
+      "estimated_bpm": 121.54866
+    },
+    {
+      "timestamp": 217.52454,
+      "strength": 1.5417864,
+      "estimated_bpm": 118.06161
+    },
+    {
+      "timestamp": 217.79156,
+      "strength": 1.782891,
+      "estimated_bpm": 136.52623
+    },
+    {
+      "timestamp": 218.09343,
+      "strength": 1.7031207,
+      "estimated_bpm": 134.6123
+    }
+  ],
+  "effect_activations": [],
+  "frame_data": null,
+  "insights": {
+    "dominant_frequency_range": "Bass-Heavy",
+    "music_complexity": 0.15769038,
+    "rhythmic_consistency": 0.9402111,
+    "harmonic_content": 0.8453935,
+    "recommended_effects": [
+      "geometric_kaleidoscope",
+      "parametric_waves",
+      "particle_swarm"
+    ],
+    "optimal_smoothing_factor": 0.6548199,
+    "suggested_thresholds": {
+      "beat_threshold": 3.0,
+      "bass_threshold": 0.055457648,
+      "onset_threshold": 0.007166561
+    }
+  }
+}

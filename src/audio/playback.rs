@@ -107,18 +107,101 @@ impl AudioPlayback {
     pub fn get_current_audio_frame(&mut self) -> AudioFrame {
         if let Some(analyzer) = &mut self.analyzer {
             if !self.audio_buffer.is_empty() {
-                // Calculate current position based on playback time
-                // Use smaller chunks for better real-time responsiveness
-                let chunk_size = 512; // Smaller chunks = better responsiveness (11.6ms at 44.1kHz)
+                // At 60fps, we should process ~735 samples per frame (44100/60)
+                let samples_per_frame = 735;
+                let chunk_size = 512; // Analysis window size
+
                 let start = self.buffer_position;
-                let end = (start + chunk_size).min(self.audio_buffer.len());
+                let end = (start + samples_per_frame).min(self.audio_buffer.len());
 
                 if start < self.audio_buffer.len() {
-                    let chunk = &self.audio_buffer[start..end];
-                    // Advance at real-time rate: 44100 samples/sec = ~735 samples per frame at 60fps
-                    self.buffer_position = (self.buffer_position + 735) % self.audio_buffer.len();
+                    // Process all accumulated samples in this frame using overlapping windows
+                    let frame_data = &self.audio_buffer[start..end];
 
-                    return analyzer.analyze(chunk);
+                    if frame_data.len() >= chunk_size {
+                        // Average multiple overlapping analysis windows within this frame
+                        let mut accumulated_frame = AudioFrame::default();
+                        let mut analysis_count = 0;
+
+                        // Analyze overlapping windows within the frame data
+                        let step_size = (frame_data.len().saturating_sub(chunk_size) / 4).max(1); // 4 overlapping analyses
+
+                        for window_start in (0..frame_data.len().saturating_sub(chunk_size)).step_by(step_size) {
+                            let window_end = (window_start + chunk_size).min(frame_data.len());
+                            let window = &frame_data[window_start..window_end];
+
+                            if window.len() == chunk_size {
+                                let analysis = analyzer.analyze(window);
+
+                                // Accumulate all analysis values
+                                accumulated_frame.volume += analysis.volume;
+                                accumulated_frame.beat_strength += analysis.beat_strength;
+                                accumulated_frame.spectral_centroid += analysis.spectral_centroid;
+                                accumulated_frame.spectral_rolloff += analysis.spectral_rolloff;
+                                accumulated_frame.zero_crossing_rate += analysis.zero_crossing_rate;
+                                accumulated_frame.spectral_flux += analysis.spectral_flux;
+                                accumulated_frame.onset_strength += analysis.onset_strength;
+                                accumulated_frame.pitch_confidence += analysis.pitch_confidence;
+                                accumulated_frame.dynamic_range += analysis.dynamic_range;
+
+                                // Accumulate frequency bands
+                                accumulated_frame.frequency_bands.bass += analysis.frequency_bands.bass;
+                                accumulated_frame.frequency_bands.mid += analysis.frequency_bands.mid;
+                                accumulated_frame.frequency_bands.treble += analysis.frequency_bands.treble;
+                                accumulated_frame.frequency_bands.sub_bass += analysis.frequency_bands.sub_bass;
+                                accumulated_frame.frequency_bands.presence += analysis.frequency_bands.presence;
+
+                                // Keep the most recent beat detection and BPM
+                                if analysis.beat_detected {
+                                    accumulated_frame.beat_detected = true;
+                                    accumulated_frame.estimated_bpm = analysis.estimated_bpm;
+                                }
+
+                                analysis_count += 1;
+                            }
+                        }
+
+                        // Average all accumulated values
+                        if analysis_count > 0 {
+                            let count_f32 = analysis_count as f32;
+                            accumulated_frame.volume /= count_f32;
+                            accumulated_frame.beat_strength /= count_f32;
+                            accumulated_frame.spectral_centroid /= count_f32;
+                            accumulated_frame.spectral_rolloff /= count_f32;
+                            accumulated_frame.zero_crossing_rate /= count_f32;
+                            accumulated_frame.spectral_flux /= count_f32;
+                            accumulated_frame.onset_strength /= count_f32;
+                            accumulated_frame.pitch_confidence /= count_f32;
+                            accumulated_frame.dynamic_range /= count_f32;
+
+                            // Average frequency bands
+                            accumulated_frame.frequency_bands.bass /= count_f32;
+                            accumulated_frame.frequency_bands.mid /= count_f32;
+                            accumulated_frame.frequency_bands.treble /= count_f32;
+                            accumulated_frame.frequency_bands.sub_bass /= count_f32;
+                            accumulated_frame.frequency_bands.presence /= count_f32;
+
+                            // Set sample rate
+                            accumulated_frame.sample_rate = self.sample_rate as f32;
+                        }
+
+                        // Advance buffer position by the frame amount
+                        self.buffer_position = (self.buffer_position + samples_per_frame) % self.audio_buffer.len();
+
+                        return accumulated_frame;
+                    } else {
+                        // Fallback: if frame data is too small, just analyze what we have
+                        let padded_chunk = if frame_data.len() < chunk_size {
+                            let mut padded = vec![0.0; chunk_size];
+                            padded[..frame_data.len()].copy_from_slice(frame_data);
+                            padded
+                        } else {
+                            frame_data.to_vec()
+                        };
+
+                        self.buffer_position = (self.buffer_position + samples_per_frame) % self.audio_buffer.len();
+                        return analyzer.analyze(&padded_chunk);
+                    }
                 }
             }
         }
@@ -144,5 +227,10 @@ impl AudioPlayback {
 
         // Return silence if no data
         vec![0.0; 512]
+    }
+
+    /// Get the full audio buffer for comprehensive analysis
+    pub fn get_full_audio_buffer(&self) -> &Vec<f32> {
+        &self.audio_buffer
     }
 }
