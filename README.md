@@ -4,17 +4,23 @@ A cross-platform music visualizer application inspired by classic WinAmp visuali
 
 ## Features
 
-- **🎵 Audio File Processing**: Direct analysis of audio files (WAV, MP3, OGG support)
+- **🎵 Audio File Processing**: Direct analysis of audio files (WAV, MP3, OGG, M4A/AAC support)
 - **🧠 Advanced Musical Analysis**: 15+ real-time audio features for rich visualization control
   - **Spectral Features**: Brightness, rolloff, pitch confidence, zero-crossing rate
   - **Rhythm Analysis**: Beat detection, BPM estimation, onset strength
   - **Dynamic Analysis**: Volume tracking, dynamic range, spectral flux
 - **🌈 Psychedelic Visual Effects**: Jeff Minter-inspired effect collection
   - **Llama Plasma Fields**: Multi-layered plasma driven by frequency bands
-  - **Geometric Kaleidoscope**: BPM-controlled kaleidoscopic patterns
+  - **Geometric Kaleidoscope**: BPM-controlled kaleidoscopic patterns with mirroring
   - **Psychedelic Tunnel**: Classic Minter-style tunnels with spectral control
   - **Particle Swarm**: Chaos-driven particles responding to onset detection
   - **Fractal Madness**: Multi-octave noise patterns modulated by dynamics
+  - **Spectralizer Bars**: Classic spectrum analyzer visualization
+- **🌀 3D Surface Projection**: Revolutionary curved surface rendering
+  - **Multiple Spheres**: Effects projected onto rotating sphere grids
+  - **Cylindrical**: Tunnel-like wraparound projections
+  - **Torus**: Donut-shaped projection surfaces
+  - **Intelligent Auto-Selection**: Chooses optimal projection based on music
 - **🎛️ Intelligent Effect Management**: Automatic effect blending based on musical characteristics
 - **⚡ Real-time FFT Analysis**: Fast Fourier Transform for frequency spectrum analysis
 - **🥁 Beat Detection**: Intelligent rhythm detection with adaptive thresholds
@@ -42,8 +48,8 @@ cd Arrvee
 # Run with default sample file
 cargo run --bin audio-test
 
-# Run with your own audio file
-cargo run --bin audio-test -- path/to/your/music.wav
+# Run with your own audio file (supports WAV, MP3, OGG, M4A/AAC)
+cargo run --bin audio-test -- path/to/your/music.m4a
 
 # Run with developer overlay showing real-time analysis
 cargo run --bin audio-test -- --debug sample.wav
@@ -61,6 +67,26 @@ The visualizer will:
 **Playback:**
 - **Space**: Pause/resume audio playback
 - **Escape**: Exit the visualizer
+
+**Effect Control:**
+- **1**: Switch to Llama Plasma Fields (frequency-driven plasma layers)
+- **2**: Switch to Geometric Kaleidoscope (BPM-synchronized patterns)
+- **3**: Switch to Psychedelic Tunnel (classic Minter-style tunnel)
+- **4**: Switch to Particle Swarm (chaos-driven particle effects)
+- **5**: Switch to Fractal Madness (dynamic fractal noise patterns)
+- **6**: Switch to Spectralizer Bars (classic spectrum analyzer visualization)
+- **0**: Auto-Blend Mode (intelligent effect selection based on music)
+
+**3D Projection Control:**
+- **Q**: Auto Projection (intelligent selection based on music and effects)
+- **W**: Multiple Spheres (effects projected onto rotating sphere grid)
+- **E**: Cylinder (tunnel-like cylindrical projection)
+- **R**: Torus (donut-shaped projection surface)
+- **T**: Flat (traditional 2D projection)
+
+**Visual Customization:**
+- **P**: Cycle Color Palettes (Rainbow, Neon Cyber, Warm Sunset, Deep Ocean, Purple Haze, Electric Green)
+- **[** / **]**: Decrease/Increase Smoothing Factor (0.1-2.0 range for real-time sensitivity adjustment)
 
 **Developer Mode** (when using `--debug`):**
 - **D**: Toggle debug overlay on/off

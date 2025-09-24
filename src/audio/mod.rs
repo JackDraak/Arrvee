@@ -1,10 +1,12 @@
 pub mod fft;
 pub mod beat_detector;
 pub mod playback;
+pub mod gpu_analyzer;
 
 pub use fft::AudioAnalyzer;
 pub use beat_detector::BeatDetector;
 pub use playback::AudioPlayback;
+pub use gpu_analyzer::{GpuAudioAnalyzer, GpuAudioFeatures};
 
 #[derive(Debug, Clone)]
 pub struct AudioFrame {

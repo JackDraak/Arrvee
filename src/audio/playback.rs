@@ -108,15 +108,15 @@ impl AudioPlayback {
         if let Some(analyzer) = &mut self.analyzer {
             if !self.audio_buffer.is_empty() {
                 // Calculate current position based on playback time
-                // For now, we'll advance the buffer position each frame
-                // In a real implementation, you'd sync this with actual playback position
-                let chunk_size = 1024; // Samples per frame at ~60fps
+                // Use smaller chunks for better real-time responsiveness
+                let chunk_size = 512; // Smaller chunks = better responsiveness (11.6ms at 44.1kHz)
                 let start = self.buffer_position;
                 let end = (start + chunk_size).min(self.audio_buffer.len());
 
                 if start < self.audio_buffer.len() {
                     let chunk = &self.audio_buffer[start..end];
-                    self.buffer_position = (self.buffer_position + chunk_size / 4) % self.audio_buffer.len();
+                    // Advance at real-time rate: 44100 samples/sec = ~735 samples per frame at 60fps
+                    self.buffer_position = (self.buffer_position + 735) % self.audio_buffer.len();
 
                     return analyzer.analyze(chunk);
                 }
@@ -125,5 +125,24 @@ impl AudioPlayback {
 
         // Return empty frame if no data
         AudioFrame::default()
+    }
+
+    /// Get raw audio data for GPU processing
+    pub fn get_current_audio_chunk(&mut self) -> Vec<f32> {
+        if !self.audio_buffer.is_empty() {
+            let chunk_size = 512; // Same size as GPU analyzer expects
+            let start = self.buffer_position;
+            let end = (start + chunk_size).min(self.audio_buffer.len());
+
+            if start < self.audio_buffer.len() {
+                let chunk = self.audio_buffer[start..end].to_vec();
+                // Advance at real-time rate: 44100 samples/sec = ~735 samples per frame at 60fps
+                self.buffer_position = (self.buffer_position + 735) % self.audio_buffer.len();
+                return chunk;
+            }
+        }
+
+        // Return silence if no data
+        vec![0.0; 512]
     }
 }

@@ -3,7 +3,7 @@ use wgpu::util::DeviceExt;
 use winit::window::Window;
 use glam::{Mat4, Vec3};
 
-use crate::audio::AudioFrame;
+use crate::audio::{AudioFrame, GpuAudioAnalyzer, GpuAudioFeatures};
 use crate::effects::PsychedelicManager;
 use super::{ShaderManager, TextureManager, Vertex, VertexBuffer};
 
@@ -25,6 +25,11 @@ pub struct GraphicsEngine<'a> {
 
     pub time: f32,
     pub psychedelic_manager: PsychedelicManager,
+    pub projection_mode: f32, // -1=auto, 0=sphere, 1=cylinder, 2=torus, 3=flat
+    pub palette_index: f32,   // Current color palette
+    pub smoothing_factor: f32, // Global smoothing factor
+    cleaned_up: bool,         // Flag to prevent rendering after cleanup
+    gpu_analyzer: Option<GpuAudioAnalyzer>, // GPU-accelerated audio analysis
 }
 
 #[repr(C)]
@@ -62,8 +67,16 @@ pub struct Uniforms {
     pub tunnel_weight: f32,
     pub particle_weight: f32,
     pub fractal_weight: f32,
+    pub spectralizer_weight: f32,
 
-    pub _padding: [f32; 3],
+    // 3D projection controls
+    pub projection_mode: f32,  // 0=sphere, 1=cylinder, 2=torus, 3=flat, -1=auto
+
+    // Visual controls
+    pub palette_index: f32,    // Current color palette (0-5)
+    pub smoothing_factor: f32, // Global smoothing sensitivity (0.1-2.0)
+
+    pub _padding: [f32; 3],   // Padding to align to 16-byte boundary (176 bytes total)
 }
 
 impl Uniforms {
@@ -91,7 +104,11 @@ impl Uniforms {
             tunnel_weight: 0.0,
             particle_weight: 0.0,
             fractal_weight: 0.0,
-            _padding: [0.0; 3],
+            spectralizer_weight: 0.0,
+            projection_mode: -1.0, // Auto mode by default
+            palette_index: 0.0,     // Start with first palette
+            smoothing_factor: 0.3,  // More responsive default smoothing
+            _padding: [0.0; 3],     // Proper padding
         }
     }
 
@@ -223,6 +240,11 @@ impl<'a> GraphicsEngine<'a> {
             vertex_buffer,
             time: 0.0,
             psychedelic_manager,
+            projection_mode: -1.0, // Start in auto mode
+            palette_index: 0.0,    // Start with first palette
+            smoothing_factor: 0.3, // More responsive default smoothing
+            cleaned_up: false,     // Not cleaned up yet
+            gpu_analyzer: None,    // GPU analyzer will be created externally
         })
     }
 
@@ -271,6 +293,9 @@ impl<'a> GraphicsEngine<'a> {
     }
 
     pub fn render(&mut self, audio_frame: &AudioFrame, window: &Window) -> Result<()> {
+        if self.cleaned_up {
+            return Ok(()); // Don't render after cleanup
+        }
         let delta_time = 1.0 / 60.0;
         self.time += delta_time;
 
@@ -308,7 +333,11 @@ impl<'a> GraphicsEngine<'a> {
             tunnel_weight: *effect_weights.get("psychedelic_tunnel").unwrap_or(&0.0),
             particle_weight: *effect_weights.get("particle_swarm").unwrap_or(&0.0),
             fractal_weight: *effect_weights.get("fractal_madness").unwrap_or(&0.0),
-            _padding: [0.0; 3],
+            spectralizer_weight: *effect_weights.get("spectralizer_bars").unwrap_or(&0.0),
+            projection_mode: self.projection_mode,
+            palette_index: self.palette_index,
+            smoothing_factor: self.smoothing_factor,
+            _padding: [0.0; 3],  // Proper padding
         };
 
         self.queue.write_buffer(&self.uniform_buffer, 0, bytemuck::cast_slice(&[uniforms]));
@@ -366,4 +395,70 @@ impl<'a> GraphicsEngine<'a> {
     pub fn psychedelic_manager(&self) -> &PsychedelicManager {
         &self.psychedelic_manager
     }
+
+    /// Explicit cleanup method to avoid destructor panics
+    pub fn cleanup(&mut self) {
+        if self.cleaned_up {
+            return; // Already cleaned up
+        }
+
+        // Ensure all GPU operations are complete before cleanup
+        self.device.poll(wgpu::Maintain::Wait);
+
+        // Wait a bit longer to ensure complete cleanup
+        std::thread::sleep(std::time::Duration::from_millis(50));
+
+        self.cleaned_up = true;
+    }
+
+    /// Initialize GPU audio analyzer
+    pub async fn init_gpu_analyzer(&mut self) -> Result<()> {
+        self.gpu_analyzer = Some(GpuAudioAnalyzer::new(
+            &self.device,
+            &self.queue,
+            44100.0, // Sample rate
+            512,     // Buffer size for real-time responsiveness
+        ).await?);
+        Ok(())
+    }
+
+    /// Analyze audio data using GPU compute shaders (if available)
+    /// Falls back to CPU analysis if GPU analyzer is not initialized
+    pub async fn analyze_audio_gpu(&mut self, audio_data: &[f32]) -> Option<GpuAudioFeatures> {
+        if let Some(ref mut gpu_analyzer) = self.gpu_analyzer {
+            gpu_analyzer.analyze(&self.device, &self.queue, audio_data).await.ok()
+        } else {
+            None
+        }
+    }
+
+    /// Convert GPU audio features to standard AudioFrame format
+    pub fn gpu_features_to_audio_frame(&self, gpu_features: &GpuAudioFeatures) -> AudioFrame {
+        AudioFrame {
+            sample_rate: 44100.0,
+            spectrum: vec![0.0; 512], // Placeholder
+            time_domain: vec![0.0; 1024], // Placeholder
+            frequency_bands: crate::audio::FrequencyBands {
+                sub_bass: gpu_features.sub_bass,
+                bass: gpu_features.bass,
+                mid: gpu_features.mid,
+                treble: gpu_features.treble,
+                presence: gpu_features.presence,
+            },
+            beat_detected: gpu_features.beat_strength > 0.5,
+            beat_strength: gpu_features.beat_strength,
+            volume: gpu_features.volume,
+            spectral_centroid: gpu_features.spectral_centroid,
+            spectral_rolloff: gpu_features.spectral_rolloff,
+            zero_crossing_rate: gpu_features.zero_crossing_rate,
+            spectral_flux: gpu_features.spectral_flux,
+            onset_strength: gpu_features.onset_strength,
+            pitch_confidence: gpu_features.pitch_confidence,
+            estimated_bpm: gpu_features.estimated_bpm,
+            dynamic_range: gpu_features.dynamic_range,
+        }
+    }
 }
+
+// Note: Drop implementation removed to prevent destructor panics
+// Cleanup is handled manually via the cleanup() method before program exit

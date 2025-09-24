@@ -48,10 +48,10 @@ pub struct EffectConfig {
 impl Default for EffectConfig {
     fn default() -> Self {
         Self {
-            responsiveness: 0.8,
+            responsiveness: 1.0,  // Maximum responsiveness
             base_intensity: 1.0,
-            beat_sensitivity: 0.7,
-            transition_smoothing: 0.9,
+            beat_sensitivity: 0.9, // Higher beat sensitivity
+            transition_smoothing: 0.5, // Less smoothing = more responsive
             auto_switch: true,
             manual_override: None,
         }
@@ -71,12 +71,13 @@ impl PsychedelicManager {
             "geometric_kaleidoscope",
             "psychedelic_tunnel",
             "particle_swarm",
-            "fractal_madness"
+            "fractal_madness",
+            "spectralizer_bars"
         ];
 
         for effect in effects {
             effect_weights.insert(effect.to_string(), 0.0);
-            transition_speeds.insert(effect.to_string(), 2.0); // 2.0 units per second
+            transition_speeds.insert(effect.to_string(), 4.0); // Faster transitions for real-time response
             target_weights.insert(effect.to_string(), 0.0);
             intensity_scalers.insert(effect.to_string(), 1.0);
         }
@@ -116,17 +117,17 @@ impl PsychedelicManager {
         let base_plasma = 0.1 + audio_frame.volume * 0.2;
         *self.target_weights.get_mut("llama_plasma").unwrap() = base_plasma;
 
-        // Plasma dominance during heavy bass
+        // Plasma dominance during bass (much more responsive thresholds)
         let bass_energy = audio_frame.frequency_bands.bass + audio_frame.frequency_bands.sub_bass;
-        if bass_energy > 0.3 {
-            let plasma_boost = (bass_energy - 0.3) * 2.0 * self.config.responsiveness;
+        if bass_energy > 0.1 { // Much lower threshold for better response
+            let plasma_boost = (bass_energy - 0.1) * 2.0 * self.config.responsiveness; // Stronger response
             *self.target_weights.get_mut("llama_plasma").unwrap() += plasma_boost;
         }
 
-        // Kaleidoscope for harmonic content
-        if audio_frame.pitch_confidence > 0.4 && audio_frame.frequency_bands.mid > 0.2 {
+        // Kaleidoscope for harmonic content (much more responsive)
+        if audio_frame.pitch_confidence > 0.2 && audio_frame.frequency_bands.mid > 0.05 { // Much lower thresholds
             let harmonic_strength = audio_frame.pitch_confidence * audio_frame.frequency_bands.mid;
-            let kaleidoscope_weight = harmonic_strength * 0.8 * self.config.responsiveness;
+            let kaleidoscope_weight = harmonic_strength * 1.5 * self.config.responsiveness; // Stronger response
             *self.target_weights.get_mut("geometric_kaleidoscope").unwrap() = kaleidoscope_weight;
         }
 
@@ -149,6 +150,14 @@ impl PsychedelicManager {
             let evolution = audio_frame.dynamic_range * audio_frame.spectral_flux;
             let fractal_weight = evolution * 0.5 * self.config.responsiveness;
             *self.target_weights.get_mut("fractal_madness").unwrap() = fractal_weight;
+        }
+
+        // Spectralizer for when we want to see frequency content clearly
+        let spectral_activity = audio_frame.frequency_bands.bass + audio_frame.frequency_bands.mid +
+                               audio_frame.frequency_bands.treble + audio_frame.frequency_bands.presence;
+        if spectral_activity > 0.4 && audio_frame.volume > 0.1 {
+            let spectralizer_weight = spectral_activity * 0.3 * self.config.responsiveness;
+            *self.target_weights.get_mut("spectralizer_bars").unwrap() = spectralizer_weight;
         }
 
         // Beat-driven effect boosting
@@ -178,14 +187,13 @@ impl PsychedelicManager {
             if let Some(target_weight) = self.target_weights.get(effect_name) {
                 if let Some(transition_speed) = self.transition_speeds.get(effect_name) {
                     let diff = target_weight - *current_weight;
-                    let max_change = transition_speed * delta_time;
 
-                    // Apply transition smoothing
-                    let smoothed_change = diff * max_change * (1.0 - self.config.transition_smoothing);
-                    let direct_change = diff.signum() * max_change.min(diff.abs()) * self.config.transition_smoothing;
+                    // Enhanced smoothing with exponential decay
+                    let smoothing_factor = 1.0 - (-transition_speed * delta_time).exp();
+                    let change = diff * smoothing_factor * self.config.transition_smoothing;
 
-                    *current_weight += smoothed_change + direct_change;
-                    *current_weight = current_weight.clamp(0.0, 2.0);
+                    *current_weight += change;
+                    *current_weight = current_weight.clamp(0.0, 1.5); // Lower ceiling for smoother visuals
                 }
             }
         }
