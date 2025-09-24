@@ -28,7 +28,7 @@ impl DebugOverlay {
     fn new() -> Self {
         Self {
             show_overlay: true,
-            volume_control: 1.0,
+            volume_control: 0.1, // 10% default volume
             frame_count: 0,
         }
     }
@@ -178,8 +178,17 @@ fn main() -> Result<()> {
     // Load and start playing the specified audio file
     info!("Loading {}...", args.audio_file);
     audio_playback.load_file(&args.audio_file)?;
+
+    // Set initial volume to 10%
+    let initial_volume = if let Some(debug) = &debug_overlay {
+        debug.volume_control
+    } else {
+        0.1
+    };
+    audio_playback.set_volume(initial_volume);
+
     audio_playback.play();
-    info!("Audio playback started - you should hear the music!");
+    info!("Audio playback started at {:.0}% volume", initial_volume * 100.0);
 
     info!("Audio file test initialized successfully");
 

@@ -12,6 +12,54 @@ pub struct AudioAnalyzer {
     previous_spectrum: Vec<f32>,
     volume_history: Vec<f32>,
     tempo_detector: TempoDetector,
+
+    // Normalization factors based on full song analysis
+    normalization_factors: NormalizationFactors,
+}
+
+#[derive(Clone)]
+struct NormalizationFactors {
+    // Frequency band normalizers (based on analysis_results_full.json max values)
+    bass_max: f32,          // 0.488851 -> use 0.5 for headroom
+    mid_max: f32,           // 0.085300 -> use 0.1 for headroom
+    treble_max: f32,        // 0.028677 -> use 0.03 for headroom
+    presence_max: f32,      // 0.007946 -> use 0.01 for headroom
+    sub_bass_max: f32,      // 0.0 -> use 0.1 as fallback
+
+    // Spectral feature normalizers
+    spectral_centroid_max: f32,   // 15354.41 -> use ~15000
+    spectral_rolloff_max: f32,    // 18949.22 -> use ~19000
+    pitch_confidence_max: f32,    // 0.998 -> already normalized
+
+    // Temporal feature normalizers
+    zero_crossing_max: f32,       // 0.407045 -> use 0.5 for headroom
+    dynamic_range_max: f32,       // 0.643238 -> use 0.7 for headroom
+    spectral_flux_max: f32,       // 0.011555 -> use 0.02 for headroom
+    onset_strength_max: f32,      // 0.103834 -> use 0.15 for headroom
+}
+
+impl Default for NormalizationFactors {
+    fn default() -> Self {
+        Self {
+            // Frequency bands - with 20% headroom for dynamics
+            bass_max: 0.6,         // ~20% over observed max
+            mid_max: 0.1,          // ~15% over observed max
+            treble_max: 0.035,     // ~20% over observed max
+            presence_max: 0.01,    // ~25% over observed max
+            sub_bass_max: 0.1,     // Fallback since observed was 0
+
+            // Spectral features
+            spectral_centroid_max: 16000.0,  // Reasonable headroom
+            spectral_rolloff_max: 20000.0,   // Just above observed max
+            pitch_confidence_max: 1.0,       // Already normalized
+
+            // Temporal features - with headroom for peak moments
+            zero_crossing_max: 0.5,     // ~25% headroom
+            dynamic_range_max: 0.8,     // ~25% headroom
+            spectral_flux_max: 0.02,    // ~75% headroom for transients
+            onset_strength_max: 0.15,   // ~45% headroom for attacks
+        }
+    }
 }
 
 struct TempoDetector {
@@ -69,6 +117,7 @@ impl AudioAnalyzer {
             previous_spectrum: vec![0.0; fft_size / 2 + 1],
             volume_history: Vec::with_capacity(100),
             tempo_detector: TempoDetector::new(),
+            normalization_factors: NormalizationFactors::default(),
         }
     }
 
@@ -113,22 +162,31 @@ impl AudioAnalyzer {
         // Store current spectrum for next frame's spectral flux calculation
         self.previous_spectrum = spectrum.clone();
 
+        // Apply normalization factors to improve dynamic range
+        let normalized_bands = FrequencyBands {
+            bass: (frequency_bands.bass / self.normalization_factors.bass_max).clamp(0.0, 1.0),
+            mid: (frequency_bands.mid / self.normalization_factors.mid_max).clamp(0.0, 1.0),
+            treble: (frequency_bands.treble / self.normalization_factors.treble_max).clamp(0.0, 1.0),
+            presence: (frequency_bands.presence / self.normalization_factors.presence_max).clamp(0.0, 1.0),
+            sub_bass: (frequency_bands.sub_bass / self.normalization_factors.sub_bass_max).clamp(0.0, 1.0),
+        };
+
         AudioFrame {
             sample_rate: self.sample_rate,
             spectrum: spectrum.clone(),
             time_domain: audio_data[..self.fft_size.min(audio_data.len())].to_vec(),
-            frequency_bands,
+            frequency_bands: normalized_bands,
             beat_detected,
             beat_strength,
             volume,
-            spectral_centroid,
-            spectral_rolloff,
-            zero_crossing_rate,
-            spectral_flux,
-            onset_strength,
-            pitch_confidence,
+            spectral_centroid: (spectral_centroid / self.normalization_factors.spectral_centroid_max).clamp(0.0, 1.0),
+            spectral_rolloff: (spectral_rolloff / self.normalization_factors.spectral_rolloff_max).clamp(0.0, 1.0),
+            zero_crossing_rate: (zero_crossing_rate / self.normalization_factors.zero_crossing_max).clamp(0.0, 1.0),
+            spectral_flux: (spectral_flux / self.normalization_factors.spectral_flux_max).clamp(0.0, 1.0),
+            onset_strength: (onset_strength / self.normalization_factors.onset_strength_max).clamp(0.0, 1.0),
+            pitch_confidence: (pitch_confidence / self.normalization_factors.pitch_confidence_max).clamp(0.0, 1.0),
             estimated_bpm: self.tempo_detector.estimated_bpm,
-            dynamic_range,
+            dynamic_range: (dynamic_range / self.normalization_factors.dynamic_range_max).clamp(0.0, 1.0),
         }
     }
 
