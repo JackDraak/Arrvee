@@ -3,16 +3,19 @@
 
 @group(0) @binding(0) var<storage, read> fft_data: array<vec2<f32>>;
 @group(0) @binding(1) var<storage, read_write> features: array<f32, 16>; // Access to write beat features
+@group(0) @binding(2) var<storage, read_write> time_data: array<f32, 4>; // [current_time, delta_time, frame_count, last_beat_time]
 
 // Beat detection parameters
 const BEAT_HISTORY_SIZE: u32 = 64u;
-const ENERGY_THRESHOLD_RATIO: f32 = 1.3; // Energy must be 30% above average
+const ENERGY_THRESHOLD_RATIO: f32 = 1.4; // Energy must be 40% above average
 const BPM_MIN: f32 = 60.0;
 const BPM_MAX: f32 = 200.0;
+const MIN_BEAT_INTERVAL: f32 = 0.3; // Minimum 0.3s between beats (200 BPM max)
+const MAX_BEAT_INTERVAL: f32 = 1.0; // Maximum 1.0s between beats (60 BPM min)
 
-// Shared memory for beat history (simulated with array indexing)
+// Persistent storage arrays (simulated - in reality these would be persistent buffers)
 var<workgroup> energy_history: array<f32, 64>;
-var<workgroup> beat_intervals: array<f32, 32>;
+var<workgroup> beat_timestamps: array<f32, 32>;
 
 // Calculate magnitude of complex number
 fn magnitude(complex: vec2<f32>) -> f32 {
@@ -56,27 +59,32 @@ fn detect_beat(current_energy: f32, avg_energy: f32) -> bool {
     return current_energy > avg_energy * ENERGY_THRESHOLD_RATIO && current_energy > 0.1;
 }
 
-// Estimate BPM from beat intervals
-fn estimate_bpm() -> f32 {
+// Estimate BPM from recent beat timestamps
+fn estimate_bpm(current_time: f32) -> f32 {
     var total_interval = 0.0;
     var valid_intervals = 0.0;
 
-    // Calculate average interval between beats
-    for (var i = 0u; i < 31u; i = i + 1u) { // 32 intervals - 1
-        let interval = beat_intervals[i + 1u] - beat_intervals[i];
-        if (interval > 0.0) {
-            total_interval = total_interval + interval;
-            valid_intervals = valid_intervals + 1.0;
+    // Calculate intervals between recent beats (only use last 16 beats for responsiveness)
+    for (var i = 16u; i < 31u; i = i + 1u) {
+        let current_beat = beat_timestamps[i + 1u];
+        let previous_beat = beat_timestamps[i];
+
+        if (current_beat > previous_beat && current_beat > 0.0 && previous_beat > 0.0) {
+            let interval = current_beat - previous_beat;
+            if (interval >= MIN_BEAT_INTERVAL && interval <= MAX_BEAT_INTERVAL) {
+                total_interval = total_interval + interval;
+                valid_intervals = valid_intervals + 1.0;
+            }
         }
     }
 
-    if (valid_intervals > 0.0) {
+    if (valid_intervals >= 4.0) { // Need at least 4 valid intervals for stable BPM
         let avg_interval = total_interval / valid_intervals;
-        let bpm = 60.0 / avg_interval; // Convert interval to BPM
+        let bpm = 60.0 / avg_interval;
         return clamp(bpm, BPM_MIN, BPM_MAX);
     }
 
-    return 120.0; // Default BPM
+    return 120.0; // Default BPM when insufficient data
 }
 
 // Adaptive threshold calculation with variance
@@ -97,56 +105,82 @@ fn calculate_adaptive_threshold(avg_energy: f32) -> f32 {
     return avg_energy * (1.0 + adaptivity);
 }
 
+// Enhanced beat detection with proper time management and hysteresis
+fn detect_beat_with_hysteresis(current_energy: f32, threshold: f32, last_beat_time: f32, current_time: f32) -> bool {
+    let time_since_last_beat = current_time - last_beat_time;
+    let energy_exceeds = current_energy > threshold;
+    let sufficient_time_passed = time_since_last_beat >= MIN_BEAT_INTERVAL;
+
+    return energy_exceeds && sufficient_time_passed && current_energy > 0.1;
+}
+
 @compute @workgroup_size(1)
 fn main() {
-    // Initialize arrays (in practice, these would persist between frames)
-    for (var i = 0u; i < BEAT_HISTORY_SIZE; i = i + 1u) {
-        energy_history[i] = 0.1; // Small baseline energy
+    // Read time data
+    let current_time = time_data[0];
+    let delta_time = time_data[1];
+    let frame_count = time_data[2];
+    let last_beat_time = time_data[3];
+
+    // Initialize arrays if this is first frame
+    if (frame_count < 1.0) {
+        for (var i = 0u; i < BEAT_HISTORY_SIZE; i = i + 1u) {
+            energy_history[i] = 0.1;
+        }
+        for (var i = 0u; i < 32u; i = i + 1u) {
+            beat_timestamps[i] = current_time;
+        }
     }
 
-    for (var i = 0u; i < 32u; i = i + 1u) {
-        beat_intervals[i] = 0.5; // Default 0.5s intervals (120 BPM)
+    // Calculate current beat energy with NaN protection
+    var current_energy = calculate_beat_energy();
+    if (current_energy != current_energy) { // NaN check
+        current_energy = 0.0;
     }
+    current_energy = clamp(current_energy, 0.0, 10.0);
 
-    // Calculate current beat energy
-    let current_energy = calculate_beat_energy();
+    // Update energy history with circular buffer
+    let history_index = u32(frame_count) % BEAT_HISTORY_SIZE;
+    energy_history[history_index] = current_energy;
 
-    // Shift energy history and add current value
-    for (var i = 0u; i < BEAT_HISTORY_SIZE - 1u; i = i + 1u) {
-        energy_history[i] = energy_history[i + 1u];
-    }
-    energy_history[BEAT_HISTORY_SIZE - 1u] = current_energy;
-
-    // Calculate statistics
-    let avg_energy = calculate_average_energy();
+    // Calculate statistics with safety checks
+    let avg_energy = max(calculate_average_energy(), 0.01);
     let adaptive_threshold = calculate_adaptive_threshold(avg_energy);
 
-    // Beat detection
-    let beat_detected = detect_beat(current_energy, adaptive_threshold);
+    // Enhanced beat detection with hysteresis
+    let beat_detected = detect_beat_with_hysteresis(current_energy, adaptive_threshold, last_beat_time, current_time);
 
-    // Calculate beat strength (how much energy exceeds threshold)
+    // Calculate beat strength with enhanced formula
     var beat_strength = 0.0;
-    if (current_energy > adaptive_threshold) {
-        beat_strength = min((current_energy - adaptive_threshold) / adaptive_threshold, 5.0);
+    if (current_energy > adaptive_threshold && current_energy > 0.1) {
+        let strength_ratio = (current_energy - adaptive_threshold) / max(adaptive_threshold, 0.1);
+        beat_strength = clamp(strength_ratio * 2.0, 0.0, 5.0);
     }
 
-    // Update beat intervals if beat detected
+    // Update beat timestamps if beat detected
+    var new_last_beat_time = last_beat_time;
     if (beat_detected) {
-        // Shift interval history
+        // Shift timestamp history
         for (var i = 0u; i < 31u; i = i + 1u) {
-            beat_intervals[i] = beat_intervals[i + 1u];
+            beat_timestamps[i] = beat_timestamps[i + 1u];
         }
-        // Add current time (simulated as increasing counter)
-        beat_intervals[31u] = beat_intervals[30u] + 0.016667; // ~60fps assumption
+        beat_timestamps[31u] = current_time;
+        new_last_beat_time = current_time;
     }
 
-    // Estimate BPM
-    let estimated_bpm = estimate_bpm();
+    // Estimate BPM with improved algorithm
+    let estimated_bpm = estimate_bpm(current_time);
 
-    // Write results to features array
-    features[10] = beat_strength; // beat_strength
-    features[11] = estimated_bpm; // estimated_bpm
+    // Write results to features array with bounds checking
+    features[10] = clamp(beat_strength, 0.0, 5.0);
+    features[11] = clamp(estimated_bpm, BPM_MIN, BPM_MAX);
 
-    // Note: Additional debug metrics would require expanding the features array
-    // For now, we only write to the standard 16 features
+    // Update time data for next frame
+    time_data[3] = new_last_beat_time; // Update last beat time
+
+    // Debug: Write energy and threshold to additional features if available
+    if (arrayLength(&features) > 14) {
+        features[14] = clamp(current_energy, 0.0, 10.0);
+        features[15] = clamp(adaptive_threshold, 0.0, 10.0);
+    }
 }

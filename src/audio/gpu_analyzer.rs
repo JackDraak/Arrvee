@@ -13,6 +13,7 @@ pub struct GpuAudioAnalyzer {
     audio_buffer: wgpu::Buffer,
     fft_buffer: wgpu::Buffer,
     features_buffer: wgpu::Buffer,
+    time_data_buffer: wgpu::Buffer,
     output_buffer: wgpu::Buffer,
 
     // Bind groups
@@ -24,6 +25,11 @@ pub struct GpuAudioAnalyzer {
     sample_rate: f32,
     buffer_size: u32,
     num_frequency_bands: u32,
+
+    // Time tracking
+    start_time: std::time::Instant,
+    frame_count: u32,
+    last_beat_time: f32,
 }
 
 #[repr(C)]
@@ -113,6 +119,13 @@ impl GpuAudioAnalyzer {
             mapped_at_creation: false,
         });
 
+        let time_data_buffer = device.create_buffer(&wgpu::BufferDescriptor {
+            label: Some("Time Data Buffer"),
+            size: (4 * std::mem::size_of::<f32>()) as u64, // [current_time, delta_time, frame_count, last_beat_time]
+            usage: wgpu::BufferUsages::STORAGE | wgpu::BufferUsages::COPY_DST,
+            mapped_at_creation: false,
+        });
+
         let output_buffer = device.create_buffer(&wgpu::BufferDescriptor {
             label: Some("Output Buffer"),
             size: std::mem::size_of::<GpuAudioFeatures>() as u64,
@@ -188,6 +201,16 @@ impl GpuAudioAnalyzer {
                 },
                 wgpu::BindGroupLayoutEntry {
                     binding: 1,
+                    visibility: wgpu::ShaderStages::COMPUTE,
+                    ty: wgpu::BindingType::Buffer {
+                        ty: wgpu::BufferBindingType::Storage { read_only: false },
+                        has_dynamic_offset: false,
+                        min_binding_size: None,
+                    },
+                    count: None,
+                },
+                wgpu::BindGroupLayoutEntry {
+                    binding: 2,
                     visibility: wgpu::ShaderStages::COMPUTE,
                     ty: wgpu::BindingType::Buffer {
                         ty: wgpu::BufferBindingType::Storage { read_only: false },
@@ -279,6 +302,10 @@ impl GpuAudioAnalyzer {
                     binding: 1,
                     resource: features_buffer.as_entire_binding(),
                 },
+                wgpu::BindGroupEntry {
+                    binding: 2,
+                    resource: time_data_buffer.as_entire_binding(),
+                },
             ],
         });
 
@@ -289,6 +316,7 @@ impl GpuAudioAnalyzer {
             audio_buffer,
             fft_buffer,
             features_buffer,
+            time_data_buffer,
             output_buffer,
             fft_bind_group,
             features_bind_group,
@@ -296,11 +324,37 @@ impl GpuAudioAnalyzer {
             sample_rate,
             buffer_size,
             num_frequency_bands,
+            start_time: std::time::Instant::now(),
+            frame_count: 0,
+            last_beat_time: 0.0,
         })
     }
 
     /// Analyze audio data using GPU compute shaders
     pub async fn analyze(&mut self, device: &wgpu::Device, queue: &wgpu::Queue, audio_data: &[f32]) -> Result<GpuAudioFeatures> {
+        // Update time tracking
+        let current_time = self.start_time.elapsed().as_secs_f32();
+        let delta_time = if self.frame_count > 0 {
+            current_time - (self.frame_count as f32 * (self.buffer_size as f32 / self.sample_rate))
+        } else {
+            0.0
+        };
+
+        // Prepare time data for GPU
+        let time_data: [f32; 4] = [
+            current_time,
+            delta_time,
+            self.frame_count as f32,
+            self.last_beat_time,
+        ];
+
+        // Upload time data to GPU
+        queue.write_buffer(
+            &self.time_data_buffer,
+            0,
+            bytemuck::cast_slice(&time_data),
+        );
+
         // Ensure data size matches buffer
         let data_size = audio_data.len().min(self.buffer_size as usize);
 
@@ -310,6 +364,8 @@ impl GpuAudioAnalyzer {
             0,
             bytemuck::cast_slice(&audio_data[..data_size]),
         );
+
+        self.frame_count += 1;
 
         let mut encoder = device.create_command_encoder(&wgpu::CommandEncoderDescriptor {
             label: Some("Audio Analysis Encoder"),

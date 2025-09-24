@@ -554,8 +554,8 @@ fn particle_swarm(pos: vec2<f32>) -> vec3<f32> {
     let smooth_zero_crossing = smooth_audio_parameter(uniforms.zero_crossing_rate, 1.5);
     let smooth_onset = smooth_audio_parameter(uniforms.onset_strength, 1.2);
     let chaos_factor = smooth_zero_crossing + smooth_onset * 0.3;
-    let particle_count = 15.0 + chaos_factor * 30.0; // Much more conservative range
-    let volume_gate = smoothstep(0.05, 0.15, uniforms.volume); // Smoother gate
+    let particle_count = clamp(15.0 + chaos_factor * 30.0, 5.0, 50.0); // Safe bounds
+    let volume_gate = max(smoothstep(0.05, 0.15, uniforms.volume), 0.4); // Brighter baseline
 
     for (var i = 0; i < i32(particle_count); i++) {
         let seed = f32(i) * 0.073; // Slightly different seed spacing
@@ -604,14 +604,14 @@ fn particle_swarm(pos: vec2<f32>) -> vec3<f32> {
             let color_t = seed + uniforms.time * 0.3 + uniforms.spectral_centroid * 0.2;
 
             // Much higher intensity scaling
-            let intensity_base = 0.6 + uniforms.volume * 0.8; // Higher baseline
-            let beat_boost = 1.0 + smooth_beat_local * 1.5;
+            let intensity_base = 1.0 + uniforms.volume * 1.2; // Even higher baseline
+            let beat_boost = 1.2 + smooth_beat_local * 2.0;
             let intensity = particle_brightness * intensity_base * beat_boost;
 
             let particle_color = get_current_palette_color(color_t) * intensity;
 
             // Add more brightness for visible particles
-            color = color + particle_color * 0.8; // Higher contribution
+            color = color + particle_color * 1.2; // Higher contribution
         }
     }
 
@@ -635,10 +635,10 @@ fn fractal_madness(pos: vec2<f32>) -> vec3<f32> {
     var p = pos * scale;
     var intensity = 0.0;
     var amplitude = 1.0;
-    let volume_gate = smoothstep(0.02, 0.12, uniforms.volume); // Gate for quiet parts
+    let volume_gate = max(smoothstep(0.02, 0.12, uniforms.volume), 0.4); // Brighter baseline
 
-    // Enhanced multi-octave fractal with dynamic octaves
-    let octave_count = 3 + i32(uniforms.onset_strength * 4.0); // Variable octave count
+    // Safe multi-octave fractal with bounded octaves
+    let octave_count = clamp(3 + i32(uniforms.onset_strength * 4.0), 3, 8); // Safe bounds 3-8
 
     for (var i = 0; i < octave_count; i++) {
         // Dynamic noise sampling with frequency content
@@ -681,9 +681,9 @@ fn fractal_madness(pos: vec2<f32>) -> vec3<f32> {
     let saturation_base = calculate_dynamic_saturation();
     let saturation = mix(0.1, 1.4, saturation_base + uniforms.volume * 0.6);
 
-    // Dynamic brightness with blackout capability
-    let brightness_base = final_intensity * (0.3 + uniforms.volume * 1.2);
-    let brightness = brightness_base * (1.0 + uniforms.beat_strength * 2.0);
+    // Dynamic brightness with enhanced visibility
+    let brightness_base = final_intensity * (0.6 + uniforms.volume * 1.5);
+    let brightness = brightness_base * (1.5 + uniforms.beat_strength * 2.5);
 
     let base_color = hsv_to_rgb(hue, saturation, brightness);
 
