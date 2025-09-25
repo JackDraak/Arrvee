@@ -156,7 +156,8 @@ struct Args {
     debug: bool,
 }
 
-fn main() -> Result<()> {
+#[tokio::main]
+async fn main() -> Result<()> {
     env_logger::init();
     let args = Args::parse();
 
@@ -181,7 +182,7 @@ fn main() -> Result<()> {
 
     // Load and start playing the specified audio file
     info!("Loading {}...", args.audio_file);
-    audio_playback.load_file(&args.audio_file)?;
+    audio_playback.load_file(&args.audio_file).await?;
 
     // Set initial volume to 10%
     let initial_volume = if let Some(debug) = &debug_overlay {
@@ -347,7 +348,7 @@ fn main() -> Result<()> {
                     }
 
                     // Get real-time audio analysis from the loaded file
-                    let audio_data = audio_playback.get_current_audio_frame();
+                    let audio_data = pollster::block_on(audio_playback.get_current_audio_frame());
 
                     // Render debug overlay if enabled (limit to ~2Hz to avoid spam)
                     static mut FRAME_COUNT: u32 = 0;

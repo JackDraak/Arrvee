@@ -260,7 +260,7 @@ impl AudioAnalysisEngine {
 
     async fn analyze_file(&mut self, file_path: &str, include_frames: bool) -> Result<AnalysisResults> {
         info!("Loading audio file: {}", file_path);
-        self.playback.load_file(file_path)?;
+        self.playback.load_file(file_path).await?;
 
         let mut frame_count = 0;
         let mut active_effects: HashMap<String, f32> = HashMap::new(); // track when effects start

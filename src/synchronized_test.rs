@@ -153,7 +153,8 @@ struct Args {
     debug: bool,
 }
 
-fn main() -> Result<()> {
+#[tokio::main]
+async fn main() -> Result<()> {
     env_logger::init();
     let args = Args::parse();
 
@@ -195,7 +196,7 @@ fn main() -> Result<()> {
 
     // Load and start playing the specified audio file
     info!("Loading {}...", args.audio_file);
-    audio_playback.load_file(&args.audio_file)?;
+    audio_playback.load_file(&args.audio_file).await?;
 
     // Set initial volume
     let initial_volume = if let Some(debug) = &debug_overlay {

@@ -17,7 +17,8 @@ use audio::AudioPlayback;
 use graphics::GraphicsEngine;
 use ui::UserInterface;
 
-fn main() -> Result<()> {
+#[tokio::main]
+async fn main() -> Result<()> {
     env_logger::init();
     info!("Starting Arrvee Music Visualizer");
 
@@ -32,7 +33,7 @@ fn main() -> Result<()> {
     let mut ui = UserInterface::new(&window, &graphics_engine);
 
     // Load sample audio file
-    audio_playback.load_file("sample.wav")?;
+    audio_playback.load_file("sample.wav").await?;
     audio_playback.play();
 
     info!("Visualizer initialized successfully");
@@ -59,7 +60,7 @@ fn main() -> Result<()> {
                     graphics_engine.resize(physical_size);
                 }
                 WindowEvent::RedrawRequested => {
-                    let audio_data = audio_playback.get_current_audio_frame();
+                    let audio_data = pollster::block_on(audio_playback.get_current_audio_frame());
                     if let Err(e) = graphics_engine.render(&audio_data, &window_clone) {
                         log::error!("Render error: {}", e);
                     }

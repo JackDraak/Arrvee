@@ -47,30 +47,30 @@ pub struct NormalizationParameters {
 impl Default for NormalizationParameters {
     fn default() -> Self {
         Self {
-            // Frequency bands - based on typical FFT magnitudes
-            sub_bass_max: 0.15,        // Sub-bass is usually quieter
-            bass_max: 0.8,             // Bass dominates in most music
-            mid_max: 0.6,              // Mids are prominent
-            treble_max: 0.4,           // Treble is usually lower energy
-            presence_max: 0.2,         // High frequencies are lowest
+            // Frequency bands - CORRECTED based on actual FFT magnitudes (order of magnitude smaller!)
+            sub_bass_max: 0.0001,      // Actual raw FFT values are ~0.00001-0.0001
+            bass_max: 0.0005,          // Real bass peaks at ~0.0001-0.0005
+            mid_max: 0.0002,           // Mid frequencies typically ~0.00001-0.0002
+            treble_max: 0.0001,        // Treble is even smaller ~0.00001-0.0001
+            presence_max: 0.00005,     // High frequencies are smallest ~0.000005-0.00005
 
             // Spectral features - based on audio characteristics
             spectral_centroid_max: 8000.0,  // Most music centers below 8kHz
             spectral_rolloff_max: 12000.0,   // 85% energy usually below 12kHz
-            spectral_flux_max: 0.5,          // Spectral change measure
+            spectral_flux_max: 0.0001,       // Spectral change measure is also tiny
 
-            // Temporal features
-            zero_crossing_rate_max: 0.5,     // ZCR for typical music
-            onset_strength_max: 0.8,         // Onset detection strength
+            // Temporal features - CORRECTED based on observed ranges
+            zero_crossing_rate_max: 0.5,     // ZCR is often already 0-1
+            onset_strength_max: 0.0002,      // Onset detection strength is also tiny
 
-            // Beat analysis
-            beat_strength_max: 2.0,          // Beat energy measure
+            // Beat analysis - CORRECTED for actual beat energy values
+            beat_strength_max: 0.0005,       // Beat energy measure is also small
             bpm_min: 60.0,                   // Reasonable BPM range
             bpm_max: 200.0,
 
-            // Dynamic features
-            volume_max: 1.0,                 // RMS magnitude
-            dynamic_range_max: 1.0,          // Range measure
+            // Dynamic features - CORRECTED for actual RMS values
+            volume_max: 0.0001,              // RMS magnitude is also tiny ~0.000001-0.0001
+            dynamic_range_max: 0.0002,       // Dynamic range measure
             pitch_confidence_max: 1.0,       // Confidence is often already 0-1
         }
     }
@@ -198,6 +198,19 @@ impl FeatureNormalizer {
 
     /// Normalize raw features to 0.0-1.0 range
     pub fn normalize(&mut self, raw: &RawAudioFeatures) -> NormalizedAudioFeatures {
+        // Debug logging to see raw input values (log occasionally to avoid spam)
+        static mut RAW_DEBUG_COUNTER: u32 = 0;
+        unsafe {
+            RAW_DEBUG_COUNTER += 1;
+            if RAW_DEBUG_COUNTER % 120 == 0 { // Log every ~2 seconds at 60fps
+                log::debug!("🔬 RAW AUDIO VALUES from analyzer:");
+                log::debug!("  🎵 Raw Frequency Bands: bass={:.6}, mid={:.6}, volume={:.6}",
+                    raw.bass, raw.mid, raw.volume);
+                log::debug!("  📐 Normalization Params: bass_max={:.3}, mid_max={:.3}, volume_max={:.3}",
+                    self.parameters.bass_max, self.parameters.mid_max, self.parameters.volume_max);
+            }
+        }
+
         // Update observed ranges if adaptive
         if self.adaptive {
             self.update_observed_ranges(raw);

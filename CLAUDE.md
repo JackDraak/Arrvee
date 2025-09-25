@@ -452,6 +452,49 @@ cargo run --bin synchronized-test sample.m4a --arv-file sample.arv --debug
 4. **Analyze**: FFT + feature extraction
 5. **Visualize**: Real-time shader parameter updates
 
+## 🔧 Troubleshooting & Fixes
+
+### Visual Reactivity Issues ("Black Screen" Problem)
+
+**Issue**: Visual display appears mostly non-reactive (black screen) even with maximum sensitivity settings.
+
+**Root Cause Analysis** (Resolved December 2024):
+1. **Architecture Mismatch**: Main visualizer binaries were using the old FFT analyzer instead of the modern unified analysis architecture
+2. **Conservative Normalization**: Old analyzer used extremely conservative normalization factors (bass_max: 0.6, mid_max: 0.1) resulting in tiny feature values
+3. **Shader Threshold Mismatch**: Shaders expect values >0.02-0.1 for meaningful visual effects, but normalized values were typically 0.01-0.05
+
+**Solution Implemented**:
+- **Updated all visualizer binaries** to use unified analysis architecture with GPU/CPU fallback
+- **Expanded sensitivity range** from 0.5-1.5 to 0.1-5.0 for better control
+- **Automatic analyzer selection**: GPU preferred, graceful CPU fallback
+- **Consistent feature normalization**: All binaries now use the same FeatureNormalizer
+
+**Technical Changes**:
+```rust
+// Before: Old FFT analyzer with conservative factors
+self.analyzer = Some(AudioAnalyzer::new(self.sample_rate as f32, 512));
+
+// After: Modern unified architecture with GPU/CPU fallback
+let analyzer: Box<dyn AudioAnalyzer + Send> = match NewGpuAudioAnalyzer::new_standalone(sample_rate, chunk_size).await {
+    Ok(gpu_analyzer) => Box::new(gpu_analyzer),
+    Err(_) => Box::new(CpuAudioAnalyzer::new(sample_rate, chunk_size)?)
+};
+```
+
+**Result**: Visuals are now highly reactive to audio dynamics, with bass-heavy sections driving strong visual responses and complex audio creating intricate visual patterns.
+
+**Verification Commands**:
+```bash
+# Test visual reactivity with music
+cargo run --bin audio-test sample.m4a --debug
+
+# Check analyzer selection in logs
+# Look for: "✅ GPU analyzer initialized successfully" or "⚠️ GPU initialization failed"
+
+# Test sensitivity controls
+# Use ; and ' keys to adjust sensitivity from 0.1x to 5.0x
+```
+
 ## 🤝 Development Guidelines
 
 ### Code Style

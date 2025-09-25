@@ -33,7 +33,8 @@ struct Args {
     debug: bool,
 }
 
-fn main() -> Result<()> {
+#[tokio::main]
+async fn main() -> Result<()> {
     env_logger::init();
     let args = Args::parse();
 
@@ -54,7 +55,7 @@ fn main() -> Result<()> {
 
     // Load and start playing the specified audio file
     info!("Loading {}...", args.audio_file);
-    audio_playback.load_file(&args.audio_file)?;
+    audio_playback.load_file(&args.audio_file).await?;
     audio_playback.play();
     info!("Audio playback started");
 
@@ -192,12 +193,12 @@ fn main() -> Result<()> {
                             }
                             None => {
                                 // Fallback to CPU analysis
-                                audio_playback.get_current_audio_frame()
+                                pollster::block_on(audio_playback.get_current_audio_frame())
                             }
                         }
                     } else {
                         // Use CPU analysis
-                        audio_playback.get_current_audio_frame()
+                        pollster::block_on(audio_playback.get_current_audio_frame())
                     };
 
                     // Print performance info every 60 frames (1 second at 60fps)
