@@ -8,7 +8,7 @@ mod effects;
 use audio::{
     PrescanProcessor, ArvFormat,
     AudioAnalyzer, CpuAudioAnalyzer, NewGpuAudioAnalyzer,
-    FeatureNormalizer, RawAudioFeatures, NormalizedAudioFeatures
+    NormalizedAudioFeatures
 };
 
 #[derive(Parser)]

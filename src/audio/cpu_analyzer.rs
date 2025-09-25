@@ -5,6 +5,7 @@ use async_trait::async_trait;
 
 /// CPU-based audio analyzer that implements the common AudioAnalyzer trait
 /// This wraps the existing CPU FFT analyzer and outputs raw features
+#[allow(dead_code)]
 pub struct CpuAudioAnalyzer {
     inner: CpuAnalyzer,
     sample_rate: f32,
@@ -267,7 +268,7 @@ impl CpuAudioAnalyzer {
         bands.bass + bands.sub_bass * 0.5
     }
 
-    fn update_bpm_estimation(&self, beat_detected: bool) -> f32 {
+    fn update_bpm_estimation(&self, _beat_detected: bool) -> f32 {
         // Simplified BPM estimation - return a reasonable default
         120.0 // In real implementation, track beat intervals
     }

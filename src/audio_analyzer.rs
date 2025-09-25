@@ -9,7 +9,8 @@ use std::io::Write;
 mod audio;
 mod effects;
 
-use audio::{AudioAnalyzer, AudioPlayback, AudioFrame};
+use audio::{AudioPlayback, AudioFrame, CpuAudioAnalyzer, NewGpuAudioAnalyzer, FeatureNormalizer, NormalizedAudioFeatures};
+use audio::analysis_interface::AudioAnalyzer;
 use effects::PsychedelicManager;
 
 #[derive(Parser)]
@@ -205,7 +206,8 @@ impl From<&AudioFrame> for SerializableAudioFrame {
 
 struct AudioAnalysisEngine {
     playback: AudioPlayback,
-    analyzer: AudioAnalyzer,
+    analyzer: Box<dyn AudioAnalyzer + Send>,
+    normalizer: FeatureNormalizer,
     psychedelic_manager: PsychedelicManager,
 
     // Statistics collectors
@@ -221,9 +223,22 @@ struct AudioAnalysisEngine {
 }
 
 impl AudioAnalysisEngine {
-    fn new(chunk_size: usize, sample_rate: f32) -> Result<Self> {
+    async fn new(chunk_size: usize, sample_rate: f32) -> Result<Self> {
         let playback = AudioPlayback::new()?;
-        let analyzer = AudioAnalyzer::new(sample_rate, chunk_size);
+
+        // Try GPU first, fallback to CPU
+        let analyzer: Box<dyn AudioAnalyzer + Send> = match NewGpuAudioAnalyzer::new_standalone(sample_rate, chunk_size).await {
+            Ok(gpu_analyzer) => {
+                info!("Using GPU analyzer");
+                Box::new(gpu_analyzer)
+            }
+            Err(e) => {
+                info!("GPU analyzer failed ({}), using CPU analyzer", e);
+                Box::new(CpuAudioAnalyzer::new(sample_rate, chunk_size)?)
+            }
+        };
+
+        let normalizer = FeatureNormalizer::new();
         let psychedelic_manager = PsychedelicManager::new();
 
         let frame_rate = sample_rate / chunk_size as f32; // Approximate frame rate
@@ -231,6 +246,7 @@ impl AudioAnalysisEngine {
         Ok(Self {
             playback,
             analyzer,
+            normalizer,
             psychedelic_manager,
             feature_collectors: HashMap::new(),
             frame_data: Vec::new(),
@@ -242,7 +258,7 @@ impl AudioAnalysisEngine {
         })
     }
 
-    fn analyze_file(&mut self, file_path: &str, include_frames: bool) -> Result<AnalysisResults> {
+    async fn analyze_file(&mut self, file_path: &str, include_frames: bool) -> Result<AnalysisResults> {
         info!("Loading audio file: {}", file_path);
         self.playback.load_file(file_path)?;
 
@@ -261,7 +277,11 @@ impl AudioAnalysisEngine {
         let mut sample_pos = 0;
         while sample_pos + self.chunk_size <= total_samples {
             let chunk = &audio_buffer[sample_pos..sample_pos + self.chunk_size];
-            let audio_frame = self.analyzer.analyze(chunk);
+
+            // Get raw features from analyzer
+            let raw_features = self.analyzer.analyze_chunk(chunk).await?;
+            let normalized_features = self.normalizer.normalize(&raw_features);
+            let audio_frame = self.convert_to_audio_frame(&normalized_features);
 
             let timestamp = sample_pos as f32 / self.sample_rate;
 
@@ -304,7 +324,7 @@ impl AudioAnalysisEngine {
         self.generate_results(file_path, frame_count, include_frames)
     }
 
-    fn collect_frame_statistics(&mut self, frame: &AudioFrame, timestamp: f32, effect_weights: &HashMap<String, f32>) {
+    fn collect_frame_statistics(&mut self, frame: &AudioFrame, timestamp: f32, _effect_weights: &HashMap<String, f32>) {
         // Collect frequency band data
         self.add_sample("sub_bass", frame.frequency_bands.sub_bass);
         self.add_sample("bass", frame.frequency_bands.bass);
@@ -366,6 +386,35 @@ impl AudioAnalysisEngine {
                     });
                 }
             }
+        }
+    }
+
+    fn convert_to_audio_frame(&self, normalized: &NormalizedAudioFeatures) -> AudioFrame {
+        // Convert normalized features back to AudioFrame format for compatibility
+        use audio::FrequencyBands;
+
+        AudioFrame {
+            sample_rate: self.sample_rate,
+            spectrum: Vec::new(), // Not used in current analysis
+            time_domain: Vec::new(), // Not used in current analysis
+            frequency_bands: FrequencyBands {
+                sub_bass: normalized.sub_bass,
+                bass: normalized.bass,
+                mid: normalized.mid,
+                treble: normalized.treble,
+                presence: normalized.presence,
+            },
+            beat_detected: normalized.beat_detected,
+            beat_strength: normalized.beat_strength,
+            estimated_bpm: normalized.estimated_bpm,
+            volume: normalized.volume,
+            spectral_centroid: normalized.spectral_centroid,
+            spectral_rolloff: normalized.spectral_rolloff,
+            pitch_confidence: normalized.pitch_confidence,
+            zero_crossing_rate: normalized.zero_crossing_rate,
+            spectral_flux: normalized.spectral_flux,
+            onset_strength: normalized.onset_strength,
+            dynamic_range: normalized.dynamic_range,
         }
     }
 
@@ -628,7 +677,8 @@ impl AudioAnalysisEngine {
     }
 }
 
-fn main() -> Result<()> {
+#[tokio::main]
+async fn main() -> Result<()> {
     env_logger::init();
     let args = Args::parse();
 
@@ -645,10 +695,10 @@ fn main() -> Result<()> {
         44100.0 // Default
     };
 
-    let mut engine = AudioAnalysisEngine::new(args.chunk_size, sample_rate)?;
+    let mut engine = AudioAnalysisEngine::new(args.chunk_size, sample_rate).await?;
 
     info!("🔍 Analyzing audio file...");
-    let results = engine.analyze_file(&args.audio_file, args.frame_by_frame)?;
+    let results = engine.analyze_file(&args.audio_file, args.frame_by_frame).await?;
 
     info!("📊 Generating analysis report...");
 

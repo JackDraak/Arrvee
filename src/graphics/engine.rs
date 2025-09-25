@@ -1,7 +1,7 @@
 use anyhow::Result;
 use wgpu::util::DeviceExt;
 use winit::window::Window;
-use glam::{Mat4, Vec3};
+use glam::Mat4;
 
 use crate::audio::{AudioFrame, GpuAudioAnalyzer, GpuAudioFeatures};
 use crate::effects::PsychedelicManager;
@@ -294,7 +294,7 @@ impl<'a> GraphicsEngine<'a> {
         }
     }
 
-    pub fn render(&mut self, audio_frame: &AudioFrame, window: &Window) -> Result<()> {
+    pub fn render(&mut self, audio_frame: &AudioFrame, _window: &Window) -> Result<()> {
         if self.cleaned_up {
             return Ok(()); // Don't render after cleanup
         }

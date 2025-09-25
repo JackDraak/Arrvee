@@ -1,6 +1,7 @@
 use super::FrequencyBands;
 use std::collections::VecDeque;
 
+#[allow(dead_code)]
 pub struct BeatDetector {
     sample_rate: f32,
     bass_history: VecDeque<f32>,

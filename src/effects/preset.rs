@@ -28,6 +28,7 @@ impl Default for PresetParameters {
     }
 }
 
+#[allow(dead_code)]
 pub struct PresetManager {
     presets: Vec<VisualizerPreset>,
     current_preset: usize,

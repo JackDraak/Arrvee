@@ -22,6 +22,7 @@ use async_trait::async_trait;
 /// # }
 /// ```
 #[derive(Debug, Clone)]
+#[allow(dead_code)]
 pub struct RawAudioFeatures {
     // Frequency bands (raw magnitudes/energies)
     pub sub_bass: f32,
@@ -83,6 +84,7 @@ pub struct RawAudioFeatures {
 ///     Ok(())
 /// }
 /// ```
+#[allow(dead_code)]
 #[async_trait]
 pub trait AudioAnalyzer {
     /// Analyze a chunk of audio data and return raw features.
@@ -112,6 +114,7 @@ pub trait AudioAnalyzer {
 /// Normalized audio features (guaranteed 0.0-1.0 range)
 /// This is what the visual system consumes
 #[derive(Debug, Clone)]
+#[allow(dead_code)]
 pub struct NormalizedAudioFeatures {
     // Frequency bands (0.0-1.0)
     pub sub_bass: f32,

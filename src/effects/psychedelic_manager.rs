@@ -1,5 +1,4 @@
 use crate::audio::AudioFrame;
-use anyhow::Result;
 use std::collections::HashMap;
 
 /// Psychedelic Effect Manager - Handles dynamic effect selection and blending

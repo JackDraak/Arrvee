@@ -14,7 +14,7 @@ mod audio;
 mod effects;
 
 use graphics::GraphicsEngine;
-use audio::{AudioPlayback, AudioFrame};
+use audio::AudioPlayback;
 
 #[derive(Parser)]
 #[command(name = "arrvee-gpu-audio-test")]

@@ -1,7 +1,6 @@
 use anyhow::Result;
 use serde::{Deserialize, Serialize};
 use std::path::Path;
-use std::collections::HashMap;
 use log::info;
 use super::{fft::AudioAnalyzer, AudioFrame, FrequencyBands};
 
@@ -98,6 +97,7 @@ impl From<&AudioFrame> for PrescanFrame {
     }
 }
 
+#[allow(dead_code)]
 pub struct PrescanProcessor {
     chunk_size: usize,
     sample_rate: f32,
@@ -302,6 +302,7 @@ impl Default for AnalysisStatistics {
 }
 
 /// Real-time synchronized playback using pre-scanned data
+#[allow(dead_code)]
 pub struct SynchronizedPlayback {
     prescan_data: PrescanData,
     current_time: f32,

@@ -1,6 +1,7 @@
 use rustfft::{FftPlanner, num_complex::Complex};
 use super::{AudioFrame, FrequencyBands, BeatDetector};
 
+#[allow(dead_code)]
 pub struct AudioAnalyzer {
     sample_rate: f32,
     fft_size: usize,
@@ -20,6 +21,7 @@ pub struct AudioAnalyzer {
     sensitivity_factor: f32,
 }
 
+#[allow(dead_code)]
 #[derive(Clone)]
 struct NormalizationFactors {
     // Frequency band normalizers (based on analysis_results_full.json max values)
@@ -65,6 +67,7 @@ impl Default for NormalizationFactors {
     }
 }
 
+#[allow(dead_code)]
 struct TempoDetector {
     beat_intervals: Vec<f32>,
     last_beat_time: f32,

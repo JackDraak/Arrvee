@@ -20,10 +20,14 @@ use super::prescan::{PrescanData, PrescanFrame, FileInfo, AnalysisStatistics};
 ///
 /// Total compression: ~85% smaller than JSON
 
+#[allow(dead_code)]
 const MAGIC_BYTES: &[u8; 4] = b"ARVV";
+#[allow(dead_code)]
 const FORMAT_VERSION: u8 = 1;
+#[allow(dead_code)]
 const BYTES_PER_FRAME: usize = 16;
 
+#[allow(dead_code)]
 #[repr(packed)]
 #[derive(Clone, Copy)]
 struct PackedFrame {
@@ -112,6 +116,7 @@ impl PackedFrame {
     }
 }
 
+#[allow(dead_code)]
 pub struct ArvFormat;
 
 impl ArvFormat {

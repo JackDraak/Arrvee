@@ -5,6 +5,7 @@ use async_trait::async_trait;
 
 /// GPU-based audio analyzer that implements the common AudioAnalyzer trait
 /// This wraps the existing GPU analyzer and outputs raw features
+#[allow(dead_code)]
 pub struct GpuAudioAnalyzer {
     inner: InnerGpuAnalyzer,
     device: Option<wgpu::Device>, // Stored for GPU operations

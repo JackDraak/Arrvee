@@ -1,5 +1,4 @@
 use anyhow::Result;
-use wgpu::util::DeviceExt;
 use bytemuck::{Pod, Zeroable};
 
 /// GPU-accelerated audio analysis using compute shaders
@@ -75,7 +74,7 @@ pub struct GpuAudioFeatures {
 impl GpuAudioAnalyzer {
     pub async fn new(
         device: &wgpu::Device,
-        queue: &wgpu::Queue,
+        _queue: &wgpu::Queue,
         sample_rate: f32,
         buffer_size: u32,
     ) -> Result<Self> {

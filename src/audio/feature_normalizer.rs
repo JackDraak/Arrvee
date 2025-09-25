@@ -114,6 +114,7 @@ impl Default for NormalizationParameters {
 /// let mut adaptive_normalizer = FeatureNormalizer::new_adaptive();
 /// // Normalization parameters automatically adjust based on observed data
 /// ```
+#[allow(dead_code)]
 pub struct FeatureNormalizer {
     parameters: NormalizationParameters,
     adaptive: bool,
@@ -122,6 +123,7 @@ pub struct FeatureNormalizer {
     observed_ranges: Option<ObservedRanges>,
 }
 
+#[allow(dead_code)]
 #[derive(Debug, Clone)]
 struct ObservedRanges {
     // Running max values observed
